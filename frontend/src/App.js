@@ -50,7 +50,7 @@ export default function App() {
       </div>
     );
   }
-  console.log(authUser)
+  // console.log(authUser)
   return (
     <div className="App">
       <AuthContext.Provider value={{ user: authUser, setUser: setAuthUser }}>
