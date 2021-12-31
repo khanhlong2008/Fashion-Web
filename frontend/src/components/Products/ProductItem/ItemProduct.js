@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "./ItemProduct.css";
-import { Navigate } from "react-router-dom";
 
 
 
