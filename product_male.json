@@ -1,0 +1,780 @@
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "red": false,
+        "black": true,
+        "white": false,
+        "yellow": false,
+        "pink": false,
+        "green": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "_id": "61cebfba74735bfe8501b186",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/d278fa0c3e07f459ad16.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b187",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/ab04596f9d64573a0e75.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b188",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/1eb5054be9ea22b47bfb.jpg"
+            }
+        ]
+    },
+    "status": {
+        "soldOut": false,
+        "stoking": true
+    },
+    "_id": "61cbde8ab8b800e20b1eaaa4",
+    "category": "Shirt",
+    "title": " Shirt For Man A01",
+    "quantity": 3,
+    "price": 800
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "red": false,
+        "black": false,
+        "white": true,
+        "yellow": false,
+        "pink": false,
+        "green": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "_id": "61cebfba74735bfe8501b189",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/11_2021/99ffa5df21fce9a2b0ed.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b18a",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/11_2021/4e4d296cad4f65113c5e.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b18b",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/11_2021/c2b2ba9b3eb8f6e6afa9.jpg"
+            }
+        ]
+    },
+    "status": {
+        "soldOut": false,
+        "stoking": true
+    },
+    "_id": "61cbde8ab8b800e20b1eaaa5",
+    "category": "Shirt",
+    "title": " Shirt For Man A02",
+    "quantity": 3,
+    "price": 800
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "red": true,
+        "black": false,
+        "white": false,
+        "yellow": false,
+        "pink": false,
+        "green": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "_id": "61cebfba74735bfe8501b18c",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/03_2021/z2374772365525_d54cc2a7cbd415e99a7d8d72b79c0dd2.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b18d",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/03_2021/z2374772374953_78b39a219d70c95af7ffd671713736f1.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b18e",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/02_2021/IMG_8136.jpg"
+            }
+        ]
+    },
+    "status": {
+        "soldOut": false,
+        "stoking": true
+    },
+    "_id": "61cbde8ab8b800e20b1eaaa6",
+    "category": "Shirt",
+    "title": " Shirt For Man A03",
+    "quantity": 3,
+    "price": 800
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "red": false,
+        "black": false,
+        "white": false,
+        "yellow": false,
+        "pink": true,
+        "green": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "_id": "61cebfba74735bfe8501b18f",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/aa2eef97af924c06a3f237e73b8afd2a.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b190",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/7bc9529dcbee03b05aff.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b191",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/138537ddaeae66f03fbf.jpg"
+            }
+        ]
+    },
+    "status": {
+        "soldOut": false,
+        "stoking": true
+    },
+    "_id": "61cbde8ab8b800e20b1eaaa7",
+    "category": "Shirt",
+    "title": " Shirt For Man A04",
+    "quantity": 3,
+    "price": 800
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "red": false,
+        "black": false,
+        "white": false,
+        "yellow": true,
+        "pink": false,
+        "green": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "_id": "61cebfba74735bfe8501b192",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_9493_WED.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b193",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_9486_WED.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b194",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/z2435439870094_e548268352cc0705458a62df0af489ce.jpg"
+            }
+        ]
+    },
+    "status": {
+        "soldOut": false,
+        "stoking": true
+    },
+    "_id": "61cbde8ab8b800e20b1eaaa8",
+    "category": "Shirt",
+    "title": " Shirt For Man A05",
+    "quantity": 3,
+    "price": 800
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "red": false,
+        "black": false,
+        "white": false,
+        "yellow": false,
+        "pink": false,
+        "green": true
+    },
+    "img": {
+        "imgList": [
+            {
+                "_id": "61cebfba74735bfe8501b195",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/2eb70efecaf500ab59e4.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b196",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/d2b048fe8cf546ab1fe4.jpg"
+            },
+            {
+                "_id": "61cebfba74735bfe8501b197",
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/aea29eb47315b84be104.jpg"
+            }
+        ]
+    },
+    "status": {
+        "soldOut": false,
+        "stoking": true
+    },
+    "_id": "61cbde8ab8b800e20b1eaaa9",
+    "category": "T-Shirt",
+    "title": " Shirt For Man A06",
+    "quantity": 3,
+    "price": 800
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/affea9420d264dbb8937e7c1be88ed63.jpg",
+                "_id": "61cbdf2cbc3d46b7df8f296c"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/8ad9f58e6cfda4a3fdec.jpg",
+                "_id": "61cbdf2cbc3d46b7df8f296d"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/10f1b8ac21dfe981b0ce.jpg",
+                "_id": "61cbdf2cbc3d46b7df8f296e"
+            }
+        ]
+    },
+    "_id": "61cbdf2cbc3d46b7df8f296b",
+    "category": "Shirt",
+    "title": " Shirt For Man A07",
+    "quantity": 10,
+    "price": 800,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": true,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/ATGA88393.jpg",
+                "_id": "61cbe119bc3d46b7df8f2971"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_3983_WED.jpg",
+                "_id": "61cbe119bc3d46b7df8f2972"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/03_2021/z2360945754162_f04766b63d54240c21d248bbe2db9f27.jpg",
+                "_id": "61cbe119bc3d46b7df8f2973"
+            }
+        ]
+    },
+    "_id": "61cbe119bc3d46b7df8f2970",
+    "category": "Shirt",
+    "title": " Shirt For Man A08",
+    "quantity": 10,
+    "price": 780,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": true
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_3679_WED.jpg",
+                "_id": "61cbe157bc3d46b7df8f2976"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_3675_WED.jpg",
+                "_id": "61cbe157bc3d46b7df8f2977"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/02_2021/z2311346968379_42f8625a153af111db5e48f1178db3b4.jpg",
+                "_id": "61cbe157bc3d46b7df8f2978"
+            }
+        ]
+    },
+    "_id": "61cbe157bc3d46b7df8f2975",
+    "category": "Shirt",
+    "title": " Shirt For Man A09",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/b55f1318d7131d4d4402.jpg",
+                "_id": "61cbe2e7bc3d46b7df8f297c"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/04473600f20b3855611a.jpg",
+                "_id": "61cbe2e7bc3d46b7df8f297d"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/7d0c854841438b1dd252.jpg",
+                "_id": "61cbe2e7bc3d46b7df8f297e"
+            }
+        ]
+    },
+    "_id": "61cbe2e7bc3d46b7df8f297b",
+    "category": "Polos",
+    "title": " Polos For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": true,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/6768431a87114d4f1400.jpg",
+                "_id": "61cbe2eebc3d46b7df8f2981"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/13a374d2b0d97a8723c8.jpg",
+                "_id": "61cbe2eebc3d46b7df8f2982"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/11_2021/6e0dd3149e5d55030c4c.jpg",
+                "_id": "61cbe2eebc3d46b7df8f2983"
+            }
+        ]
+    },
+    "_id": "61cbe2eebc3d46b7df8f2980",
+    "category": "Polos",
+    "title": " Polos For Man A02",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/0c2893e5ced0048e5dc1.jpg",
+                "_id": "61cbe346bc3d46b7df8f2986"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/fc52e6adbb9871c62889.jpg",
+                "_id": "61cbe346bc3d46b7df8f2987"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/86ff90e6cdd3078d5ec2.jpg",
+                "_id": "61cbe346bc3d46b7df8f2988"
+            }
+        ]
+    },
+    "_id": "61cbe346bc3d46b7df8f2985",
+    "category": "T-Shirt",
+    "title": " T-Shirt For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": true,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/4320818a19bfd3e18aae.jpg",
+                "_id": "61cbe36fbc3d46b7df8f298b"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/a60affa06795adcbf484.jpg",
+                "_id": "61cbe36fbc3d46b7df8f298c"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/f3e7ffd9a2ec68b231fd.jpg",
+                "_id": "61cbe36fbc3d46b7df8f298d"
+            }
+        ]
+    },
+    "_id": "61cbe36fbc3d46b7df8f298a",
+    "category": "T-Shirt",
+    "title": " T-Shirt For Man A02",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/dfd64248a91b63453a0a.jpg",
+                "_id": "61cbe3ffbc3d46b7df8f2990"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/1c0313172c77e629bf66.jpg",
+                "_id": "61cbe3ffbc3d46b7df8f2991"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/6e9a638c5cec96b2cffd.jpg",
+                "_id": "61cbe3ffbc3d46b7df8f2992"
+            }
+        ]
+    },
+    "_id": "61cbe3ffbc3d46b7df8f298f",
+    "category": "Jacket",
+    "title": " Jacket For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": true,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/11_2021/bc7c006b82464a181357.jpg",
+                "_id": "61cbe46fbc3d46b7df8f2995"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/JKXX44620.jpg",
+                "_id": "61cbe46fbc3d46b7df8f2996"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/0ddc64d0697ba025f96a.jpg",
+                "_id": "61cbe46fbc3d46b7df8f2997"
+            }
+        ]
+    },
+    "_id": "61cbe46fbc3d46b7df8f2994",
+    "category": "Jacket",
+    "title": " Jacket For Man A02",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": true
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/fa87da2ce40f2e51771e.jpg",
+                "_id": "61cbe4a9bc3d46b7df8f299a"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/c0f8d157ef74252a7c65.jpg",
+                "_id": "61cbe4a9bc3d46b7df8f299b"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/afb6f9a2dd31166f4f20_1.jpg",
+                "_id": "61cbe4a9bc3d46b7df8f299c"
+            }
+        ]
+    },
+    "_id": "61cbe4a9bc3d46b7df8f2999",
+    "category": "hoodie ",
+    "title": " hoodie  For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": false,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/89ff3c510272c82c9163.jpg",
+                "_id": "61cbe4dabc3d46b7df8f299f"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/5a784beb75c8bf96e6d9.jpg",
+                "_id": "61cbe4dabc3d46b7df8f29a0"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/ccb8166431f7faa9a3e6_1.jpg",
+                "_id": "61cbe4dabc3d46b7df8f29a1"
+            }
+        ]
+    },
+    "_id": "61cbe4dabc3d46b7df8f299e",
+    "category": "hoodie ",
+    "title": " hoodie  For Man A02",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/a0b8d80de0c02a9e73d132.jpg",
+                "_id": "61cbe52abc3d46b7df8f29a4"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/7061ee0fd9c2139c4ad38.jpg",
+                "_id": "61cbe52abc3d46b7df8f29a5"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/4c929cfeab33616d38226.jpg",
+                "_id": "61cbe52abc3d46b7df8f29a6"
+            }
+        ]
+    },
+    "_id": "61cbe52abc3d46b7df8f29a3",
+    "category": "JOGGERS ",
+    "title": " JOGGERS  For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/5630.jpg",
+                "_id": "61cbe569bc3d46b7df8f29a9"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/558d5235cb7e03205a6f.jpg",
+                "_id": "61cbe569bc3d46b7df8f29aa"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/10_2021/5f672bd9b2927acc2383.jpg",
+                "_id": "61cbe569bc3d46b7df8f29ab"
+            }
+        ]
+    },
+    "_id": "61cbe569bc3d46b7df8f29a8",
+    "category": "SHORT PANT ",
+    "title": " SHORT PANT  For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/84ccf8916c2444fb8d09bdda249b3b66.jpg",
+                "_id": "61cbe5b4bc3d46b7df8f29ae"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/e5d886bb82ae48f011bf.jpg",
+                "_id": "61cbe5b4bc3d46b7df8f29af"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/926ab53bb12e7b70223f.jpg",
+                "_id": "61cbe5b4bc3d46b7df8f29b0"
+            }
+        ]
+    },
+    "_id": "61cbe5b4bc3d46b7df8f29ad",
+    "category": "Jeans  ",
+    "title": " Jeans   For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+},
+{
+    "size": {
+        "s": true,
+        "m": true,
+        "l": true
+    },
+    "color": {
+        "black": true,
+        "white": false,
+        "red": false,
+        "yellow": false,
+        "pink": false
+    },
+    "img": {
+        "imgList": [
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_3062_WED.jpg",
+                "_id": "61cbe5ebbc3d46b7df8f29b3"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/04_2021/_MG_3011_WED.jpg",
+                "_id": "61cbe5ebbc3d46b7df8f29b4"
+            },
+            {
+                "imgItem": "https://oldsailor.com.vn/vnt_upload/product/12_2021/168896454_2026961717459505_5569879049210844438_n.jpg",
+                "_id": "61cbe5ebbc3d46b7df8f29b5"
+            }
+        ]
+    },
+    "_id": "61cbe5ebbc3d46b7df8f29b2",
+    "category": "Kaki  ",
+    "title": " Kaki   For Man A01",
+    "quantity": 10,
+    "price": 820,
+    "__v": 0
+}

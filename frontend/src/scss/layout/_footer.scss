@@ -1,0 +1,96 @@
+footer {
+    * {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .accordion {
+
+        @media only screen and (min-width: 992px) {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+
+            .accordion-button {
+                &::after {
+                    display: none;
+                }
+
+                &:not(.collapsed) {
+                    color: #000;
+                }
+
+                &:hover {
+                    cursor: default;
+                }
+            }
+
+            .accordion-collapse {
+                display: block;
+
+                &.collapsing {
+                    height: auto !important;
+                }
+            }
+        }
+
+        .accordion-item {
+            background: none;
+
+            &:first-child {
+                .icon-container {
+                    width: 40px;
+                    height: 40px;
+                    background: $primary;
+                    display: grid;
+                    border-radius: 100px;
+                    place-items: center;
+
+                    i {
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .accordion-button {
+            background: none;
+        }
+    }
+
+
+}
+
+#btn-back-to-top {
+    i {
+        font-size: 40px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color 0.3s,
+    opacity 0.5s,
+    visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+
+    @include custom-media(mobile) {
+        right: 28px;
+        bottom: 36px;
+    }
+
+}
+
+#btn-back-to-top:active {
+    opacity: 0.8;
+}
+
+#btn-back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}

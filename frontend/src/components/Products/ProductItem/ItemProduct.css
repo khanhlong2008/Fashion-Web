@@ -1,0 +1,34 @@
+.ItemProduct-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.ItemProduct {
+  width: 90%;
+  margin: 10px auto;
+  padding-bottom: 20px;
+}
+
+.itemProduct-img {
+  width: 100%;
+}
+
+.itemProduct-img img {
+  width: 100%;
+  height:370px;
+}
+
+.itemproduct-title h2 {
+  font-size: 20px;
+  text-align: center;
+  margin: 5px 0;
+  font-weight: 400;
+}
+
+.itemproduct-title p {
+  text-align: center;
+  font-size: 16px;
+  margin: 0;
+  font-weight: 700;
+  color: #6e6c3c;
+}

@@ -1,0 +1,20 @@
+.md {
+  font-size: 80px;
+  color: #787878;
+}
+
+.about-Title-container {
+  margin: 30px 10px;
+}
+
+.about-Title-container h3 {
+  font-size: 20px;
+  font-weight: 300;
+  padding: 5px 0px;
+}
+
+.about-Title-container p {
+  font-size: 15px;
+  color: #787878;
+  font-weight: 300;
+}

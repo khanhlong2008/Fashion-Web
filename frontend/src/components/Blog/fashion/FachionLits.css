@@ -1,0 +1,61 @@
+.container-left-mian {
+  width: 100%;
+}
+
+.mar {
+  margin-bottom: 20px;
+  border: 0.5px solid rgb(241 241 241);
+}
+
+.left-mian-top h2 {
+  padding: 15px 15px;
+  background-color: #f5f5f5;
+  color: #232323;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.row {
+  padding: 0 15px;
+  margin: 0;
+}
+
+.col {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.col img {
+  width: 120px;
+  padding-right: 10px;
+}
+
+.col-title {
+  display: block;
+}
+
+.col-title span {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.col-title p {
+  margin: 5px 0;
+}
+
+.col-title-span-icons ion-icon {
+  font-size: 16px;
+  color: #fec42d;
+}
+
+.sss a {
+  color: #232323;
+}
+
+.nav-link {
+  color: black;
+  font-size: 14px;
+  text-align: right;
+}

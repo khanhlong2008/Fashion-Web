@@ -1,0 +1,183 @@
+@import './variable';
+/*
+    Reference resources: 
+    - https://dev.to/alemesa/10-awesome-sass-scss-mixins-5ci2#box
+    - 
+*/
+
+@mixin box($width, $height) {
+    width: $width * 1px;
+    height: $height * 1px;
+}
+
+@mixin button($background, $color, $borderRadius) {
+    background-color: $background !important;
+    color: $color !important;
+    border-radius: $borderRadius !important;
+}
+
+// Flexbox
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-center-column {
+    @include flex-center;
+    flex-direction: column;
+}
+
+@mixin flex-center-vert {
+    display: flex;
+    align-items: center;
+}
+
+@mixin flex-center-horiz {
+    display: flex;
+    justify-content: center;
+}
+
+// Fonts
+@mixin font-size($font-size, $line-height: normal, $letter-spacing: normal) {
+    font-size: $font-size * 1px;
+    // font-size: $font-size * 0.1rem;
+    // example using rem values and 62.5% font-size so 1rem = 10px
+
+    @if $line-height==normal {
+        line-height: normal;
+    }
+
+    @else {
+        line-height: calc($line-height/ $font-size);
+    }
+
+    @if $letter-spacing==normal {
+        letter-spacing: normal;
+    }
+
+    @else {
+        letter-spacing: #{calc($line-height/ $font-size)}em;
+    }
+}
+
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+    @font-face {
+        font-family: quote($font-name);
+        src: url($path + '.eot');
+        src: url($path + '.eot?#iefix') format('embedded-opentype'),
+        url($path + '.woff') format('woff'),
+        url($path + '.ttf') format('truetype'),
+        url($path + '.svg##{$font-name}') format('svg');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+/* ===== Usage ===== */
+// @include font-face(Roboto, "./assets/Roboto", normal, normal);
+
+// Background
+@mixin cover-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+// Media query
+@mixin custom-media($breakpoint) {
+    @if $breakpoint==desktop-larger {
+        @media only screen and (max-width: 1920px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==desktop-large {
+        @media only screen and (max-width: 1440px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==desktop {
+        @media only screen and (max-width: 1280px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==tablet-larger {
+        @media only screen and (max-width: 1024px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==tablet-large {
+        @media only screen and (max-width: 992px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==tablet {
+        @media only screen and (max-width: 768px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==mobile {
+        @media only screen and (max-width: 576px) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint==small-mobile {
+        @media only screen and (max-width: 384px) {
+            @content;
+        }
+    }
+
+    @else {
+        @media only screen and (max-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+@mixin section-padding-y {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    @include custom-media(tablet) {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+}
+
+@mixin overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+// Image with overlay
+@mixin img-with-overlay {
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        object-fit: contain;
+    }
+
+    div.overlay {
+        @include overlay;
+    }
+}

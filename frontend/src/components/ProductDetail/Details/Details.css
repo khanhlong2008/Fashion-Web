@@ -1,0 +1,5 @@
+.product-detail__wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1fr;
+  grid-column-gap: 50px;
+}
