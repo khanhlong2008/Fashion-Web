@@ -4,7 +4,7 @@ const createProduct = async (req, res, next) => {
     try {
         console.log("call to createProduct")
         const newProduct = req.body;
-        console.log(newProduct)
+        // console.log(newProduct)
         const product = new product_female(newProduct);
         await product.save();
         res.status(200).send(product)

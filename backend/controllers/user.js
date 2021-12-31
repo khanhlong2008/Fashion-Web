@@ -96,6 +96,12 @@ const secret = async (req, res, next) => {
     // console.log("call to secret fn")
     return res.status(200).json({ user: user.lastname })
 }
+const secretAdmin = async (req, res, next) => {
+    // console.log(req.user)
+    const user = req.user
+    // console.log("call to secret fn")
+    return res.status(200).json({ user: user })
+}
 module.exports = {
     index,
     newUser,
@@ -103,5 +109,5 @@ module.exports = {
     signIn,
     getUser,
     updateUser,
-    secret
+    secret, secretAdmin
 }
