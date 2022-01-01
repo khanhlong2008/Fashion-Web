@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import CartCtx from '../../context/CartProvider/CartCtx';
 
-const ProductItem = ({ front, price, name, quantity, id }) => {
+const ProductItem = ({ front, price, title, quantity, id }) => {
   const { removeItemFromCart } = useContext(CartCtx);
 
   const handleRemove = e => {
@@ -14,7 +14,7 @@ const ProductItem = ({ front, price, name, quantity, id }) => {
         <img src={front} alt="" />
       </div>
       <div>
-        <p>{name}</p>
+        <p>{title}</p>
         <p className="text-primary">L/Red</p>
         <p className="text-primary">
           {`${quantity}`} X ${`${price.toFixed(2)}`}

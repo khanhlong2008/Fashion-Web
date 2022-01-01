@@ -7,15 +7,15 @@ const ProductModal = () => {
     showModal,
     handleCloseModal,
     addItemToCart,
-    modal: { id, name, front, price, star, back },
+    modal: { id, title, imgList, price, star },
   } = useContext(CartCtx);
   const [showCollapse, setShowCollapse] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [imgSrc, setImgSrc] = useState('');
 
   useEffect(() => {
-    setImgSrc(front);
-  }, [front]);
+    setImgSrc(imgList[0].imgItem);
+  }, [imgList]);
 
   const handleImage = src => {
     setImgSrc(src);
@@ -23,7 +23,7 @@ const ProductModal = () => {
 
   const addToCart = () => {
     if (quantity === '' || quantity < 1) return;
-    addItemToCart({ id, name, front, price, quantity });
+    addItemToCart({ id, title, front: imgList[0].imgItem, price, quantity });
   };
 
   const closeModal = () => {
@@ -70,13 +70,10 @@ const ProductModal = () => {
             <div>
               <img src={imgSrc} alt="" />
             </div>
-            <ImageCarousel
-              listImage={[front, back]}
-              handleImage={handleImage}
-            />
+            <ImageCarousel listImage={imgList} handleImage={handleImage} />
           </div>
           <div className="product-info">
-            <p className="h2">{name}</p>
+            <p className="h2">{title}</p>
             <p className="price fw-bold">
               <span>$38.00</span> ${price.toFixed(2)}
             </p>
@@ -87,7 +84,7 @@ const ProductModal = () => {
               material for a comfortable fit. Accessorize with a straw hat and
               you're ready for summer!
             </p>
-            <div class={`collapse-content ${showCollapse ? 'show' : ''}`}>
+            <div className={`collapse-content ${showCollapse ? 'show' : ''}`}>
               <p>Sample Unordered List</p>
               <ul>
                 <li>Comodous in tempor ullamcorper miaculis</li>
@@ -122,15 +119,15 @@ const ProductModal = () => {
             <p className="option-label">Size</p>
             <div>
               <input type="radio" name="size" value="M" id="size-0" />
-              <label for="size-0" className="square size">
+              <label htmlFor="size-0" className="square size">
                 M
               </label>
               <input type="radio" name="size" value="L" id="size-1" />
-              <label for="size-1" className="square size">
+              <label htmlFor="size-1" className="square size">
                 L
               </label>
               <input type="radio" name="size" value="XL" id="size-2" />
-              <label for="size-2" className="square size">
+              <label htmlFor="size-2" className="square size">
                 XL
               </label>
             </div>
@@ -138,19 +135,19 @@ const ProductModal = () => {
             <div>
               <input type="radio" name="color" value="red" id="color-0" />
               <label
-                for="color-0"
+                htmlFor="color-0"
                 className="square color"
                 style={{ backgroundColor: 'red' }}
               ></label>
               <input type="radio" name="color" value="yellow" id="color-1" />
               <label
-                for="color-1"
+                htmlFor="color-1"
                 className="square color"
                 style={{ backgroundColor: 'yellow' }}
               ></label>
               <input type="radio" name="color" value="black" id="color-2" />
               <label
-                for="color-2"
+                htmlFor="color-2"
                 className="square color"
                 style={{ backgroundColor: 'black' }}
               ></label>

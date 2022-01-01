@@ -16,9 +16,9 @@ const cartReducer = (state, action) => {
               id: newItem.id,
               price: newItem.price,
               quantity: newItem.quantity,
-              totalPrice: newItem.price,
+              totalPrice: newItem.price * newItem.quantity,
               front: newItem.front,
-              name: newItem.name,
+              title: newItem.title,
             },
           ],
           totalQuantity: state.totalQuantity + 1,
@@ -34,7 +34,7 @@ const cartReducer = (state, action) => {
               return {
                 ...item,
                 quantity: item.quantity + newItem.quantity,
-                totalPrice: item.totalPrice + newItem.price,
+                totalPrice: item.totalPrice + newItem.price * newItem.quantity,
               };
             }
 

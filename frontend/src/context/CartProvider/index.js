@@ -11,11 +11,10 @@ const initialState = {
   showModal: false,
   modal: {
     id: '',
-    name: '',
+    title: '',
     price: 0,
-    front: '',
+    imgList: [{ imgItem: '' }],
     star: 0,
-    back: '',
   },
 };
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const DiscountSale = () => {
-  const countDownDate = new Date('2022, 1, 1 0:00:00').getTime();
+  const countDownDate = new Date('2023, 1, 1 0:00:00').getTime();
   const now = new Date().getTime();
   const distance = countDownDate - now;
   const navigate = useNavigate();

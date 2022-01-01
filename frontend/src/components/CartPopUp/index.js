@@ -2,9 +2,18 @@ import React, { useContext } from 'react';
 import CartCtx from '../../context/CartProvider/CartCtx';
 import ProductItem from './ProductItem';
 import '@dotlottie/player-component';
+import { useNavigate } from 'react-router-dom';
 
 const CartPopUp = ({ show }) => {
   const { items, totalPrice } = useContext(CartCtx);
+
+  const navigate = useNavigate();
+  const handlePushCheckout = () => {
+    navigate('/checkouts/id?step=contact_information');
+  };
+  const handlePushCart = () => {
+    navigate('/cart');
+  };
   if (items.length === 0) {
     return (
       <div className={`dropdown-menu cart-wrapper ${show ? 'show' : ''}`}>
@@ -39,8 +48,12 @@ const CartPopUp = ({ show }) => {
       </div>
 
       <div className="d-flex justify-content-center">
-        <button className="btn btn-dark mx-2">YOUR CART</button>
-        <button className="btn btn-primary mx-2">CHECK OUT</button>
+        <button className="btn btn-dark mx-2" onClick={handlePushCart}>
+          YOUR CART
+        </button>
+        <button className="btn btn-primary mx-2" onClick={handlePushCheckout}>
+          CHECK OUT
+        </button>
       </div>
     </div>
   );
