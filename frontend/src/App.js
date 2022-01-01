@@ -68,7 +68,7 @@ export default function App() {
               <Route path="/blog/fashion" element={<Blog />} />
               <Route path="/blog/fashion/:id" element={<FashionDetail />} />
               <Route path="/product/:param" element={<ProductList />} />
-              <Route path="/detail" element={<Details />} />
+              <Route path="/detail/" element={<Details />} />
               {/* </>
                 ) : (
                   <> */}

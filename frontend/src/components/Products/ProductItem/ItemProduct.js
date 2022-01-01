@@ -4,11 +4,10 @@ import "./ItemProduct.css";
 
 
 export default function ItemProduct({ products }) {
-  // console.log(products);
 
   return (
     <div className="ItemProduct" >
-      <div className="itemProduct-img">
+      <div className="itemProduct-img" >
         <img src={products.img.imgList[0].imgItem} alt="" />
 
       </div>

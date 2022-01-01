@@ -2,7 +2,6 @@ import ItemProduct from "./ItemProduct";
 import "./ProductItem.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 const ProductItem = () => {
   const [products, setProduct] = useState([]);
@@ -39,14 +38,12 @@ const ProductItem = () => {
 
         {products.map((item, index) => {
         return (
-          <ItemProduct products={item} key={index} onclick={handleNextdetail(item._id)} />
+          <ItemProduct products={item} key={index} />
         );
         })}
     </div>
     </div>
   );
 };
-const handleNextdetail = (id) => {
-  console.log(id)
-}
+
 export default ProductItem;

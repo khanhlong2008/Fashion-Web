@@ -1,7 +1,7 @@
 import "./Right.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState } from "react";
-import { Card, Col, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 const ProductRight = () => {
     const [quantity, setQuantity] = useState(1);
     const handleInputQuantity = e => {
