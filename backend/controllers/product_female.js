@@ -19,7 +19,17 @@ const index = async (req, res) => {
     const product = await product_female.find({})
     return res.status(200).json({ product })
 }
+const getProduct = async (req, res) => {
+    try {
+        const { productID } = req.params;
+        const product = await product_female.findById(productID)
+        return res.status(200).json({ product })
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
 module.exports = {
     index,
-    createProduct
+    createProduct,
+    getProduct
 }

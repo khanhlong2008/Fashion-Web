@@ -87,7 +87,7 @@ const ProductModal = () => {
               material for a comfortable fit. Accessorize with a straw hat and
               you're ready for summer!
             </p>
-            <div class={`collapse-content ${showCollapse ? 'show' : ''}`}>
+            <div className={`collapse-content ${showCollapse ? 'show' : ''}`}>
               <p>Sample Unordered List</p>
               <ul>
                 <li>Comodous in tempor ullamcorper miaculis</li>

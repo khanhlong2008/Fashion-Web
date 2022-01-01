@@ -21,18 +21,18 @@ const ProductRight = () => {
             </div>
             <div className="right-review">
                 <span className="right-review-icon" style={{ color: "gray" }}>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
                 </span>
                 <span className="right-review-yet">
                     <p>No review yet</p>
                 </span>
                 <span className="right-review-write">
                     <a href="/">Write Review</a>
-                    <i class="bi bi-pencil-fill" style={{ color: "gray", marginLeft: "0.5rem" }}></i>
+                    <i className="bi bi-pencil-fill" style={{ color: "gray", marginLeft: "0.5rem" }}></i>
                 </span>
             </div>
             <div className="right-price">
@@ -47,13 +47,13 @@ const ProductRight = () => {
             </div>
             <div className="right-chart">
                 <span>
-                    <i class="bi bi-heart-fill" style={{ color: "gray" }}></i>
+                    <i className="bi bi-heart-fill" style={{ color: "gray" }}></i>
                 </span>
                 <span style={{ paddingLeft: "1rem" }}>
                     <p>Add To Wishlist</p>
                 </span>
                 <span style={{ paddingLeft: "1rem" }}>
-                    <i class="bi bi-rulers" style={{ color: "gray" }}></i>
+                    <i className="bi bi-rulers" style={{ color: "gray" }}></i>
                 </span>
                 <span style={{ paddingLeft: "1rem" }}>
                     <p>Sizechart</p>
