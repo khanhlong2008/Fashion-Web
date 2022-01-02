@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import CartCtx from '../../context/CartProvider/CartCtx';
+import CartCtx from '../../../context/CartProvider/CartCtx';
 
 const ProductItem = ({
   _id: id,
@@ -7,11 +7,45 @@ const ProductItem = ({
   originPrice,
   price,
   img: { imgList },
-  star = 4,
+  star = Math.floor(Math.random() * 3) + 2,
+  size,
+  color,
+  quantity: stock,
 }) => {
   const link = `/products/${id}`;
   const { addItemToCart, handleShowModal } = useContext(CartCtx);
   const stars = [];
+
+  const handleAddItem = () => {
+    addItemToCart({
+      id,
+      title,
+      price,
+      front: imgList[0].imgItem,
+      quantity: 1,
+      color: selectColor,
+      size: selectSize,
+      stock,
+    });
+  };
+
+  let selectSize;
+  let selectColor;
+  for (let s in size) {
+    if (size[s]) {
+      selectSize = s;
+      break;
+    }
+  }
+
+  for (let c in color) {
+    if (color[c]) {
+      selectColor = c;
+      break;
+    }
+  }
+
+  const isSoldout = selectColor && selectSize && stock >= 1;
 
   for (let i = 1; i <= 5; i++) {
     if (i <= star) {
@@ -49,6 +83,8 @@ const ProductItem = ({
             price,
             imgList,
             star,
+            size,
+            color,
           })}
         >
           <i className="bi bi-eye-fill"></i>
@@ -56,18 +92,11 @@ const ProductItem = ({
         <div className="icon__container">
           <i className="bi bi-heart"></i>
         </div>
-        <div
-          className="icon__container"
-          onClick={addItemToCart.bind(null, {
-            id,
-            title,
-            price,
-            front: imgList[0].imgItem,
-            quantity: 1,
-          })}
-        >
-          <i className="bi bi-cart3"></i>
-        </div>
+        {isSoldout && (
+          <div className="icon__container" onClick={handleAddItem}>
+            <i className="bi bi-cart3"></i>
+          </div>
+        )}
       </div>
     </div>
   );

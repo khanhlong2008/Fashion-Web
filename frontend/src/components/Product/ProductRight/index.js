@@ -1,25 +1,98 @@
 import './Right.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import CartCtx from '../../../context/CartProvider/CartCtx';
 import { useNavigate } from 'react-router-dom';
+
 const ProductRight = ({
   _id: id,
   img: { imgList },
   title,
   price,
   star = 4,
+  size,
+  color,
+  quantity: stock,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const { addItemToCart } = useContext(CartCtx);
   const navigate = useNavigate();
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
+  const [isSoldout, setSoldout] = useState(false);
+
+  const handleChangeSize = e => {
+    setSelectedSize(e.target.value);
+    setSoldout(!(size[e.target.value] && color[selectedColor] && stock >= 1));
+  };
+
+  const handleChangeColor = e => {
+    setSelectedColor(e.target.value);
+    setSoldout(!(size[selectedSize] && color[e.target.value] && stock >= 1));
+  };
+
+  useEffect(() => {
+    setSelectedSize(Object.keys(size)[0]);
+    setSelectedColor(Object.keys(color)[0]);
+    setSoldout(
+      !(Object.values(size)[0] && Object.values(color)[0] && stock >= 1)
+    );
+  }, [size, color, stock]);
+
+  const sizesSelector = [];
+
+  for (let s in size) {
+    sizesSelector.push(
+      <>
+        <input
+          type="radio"
+          name="size"
+          value={s}
+          id={s}
+          checked={s === selectedSize ? true : false}
+          onChange={handleChangeSize}
+        />
+        <label htmlFor={s} className="square size">
+          {s.toUpperCase()}
+        </label>
+      </>
+    );
+  }
+
+  const colorsSelector = [];
+
+  for (let c in color) {
+    colorsSelector.push(
+      <>
+        <input
+          type="radio"
+          name="color"
+          value={c}
+          id={c}
+          checked={c === selectedColor ? true : false}
+          onChange={handleChangeColor}
+        />
+        <label
+          htmlFor={c}
+          className="square color"
+          style={{ backgroundColor: c }}
+        ></label>
+      </>
+    );
+  }
 
   const handleInputQuantity = e => {
     if (parseFloat(e.target.value) >= 0 && parseFloat(e.target.value) % 1 === 0)
       setQuantity(parseFloat(e.target.value));
     if (e.target.value === '') setQuantity(e.target.value);
     if (e.target.value === '-') return;
+  };
+
+  const changeQuantity = e => {
+    const quantityInput = +e.target.value;
+    if (quantityInput === 0 || isNaN(quantityInput)) setQuantity(1);
+    if (quantityInput > stock) setQuantity(stock);
   };
 
   const handleBuyProduct = () => {
@@ -31,6 +104,9 @@ const ProductRight = ({
       front: imgList[0].imgItem,
       price,
       quantity,
+      stock,
+      size: selectedSize,
+      color: selectedColor,
     });
 
     navigate('/checkouts/id?step=contact_information');
@@ -44,7 +120,16 @@ const ProductRight = ({
   const addToCart = () => {
     if (quantity === '' || quantity < 1) return;
 
-    addItemToCart({ id, title, front: imgList[0].imgItem, price, quantity });
+    addItemToCart({
+      id,
+      title,
+      front: imgList[0].imgItem,
+      price,
+      quantity,
+      size: selectedSize,
+      color: selectedColor,
+      stock,
+    });
   };
 
   const stars = [];
@@ -72,44 +157,12 @@ const ProductRight = ({
       </div>
       <div className="body-one">
         <p className="option-label">Size</p>
-        <div>
-          <input type="radio" name="size" value="M" id="size-0" />
-          <label htmlFor="size-0" className="square size">
-            M
-          </label>
-          <input type="radio" name="size" value="L" id="size-1" />
-          <label htmlFor="size-1" className="square size">
-            L
-          </label>
-          <input type="radio" name="size" value="XL" id="size-2" />
-          <label htmlFor="size-2" className="square size">
-            XL
-          </label>
-        </div>
+        <div>{sizesSelector}</div>
         <p className="option-label">Color</p>
-        <div>
-          <input type="radio" name="color" value="red" id="color-0" />
-          <label
-            htmlFor="color-0"
-            className="square color"
-            style={{ backgroundColor: 'red' }}
-          ></label>
-          <input type="radio" name="color" value="yellow" id="color-1" />
-          <label
-            htmlFor="color-1"
-            className="square color"
-            style={{ backgroundColor: 'yellow' }}
-          ></label>
-          <input type="radio" name="color" value="black" id="color-2" />
-          <label
-            htmlFor="color-2"
-            className="square color"
-            style={{ backgroundColor: 'black' }}
-          ></label>
-        </div>
+        <div>{colorsSelector}</div>
         <div className="quantity-input mt-3">
           <button
-            disabled={quantity === 1 ? true : false}
+            disabled={quantity === 1 || isSoldout ? true : false}
             onClick={handleQuantity.bind(null, 'decrease')}
           >
             -
@@ -119,17 +172,30 @@ const ProductRight = ({
             step="1"
             value={quantity}
             onChange={handleInputQuantity}
+            onBlur={changeQuantity}
+            disabled={isSoldout}
           />
-          <button onClick={handleQuantity.bind(null, 'increase')}>+</button>
+          <button
+            disabled={isSoldout || quantity === stock ? true : false}
+            onClick={handleQuantity.bind(null, 'increase')}
+          >
+            +
+          </button>
         </div>
       </div>
-      <div className="btn-body">
-        <button className="btn-add" onClick={addToCart}>
-          ADD TO CART
+      <div className="d-flex justify-content-start">
+        <button
+          className="btn btn-primary me-2"
+          onClick={addToCart}
+          disabled={isSoldout}
+        >
+          {isSoldout ? 'SOLD OUT' : 'ADD TO CART'}
         </button>
-        <button className="btn-add btn-buy" onClick={handleBuyProduct}>
-          BUY IT NOW
-        </button>
+        {!isSoldout && (
+          <button className="btn btn-dark" onClick={handleBuyProduct}>
+            BUY IT NOW
+          </button>
+        )}
       </div>
       <div className="main-reassurance mt-3">
         <Row className="row">

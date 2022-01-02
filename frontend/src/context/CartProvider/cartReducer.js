@@ -1,5 +1,13 @@
 const cartReducer = (state, action) => {
   switch (action.type) {
+    case 'GET_CART':
+      const cart = action.payload || [];
+      return {
+        ...state,
+        items: cart,
+        totalPrice: cart.reduce((total, item) => total + item.totalPrice, 0),
+        totalQuantity: cart.length,
+      };
     case 'ADD_ITEM':
       const newItem = action.payload;
       const existingItem = state.items.findIndex(
@@ -19,6 +27,9 @@ const cartReducer = (state, action) => {
               totalPrice: newItem.price * newItem.quantity,
               front: newItem.front,
               title: newItem.title,
+              stock: newItem.stock,
+              size: newItem.size,
+              color: newItem.color,
             },
           ],
           totalQuantity: state.totalQuantity + 1,
@@ -48,10 +59,61 @@ const cartReducer = (state, action) => {
       const item = state.items.find(item => item.id === id);
       return {
         ...state,
+        changed: true,
         items: state.items.filter(item => item.id !== id),
         totalQuantity: state.totalQuantity - 1,
         totalPrice: state.totalPrice - item.totalPrice,
       };
+
+    case 'CHANGE_QUANTITY':
+      const changedItem = action.payload;
+      const selectItem = state.items.find(item => item.id === changedItem.id);
+      return {
+        ...state,
+        changed: true,
+        totalPrice:
+          state.totalPrice - selectItem.totalPrice + changedItem.totalPrice,
+        items: state.items.map(item => {
+          if (item.id === changedItem.id) {
+            return {
+              ...item,
+              quantity: changedItem.quantity,
+              totalPrice: changedItem.totalPrice,
+            };
+          }
+
+          return item;
+        }),
+      };
+    case 'REMOVE_ONE':
+      const itemDelete = state.items.find(item => item.id === action.payload);
+      if (itemDelete.quantity > 1) {
+        return {
+          ...state,
+          changed: true,
+          items: [
+            ...state.items.map(item =>
+              item.id === action.payload
+                ? {
+                    ...item,
+                    quantity: item.quantity - 1,
+                    totalPrice: item.totalPrice - item.price,
+                  }
+                : item
+            ),
+          ],
+          totalQuantity: state.totalQuantity,
+          totalPrice: state.totalPrice - itemDelete.price,
+        };
+      } else {
+        return {
+          ...state,
+          changed: true,
+          items: state.items.filter(item => item.id !== id),
+          totalQuantity: state.totalQuantity - 1,
+          totalPrice: state.totalPrice - itemDelete.totalPrice,
+        };
+      }
     case 'CLEAR_MESSAGE':
       return {
         ...state,

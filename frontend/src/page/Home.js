@@ -8,7 +8,7 @@ import DiscountSale from '../components/Home/DiscountSale';
 import Partners from '../components/Home/Partners';
 import Policy from '../components/Home/Policy';
 import TopProduct from '../components/Home/TopProduct';
-import ProductModal from '../components/ProductModal';
+import ProductModal from '../components/Product/ProductModal';
 import Notification from '../components/Home/Notification';
 import CartCtx from '../context/CartProvider/CartCtx';
 

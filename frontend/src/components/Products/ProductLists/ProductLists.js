@@ -1,14 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCtx from '../../../context/ProductProvider/ProductCtx';
-import ProductList from '../../ProductList';
-import ProductModal from '../../ProductModal';
+import ProductList from '../../Product/ProductList';
+import ProductModal from '../../Product/ProductModal';
+
 import ProductFilter from '../ProductFilter/ProductFilter';
 import './ProductList.css';
 
 export default function ProductLists() {
   const { param } = useParams();
   const { menList, womenList } = useContext(ProductCtx);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="container">

@@ -1,7 +1,17 @@
 import React, { useContext, useState } from 'react';
 import CartCtx from '../../context/CartProvider/CartCtx';
 
-const CartItem = ({ front, price, title, quantity, id, totalPrice }) => {
+const CartItem = ({
+  front,
+  price,
+  title,
+  quantity,
+  id,
+  totalPrice,
+  size,
+  color,
+  stock,
+}) => {
   const [newQuantity, setNewQuantity] = useState(quantity);
   const {
     removeItemFromCart,
@@ -9,6 +19,7 @@ const CartItem = ({ front, price, title, quantity, id, totalPrice }) => {
     removeOneFromItem,
     changeQuantityItem,
   } = useContext(CartCtx);
+
   const handleInputQuantity = e => {
     if (parseFloat(e.target.value) >= 0 && parseFloat(e.target.value) % 1 === 0)
       setNewQuantity(parseFloat(e.target.value));
@@ -20,16 +31,12 @@ const CartItem = ({ front, price, title, quantity, id, totalPrice }) => {
     const quantityInput = +e.target.value;
     if (quantityInput > 0)
       changeQuantityItem({
-        front,
-        price,
-        title,
         quantity: quantityInput,
         id,
         totalPrice: price * quantityInput,
       });
-    else {
-      setNewQuantity(quantity);
-    }
+    if (quantityInput === 0 || isNaN(quantityInput)) setNewQuantity(quantity);
+    if (quantityInput > stock) setNewQuantity(stock);
   };
 
   const handleQuantity = type => {
@@ -42,6 +49,9 @@ const CartItem = ({ front, price, title, quantity, id, totalPrice }) => {
         quantity: +newQuantity,
         id,
         totalPrice,
+        color,
+        size,
+        stock,
       });
     } else {
       setNewQuantity(state => +state - 1);
@@ -58,14 +68,14 @@ const CartItem = ({ front, price, title, quantity, id, totalPrice }) => {
 
         <div>
           <p>{title}</p>
-          <p>Size: L</p>
-          <p>Color: Red</p>
+          <p>Size: {size.toUpperCase()}</p>
+          <p>Color: {color[0].toUpperCase() + color.slice(1)}</p>
         </div>
       </div>
       <p>${price.toFixed(2)}</p>
       <div className="quantity-input">
         <button
-          disabled={quantity === 1 ? true : false}
+          disabled={newQuantity === 1}
           onClick={handleQuantity.bind(null, 'decrease')}
         >
           -
@@ -77,7 +87,12 @@ const CartItem = ({ front, price, title, quantity, id, totalPrice }) => {
           onChange={handleInputQuantity}
           onBlur={changeQuantity}
         />
-        <button onClick={handleQuantity.bind(null, 'increase')}>+</button>
+        <button
+          onClick={handleQuantity.bind(null, 'increase')}
+          disabled={newQuantity >= stock}
+        >
+          +
+        </button>
       </div>
       <div className="total-price">
         <strong>${totalPrice.toFixed(2)}</strong>

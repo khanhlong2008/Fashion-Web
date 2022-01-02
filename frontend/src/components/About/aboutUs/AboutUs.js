@@ -1,8 +1,13 @@
-import AboutInfo from "../aboutInfo/AboutInfolits";
-import AboutTitle from "../aboutTitle/AboutTitle";
-import "./AboutUs.css";
+import AboutInfo from '../aboutInfo/AboutInfolits';
+import AboutTitle from '../aboutTitle/AboutTitle';
+import './AboutUs.css';
+import { useEffect } from 'react';
 
 const AboutUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="container">
       <div className="about-us-container">

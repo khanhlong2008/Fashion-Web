@@ -8,15 +8,16 @@ import Login from './components/Auth/Login';
 import Forgot from './components/Auth/Forgot';
 import AuthContext from './context/auth';
 import http, { addJwt } from './Util';
-import Details from './components/ProductDetail/Details';
 import CartProvider from './context/CartProvider';
 // import Logout from "./components/Auth/Logout";
 import ProductList from './components/Products/ProductLists/ProductLists';
 import Home from './page/Home';
+import ProductDetail from './page/ProductDetail';
 import Layout from './components/layout';
 import Cart from './page/Cart';
 import CheckoutPage from './page/CheckoutPage';
 import ProductProvider from './context/ProductProvider';
+
 // import { Navigate } from "react-router";
 export default function App() {
   const [authUser, setAuthUser] = useState(null);
@@ -28,6 +29,7 @@ export default function App() {
       setCheckingAuthUserDone(true);
       return;
     }
+
     http
       .get('/auth/secret', {
         headers: {
@@ -72,7 +74,7 @@ export default function App() {
                 <Route path="/blog/fashion" element={<Blog />} />
                 <Route path="/blog/fashion/:id" element={<FashionDetail />} />
                 <Route path="/collection/:param" element={<ProductList />} />
-                <Route path="/products/:id" element={<Details />} />
+                <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/checkouts/:id:type" element={<CheckoutPage />} />
                 <Route path="/cart" element={<Cart />} />
                 {/* </>

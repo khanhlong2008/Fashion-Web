@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import CartCtx from '../../context/CartProvider/CartCtx';
+import CartCtx from '../../../context/CartProvider/CartCtx';
+
 import ImageCarousel from './ImageCarousel';
 
 const ProductModal = () => {
@@ -7,15 +8,39 @@ const ProductModal = () => {
     showModal,
     handleCloseModal,
     addItemToCart,
-    modal: { id, title, imgList, price, star },
+    modal: { id, title, imgList, price, star, size, color, stock },
   } = useContext(CartCtx);
   const [showCollapse, setShowCollapse] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [imgSrc, setImgSrc] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
+  const [isSoldout, setSoldout] = useState(false);
+
+  const handleChangeSize = e => {
+    setSelectedSize(e.target.value);
+    setSoldout(!(size[e.target.value] && color[selectedColor] && stock >= 1));
+  };
+
+  const handleChangeColor = e => {
+    setSelectedColor(e.target.value);
+    setSoldout(!(size[selectedSize] && color[e.target.value] && stock >= 1));
+  };
+
+  const changeQuantity = e => {
+    const quantityInput = +e.target.value;
+    if (quantityInput === 0 || isNaN(quantityInput)) setQuantity(1);
+    if (quantityInput > stock) setQuantity(stock);
+  };
 
   useEffect(() => {
     setImgSrc(imgList[0].imgItem);
-  }, [imgList]);
+    setSelectedSize(Object.keys(size)[0]);
+    setSelectedColor(Object.keys(color)[0]);
+    setSoldout(
+      !(Object.values(size)[0] && Object.values(color)[0] && stock >= 1)
+    );
+  }, [size, color, imgList, stock]);
 
   const handleImage = src => {
     setImgSrc(src);
@@ -48,6 +73,48 @@ const ProductModal = () => {
     setShowCollapse(state => !state);
   };
 
+  const sizesSelector = [];
+
+  for (let s in size) {
+    sizesSelector.push(
+      <>
+        <input
+          type="radio"
+          name="size"
+          value={s}
+          id={s}
+          checked={s === selectedSize ? true : false}
+          onChange={handleChangeSize}
+        />
+        <label htmlFor={s} className="square size">
+          {s.toUpperCase()}
+        </label>
+      </>
+    );
+  }
+
+  const colorsSelector = [];
+
+  for (let c in color) {
+    colorsSelector.push(
+      <>
+        <input
+          type="radio"
+          name="color"
+          value={c}
+          id={c}
+          checked={c === selectedColor ? true : false}
+          onChange={handleChangeColor}
+        />
+        <label
+          htmlFor={c}
+          className="square color"
+          style={{ backgroundColor: c }}
+        ></label>
+      </>
+    );
+  }
+
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= star) {
@@ -74,9 +141,7 @@ const ProductModal = () => {
           </div>
           <div className="product-info">
             <p className="h2">{title}</p>
-            <p className="price fw-bold">
-              <span>$38.00</span> ${price.toFixed(2)}
-            </p>
+            <p className="price fw-bold">${price.toFixed(2)}</p>
             <div className="star-container">{stars}</div>
 
             <p className="info-1">
@@ -117,44 +182,12 @@ const ProductModal = () => {
               {showCollapse ? 'Read Less' : 'Read More'}
             </p>
             <p className="option-label">Size</p>
-            <div>
-              <input type="radio" name="size" value="M" id="size-0" />
-              <label htmlFor="size-0" className="square size">
-                M
-              </label>
-              <input type="radio" name="size" value="L" id="size-1" />
-              <label htmlFor="size-1" className="square size">
-                L
-              </label>
-              <input type="radio" name="size" value="XL" id="size-2" />
-              <label htmlFor="size-2" className="square size">
-                XL
-              </label>
-            </div>
+            <div>{sizesSelector}</div>
             <p className="option-label">Color</p>
-            <div>
-              <input type="radio" name="color" value="red" id="color-0" />
-              <label
-                htmlFor="color-0"
-                className="square color"
-                style={{ backgroundColor: 'red' }}
-              ></label>
-              <input type="radio" name="color" value="yellow" id="color-1" />
-              <label
-                htmlFor="color-1"
-                className="square color"
-                style={{ backgroundColor: 'yellow' }}
-              ></label>
-              <input type="radio" name="color" value="black" id="color-2" />
-              <label
-                htmlFor="color-2"
-                className="square color"
-                style={{ backgroundColor: 'black' }}
-              ></label>
-            </div>
+            <div>{colorsSelector}</div>
             <div className="quantity-input mt-3">
               <button
-                disabled={quantity === 1 ? true : false}
+                disabled={quantity === 1 || isSoldout ? true : false}
                 onClick={handleQuantity.bind(null, 'decrease')}
               >
                 -
@@ -164,11 +197,22 @@ const ProductModal = () => {
                 step="1"
                 value={quantity}
                 onChange={handleInputQuantity}
+                onBlur={changeQuantity}
+                disabled={isSoldout}
               />
-              <button onClick={handleQuantity.bind(null, 'increase')}>+</button>
+              <button
+                disabled={isSoldout || quantity === stock ? true : false}
+                onClick={handleQuantity.bind(null, 'increase')}
+              >
+                +
+              </button>
             </div>
-            <button className="btn btn-primary" onClick={addToCart}>
-              ADD TO CART
+            <button
+              className="btn btn-primary"
+              onClick={addToCart}
+              disabled={isSoldout}
+            >
+              {isSoldout ? 'SOLD OUT' : 'ADD TO CART'}
             </button>
           </div>
         </div>

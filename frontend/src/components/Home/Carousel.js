@@ -2,8 +2,10 @@ import React from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import { useNavigate } from 'react-router-dom';
 
 const Carousel = () => {
+  const navigate = useNavigate();
   const settings = {
     dots: true,
     arrows: true,
@@ -38,7 +40,12 @@ const Carousel = () => {
             <p className="d-none d-lg-block mb-lg-4">
               500+ Deals On Top Brands & Big Offer On First Order
             </p>
-            <button className="btn btn-primary">SHOP NOW</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate('/collection/men')}
+            >
+              SHOP NOW
+            </button>
           </div>
           <div className="banner-1__background">
             <img src="image/banner2.png" alt="banner1" />
@@ -54,7 +61,12 @@ const Carousel = () => {
             <p className="d-none d-lg-block mb-lg-4">
               500+ Deals On Top Brands & Big Offer On First Order
             </p>
-            <button className="btn btn-primary">SHOP NOW</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate('/collection/women')}
+            >
+              SHOP NOW
+            </button>
           </div>
           <div className="banner-2__background">
             <img src="image/banner1.png" alt="banner2" />

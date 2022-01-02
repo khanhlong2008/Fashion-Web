@@ -1,8 +1,8 @@
-import ProductRight from '../ProductRight';
 import { useParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
-import ProductCtx from '../../../context/ProductProvider/ProductCtx';
-import ImageCarousel from '../../ProductModal/ImageCarousel';
+import ProductCtx from '../context/ProductProvider/ProductCtx';
+import ImageCarousel from '../components/Product/ProductModal/ImageCarousel';
+import ProductRight from '../components/Product/ProductRight';
 
 const Details = () => {
   const { id } = useParams();
@@ -21,6 +21,10 @@ const Details = () => {
   useEffect(() => {
     if (product) setImgSrc(product.img.imgList[0].imgItem);
   }, [product]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const imgList = product ? product.img.imgList : [];
 

@@ -25,10 +25,7 @@ const AboutUs = () => {
           suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
           lacus vel facilisis.
         </p>
-        <button
-          className="btn btn-dark"
-          onClick={() => navigate('/pages/aboutus')}
-        >
+        <button className="btn btn-dark" onClick={() => navigate('/about-us')}>
           Read more
         </button>
       </div>

@@ -1,24 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   return (
     <section className="banner__wrapper pb-5 container">
-      <a
-        className="banner__container"
-        href="/collections/men"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <Link className="banner__container" to="/collection/men" rel="noreferrer">
         <img src="image/menwear.png" alt="" />
-      </a>
-      <a
+      </Link>
+      <Link
         className="banner__container"
-        href="/collections/women"
-        target="_blank"
+        to="/collection/women"
         rel="noreferrer"
       >
         <img src="image/womentop.png" alt="" />
-      </a>
+      </Link>
     </section>
   );
 };
