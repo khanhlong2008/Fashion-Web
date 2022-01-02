@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import InputGroup from './InputGroup';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../context/auth';
 
 const ContactInfofmation = () => {
   const navigate = useNavigate();
@@ -9,6 +10,9 @@ const ContactInfofmation = () => {
   const [address, setAddress] = useState('');
   const [apartment, setApartment] = useState('');
   const [city, setCity] = useState('');
+  const {
+    user: { firstname, lastname, email },
+  } = useContext(AuthContext);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,7 +29,9 @@ const ContactInfofmation = () => {
             alt=""
           />
         </div>
-        <p>Nguyet Doan (minhnguyet@gmail.com)</p>
+        <p>
+          {firstname + lastname} ({email})
+        </p>
       </div>
       <div className="shipping-address">
         <p>Shipping address</p>

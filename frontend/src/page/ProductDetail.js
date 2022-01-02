@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import ProductCtx from '../context/ProductProvider/ProductCtx';
-import ImageCarousel from '../components/Product/ProductModal/ImageCarousel';
-import ProductRight from '../components/Product/ProductRight';
+import ImageCarousel from '../components/Product/ProductDetail/ProductModal/ImageCarousel';
+import ProductRight from '../components/Product/ProductDetail/ProductRight';
 
 const Details = () => {
   const { id } = useParams();

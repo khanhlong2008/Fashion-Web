@@ -27,7 +27,7 @@ const updateCart = async (req, res) => {
       res.status(201).json(cart);
     } else {
       cartBefore = await Cart.findOneAndUpdate(
-        { userId },
+        { user: userId },
         { $set: { cart: cartFields } },
         { new: true }
       );

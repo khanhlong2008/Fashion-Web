@@ -3,13 +3,15 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import BackToTopBtn from './BackToTopBtn';
 import CartCtx from '../../context/CartProvider/CartCtx';
+import AuthContext from '../../context/auth';
 
 const Layout = props => {
   const { getCart, items, sendCartData, changed } = useContext(CartCtx);
+  const { isAuthenticated } = useContext(AuthContext);
   useEffect(() => {
-    getCart();
+    if (isAuthenticated) getCart();
     // eslint-disable-next-line
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (changed) {

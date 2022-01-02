@@ -1,9 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ProductCtx from '../../../context/ProductProvider/ProductCtx';
-import ProductList from '../../Product/ProductList';
-import ProductModal from '../../Product/ProductModal';
-
+import ProductCtx from '../../../../context/ProductProvider/ProductCtx';
+import ProductModal from '../../ProductDetail/ProductModal';
+import ProductList from '../../TopProduct/ProductList';
 import ProductFilter from '../ProductFilter/ProductFilter';
 import './ProductList.css';
 

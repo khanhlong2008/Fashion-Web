@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import CartCtx from '../../context/CartProvider/CartCtx';
-import ProductItem from './ProductItem';
 import '@dotlottie/player-component';
 import { useNavigate } from 'react-router-dom';
+import CartCtx from '../../../context/CartProvider/CartCtx';
+import ProductItem from './ProductItem';
 
 const CartPopUp = ({ show }) => {
   const { items, totalPrice } = useContext(CartCtx);

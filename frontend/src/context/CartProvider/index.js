@@ -1,7 +1,8 @@
-import React, { useReducer } from 'react';
+import React, { useContext, useReducer } from 'react';
 import CartCtx from './CartCtx';
 import cartReducer from './cartReducer';
 import axiosInstance from '../../Util';
+import AuthContext from '../auth';
 
 const initialState = {
   changed: false,
@@ -20,14 +21,16 @@ const initialState = {
     size: {},
     stock: 0,
   },
+  isLoading: true,
 };
 
 const CartProvider = props => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  const { user } = useContext(AuthContext);
 
   const getCart = async () => {
     try {
-      const res = await axiosInstance.get('/cart/61cc662277177893679d56d5');
+      const res = await axiosInstance.get(`/cart/${user._id}`);
       dispatch({ type: 'GET_CART', payload: res.data.cart });
     } catch (error) {
       console.log('error');
@@ -41,7 +44,7 @@ const CartProvider = props => {
       },
     };
     try {
-      await axiosInstance.put('/cart/61cc662277177893679d56d5', cart, config);
+      await axiosInstance.put(`/cart/${user._id}`, cart, config);
     } catch (error) {
       console.log('error');
     }

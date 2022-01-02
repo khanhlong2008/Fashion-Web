@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import CartCtx from '../../../context/CartProvider/CartCtx';
+import CartCtx from '../../../../context/CartProvider/CartCtx';
 
 const ProductItem = ({
   _id: id,
@@ -85,6 +85,7 @@ const ProductItem = ({
             star,
             size,
             color,
+            stock,
           })}
         >
           <i className="bi bi-eye-fill"></i>

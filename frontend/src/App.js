@@ -10,7 +10,7 @@ import AuthContext from './context/auth';
 import http, { addJwt } from './Util';
 import CartProvider from './context/CartProvider';
 // import Logout from "./components/Auth/Logout";
-import ProductList from './components/Products/ProductLists/ProductLists';
+import ProductList from './components/Product/MainProduct/ProductLists/ProductLists';
 import Home from './page/Home';
 import ProductDetail from './page/ProductDetail';
 import Layout from './components/layout';
@@ -54,10 +54,16 @@ export default function App() {
       </div>
     );
   }
-  // console.log(authUser)
+
   return (
     <div className="App">
-      <AuthContext.Provider value={{ user: authUser, setUser: setAuthUser }}>
+      <AuthContext.Provider
+        value={{
+          user: authUser,
+          setUser: setAuthUser,
+          isAuthenticated: checkingAuthUserDone,
+        }}
+      >
         <ProductProvider>
           <CartProvider>
             <Layout>

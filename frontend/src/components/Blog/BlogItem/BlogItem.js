@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
-import "./BlogItem.css";
+import { NavLink } from 'react-router-dom';
+import './BlogItem.css';
 
-const BlogItem = (props) => {
+const BlogItem = props => {
   return (
     <div className="blog-container">
       {/* <div className="blog-item"></div> */}
-      {props.blogdata.map((item) => {
+      {props.blogdata.map(item => {
         return (
           <div className="card-items-container" key={item.id}>
             <div className="card-item-img">

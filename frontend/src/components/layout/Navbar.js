@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import CartCtx from '../../context/CartProvider/CartCtx';
-import CartPopUp from '../CartPopUp';
 import AuthContext from '../../context/auth';
+import CartPopUp from '../Cart/CartPopUp';
+
 const Navbar = () => {
   const [onActiveMenu, setActiveMenu] = useState(false);
   const [onSearch, setOnSearch] = useState(false);
   const [onShowCart, setShowCart] = useState(false);
   const { totalQuantity } = useContext(CartCtx);
-  const authCtx = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     document.querySelector('body').addEventListener('click', e => {
@@ -69,7 +70,7 @@ const Navbar = () => {
               X
             </p>
             <ul>
-              {authCtx.user ? (
+              {user ? (
                 <>
                   <li>
                     <NavLink to="/collection/men">Men</NavLink>
@@ -125,8 +126,8 @@ const Navbar = () => {
           </div>
           <CartPopUp show={onShowCart} />
           <i className="bi bi-person" style={{ marginLeft: 15 }}></i>
-          {authCtx.user ? (
-            <span style={{ marginLeft: 5 }}> {authCtx.user}</span>
+          {user ? (
+            <span style={{ marginLeft: 5 }}> {user.lastname}</span>
           ) : null}
         </div>
       </nav>

@@ -1,6 +1,7 @@
-import React from "react";
-import FachionLits from "../../Blog/fashion/FachionLits";
-import ProductFilterBy from "./ProductFilterBy";
+import React from 'react';
+import FachionLits from '../../../Blog/fashion/FachionLits';
+
+import ProductFilterBy from './ProductFilterBy';
 
 const ProductFilter = () => {
   return (

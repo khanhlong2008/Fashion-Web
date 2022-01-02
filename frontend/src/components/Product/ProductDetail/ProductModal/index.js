@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import CartCtx from '../../../context/CartProvider/CartCtx';
+import CartCtx from '../../../../context/CartProvider/CartCtx';
 
 import ImageCarousel from './ImageCarousel';
 
@@ -48,7 +48,16 @@ const ProductModal = () => {
 
   const addToCart = () => {
     if (quantity === '' || quantity < 1) return;
-    addItemToCart({ id, title, front: imgList[0].imgItem, price, quantity });
+    addItemToCart({
+      id,
+      title,
+      front: imgList[0].imgItem,
+      price,
+      quantity,
+      stock,
+      size: selectedSize,
+      color: selectedColor,
+    });
   };
 
   const closeModal = () => {

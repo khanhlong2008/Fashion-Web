@@ -13,7 +13,7 @@ const CheckoutPage = () => {
     shipping: false,
     payment: false,
   });
-  const { items } = useContext(CartCtx);
+  const { items, isLoading } = useContext(CartCtx);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get('step');
@@ -23,7 +23,7 @@ const CheckoutPage = () => {
     document.body.click();
   }, []);
 
-  return items.length === 0 ? (
+  return items.length === 0 && !isLoading ? (
     <Navigate to="/cart" />
   ) : (
     <section className="checkout-wrapper container d-block">

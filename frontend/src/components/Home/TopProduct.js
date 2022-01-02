@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import ProductCtx from '../../context/ProductProvider/ProductCtx';
-import ProductList from '../Product/ProductList';
+import ProductList from '../Product/TopProduct/ProductList';
 
 const TopProduct = () => {
   const { menList, womenList } = useContext(ProductCtx);
@@ -47,7 +47,7 @@ const TopProduct = () => {
         >
           <ProductList
             list={menList.length >= 8 ? menList.slice(0, 8) : menList}
-          ></ProductList>
+          />
         </div>
         <div
           className="tab-pane fade"

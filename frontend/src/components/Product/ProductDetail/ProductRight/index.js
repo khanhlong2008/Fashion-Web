@@ -2,7 +2,7 @@ import './Right.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useContext, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import CartCtx from '../../../context/CartProvider/CartCtx';
+import CartCtx from '../../../../context/CartProvider/CartCtx';
 import { useNavigate } from 'react-router-dom';
 
 const ProductRight = ({

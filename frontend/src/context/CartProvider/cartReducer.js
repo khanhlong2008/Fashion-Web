@@ -4,6 +4,7 @@ const cartReducer = (state, action) => {
       const cart = action.payload || [];
       return {
         ...state,
+        isLoading: false,
         items: cart,
         totalPrice: cart.reduce((total, item) => total + item.totalPrice, 0),
         totalQuantity: cart.length,
@@ -40,6 +41,7 @@ const cartReducer = (state, action) => {
           ...state,
           changed: true,
           totalPrice: state.totalPrice + newItem.price,
+          message: `PRODUCT ADDED TO CART`,
           items: state.items.map(item => {
             if (item.id === newItem.id) {
               return {
