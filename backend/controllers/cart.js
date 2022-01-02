@@ -4,7 +4,6 @@ const getCart = async (req, res) => {
   try {
     const { userId } = req.params;
     const cart = await Cart.findOne({ user: userId });
-
     return res.status(200).json(cart);
   } catch (err) {
     res.status(500).json({ error: err });
@@ -16,7 +15,7 @@ const updateCart = async (req, res) => {
   const { userId } = req.params;
 
   try {
-    let cartBefore = await Cart.findOne({ userId });
+    let cartBefore = await Cart.findOne({ user: userId });
 
     if (!cartBefore) {
       const newCart = new Cart({
