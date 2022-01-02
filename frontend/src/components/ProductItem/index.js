@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
 import CartCtx from '../../context/CartProvider/CartCtx';
 
-const ProductItem = ({ id, name, originPrice, price, back, front, star }) => {
-  const link = `/products/${name.toLowerCase().split(' ').join('-')}`;
+const ProductItem = ({
+  _id: id,
+  title,
+  originPrice,
+  price,
+  img: { imgList },
+  star = 4,
+}) => {
+  const link = `/products/${id}`;
   const { addItemToCart, handleShowModal } = useContext(CartCtx);
-
   const stars = [];
+
   for (let i = 1; i <= 5; i++) {
     if (i <= star) {
       stars.push(<i className="bi bi-star-fill yellow"></i>);
@@ -14,20 +21,20 @@ const ProductItem = ({ id, name, originPrice, price, back, front, star }) => {
   return (
     <div className="product-item__card">
       <div className="product-item__card-img">
-        <img src={front} alt="product" />
-        <img src={back} alt="product" />
-        <div className="star-container">{stars}</div>
+        <img src={imgList[0].imgItem} alt="product" />
+        <img src={imgList[1].imgItem} alt="product" />
         <a href={link} target="_blank" rel="noreferrer">
           {link}
         </a>
       </div>
+      <div className="star-container">{stars}</div>
       <a
         className="text-center d-block fw-bold mt-3 mb-0"
         href={link}
         target="_blank"
         rel="noreferrer"
       >
-        {name}
+        {title}
       </a>
       <p className="text-center text-primary">
         {originPrice > 0 && <span>{`$${originPrice.toFixed(2)}`}</span>}
@@ -38,11 +45,10 @@ const ProductItem = ({ id, name, originPrice, price, back, front, star }) => {
           className="icon__container"
           onClick={handleShowModal.bind(null, {
             id,
-            name,
+            title,
             price,
-            front,
+            imgList,
             star,
-            back,
           })}
         >
           <i className="bi bi-eye-fill"></i>
@@ -54,9 +60,9 @@ const ProductItem = ({ id, name, originPrice, price, back, front, star }) => {
           className="icon__container"
           onClick={addItemToCart.bind(null, {
             id,
-            name,
+            title,
             price,
-            front,
+            front: imgList[0].imgItem,
             quantity: 1,
           })}
         >

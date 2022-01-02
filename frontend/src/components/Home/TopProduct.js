@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import ProductCtx from '../../context/ProductProvider/ProductCtx';
 import ProductList from '../ProductList';
 
 const listProduct = [
@@ -77,6 +78,8 @@ const listProduct = [
 ];
 
 const TopProduct = () => {
+  const { menList, womenList } = useContext(ProductCtx);
+
   return (
     <section className="container top-product__wrapper py-5 d-block">
       <h2 className="text-center">TOP PRODUCTS</h2>
@@ -87,65 +90,49 @@ const TopProduct = () => {
       >
         <button
           className="nav-link active bg-transparent"
-          id="featured-tab"
+          id="men-tab"
           data-bs-toggle="tab"
-          data-bs-target="#featured"
+          data-bs-target="#men"
           type="button"
           role="tab"
-          aria-controls="featured"
+          aria-controls="men"
           aria-selected="true"
         >
-          FEATURED
+          MEN
         </button>
         <button
           className="nav-link bg-transparent"
-          id="new-arrivals-tab"
+          id="women-tab"
           data-bs-toggle="tab"
-          data-bs-target="#new-arrivals"
+          data-bs-target="#women"
           type="button"
           role="tab"
-          aria-controls="new-arrivals"
+          aria-controls="women"
           aria-selected="false"
         >
-          NEW ARRIVALS
-        </button>
-        <button
-          className="nav-link bg-transparent"
-          id="best-seller-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#best-seller"
-          type="button"
-          role="tab"
-          aria-controls="best-seller"
-          aria-selected="false"
-        >
-          BEST SELLER
+          WOMEN
         </button>
       </div>
       <div className="tab-content mb-5" id="nav-tabContent">
         <div
           className="tab-pane fade show active "
-          id="featured"
+          id="men"
           role="tabpanel"
-          aria-labelledby="featured-tab"
+          aria-labelledby="men-tab"
         >
-          <ProductList list={listProduct} />
+          <ProductList
+            list={menList.length >= 8 ? menList.slice(0, 8) : menList}
+          ></ProductList>
         </div>
         <div
           className="tab-pane fade"
-          id="new-arrivals"
+          id="women"
           role="tabpanel"
-          aria-labelledby="new-arrivals-tab"
+          aria-labelledby="women-tab"
         >
-          <ProductList list={listProduct} />
-        </div>
-        <div
-          className="tab-pane fade"
-          id="best-seller"
-          role="tabpanel"
-          aria-labelledby="best-seller-tab"
-        >
-          <ProductList list={listProduct} />
+          <ProductList
+            list={womenList.length >= 8 ? womenList.slice(0, 8) : womenList}
+          />
         </div>
       </div>
     </section>

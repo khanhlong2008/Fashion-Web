@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import CartCtx from '../../context/CartProvider/CartCtx';
 import CartPopUp from '../CartPopUp';
-import AuthContext from '../../context/auth'
+import AuthContext from '../../context/auth';
 const Navbar = () => {
   const [onActiveMenu, setActiveMenu] = useState(false);
   const [onSearch, setOnSearch] = useState(false);
   const [onShowCart, setShowCart] = useState(false);
   const { totalQuantity } = useContext(CartCtx);
-  const authCtx = useContext(AuthContext)
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    document.querySelector("body").addEventListener("click", (e) => {
-      const searchContainer = document.querySelector("#searchBar");
-      const cart = document.querySelector(".cart-wrapper");
+    document.querySelector('body').addEventListener('click', e => {
+      const searchContainer = document.querySelector('#searchBar');
+      const cart = document.querySelector('.cart-wrapper');
 
       if (
         !searchContainer.isEqualNode(e.target) &&
@@ -24,32 +24,28 @@ const Navbar = () => {
         setShowCart(false);
     });
 
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 90) {
-        document.querySelector("header").classList.add("fixed");
+        document.querySelector('header').classList.add('fixed');
       } else {
-        document.querySelector("header").classList.remove("fixed");
+        document.querySelector('header').classList.remove('fixed');
       }
     });
   }, []);
 
-  // useEffect(() => {
-  //   onchangeClickStatus(isShowMen);
-  // });
-
   const activeHandler = () => {
-    setActiveMenu((state) => !state);
+    setActiveMenu(state => !state);
   };
 
-  const handleSearchBar = (e) => {
+  const handleSearchBar = e => {
     e.stopPropagation();
-    setOnSearch((state) => !state);
+    setOnSearch(state => !state);
     setShowCart(false);
   };
 
-  const handleShowCart = (e) => {
+  const handleShowCart = e => {
     e.stopPropagation();
-    setShowCart((state) => !state);
+    setShowCart(state => !state);
     setOnSearch(false);
   };
 
@@ -58,54 +54,49 @@ const Navbar = () => {
       <nav className="container navbar my-0">
         <div className="menu-mb d-flex align-items-center d-lg-none">
           <div
-            className={`sign-container ${onActiveMenu ? "active" : ""}`}
+            className={`sign-container ${onActiveMenu ? 'active' : ''}`}
             onClick={activeHandler}
           >
             <div className="sign"></div>
           </div>
         </div>
-        <a href="/" className="h2 nav-logo">
+        <Link to="/" className="h2 nav-logo">
           Aveda <span className="text-secondary">.</span>
-        </a>
-        <div className={`menu-list ${onActiveMenu ? "show" : ""}`}>
+        </Link>
+        <div className={`menu-list ${onActiveMenu ? 'show' : ''}`}>
           <div className="menu-collapse">
             <p className="exit-btn d-lg-none" onClick={activeHandler}>
               X
             </p>
             <ul>
-              {
-                authCtx.user ? (
-                  <>
-                    <li>
-                      <NavLink to="/product/men">Men</NavLink>
-              </li>
-              <li>
-                      <NavLink to="/product/women">Women</NavLink>
-              </li>
-              <li>
-                <NavLink to="/blog/fashion">Blogs</NavLink>
-              </li>
-              <li>
-                <NavLink to="/about-us">About us</NavLink>
-              </li>
-              <li>
-                <NavLink to="/pages/contact">Contact</NavLink>
-              </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <NavLink to="/">Login</NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/register">Register</NavLink>
-                    </li>
-                  </>
-                )
-
-              }
-
-
+              {authCtx.user ? (
+                <>
+                  <li>
+                    <NavLink to="/collection/men">Men</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/collection/women">Women</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/blog/fashion">Blogs</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/about-us">About us</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/pages/contact">Contact</NavLink>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <NavLink to="/">Login</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/register">Register</NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
           <div className="back-drop" onClick={activeHandler}></div>
@@ -115,7 +106,7 @@ const Navbar = () => {
           <div
             id="searchBar"
             className={`input-group input-group-sm search-container ${
-              onSearch ? "show" : ""
+              onSearch ? 'show' : ''
             }`}
           >
             <input
@@ -134,7 +125,9 @@ const Navbar = () => {
           </div>
           <CartPopUp show={onShowCart} />
           <i className="bi bi-person" style={{ marginLeft: 15 }}></i>
-          {authCtx.user ? (<span style={{ marginLeft: 5 }}> {authCtx.user}</span>) : null}
+          {authCtx.user ? (
+            <span style={{ marginLeft: 5 }}> {authCtx.user}</span>
+          ) : null}
         </div>
       </nav>
     </header>

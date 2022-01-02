@@ -7,15 +7,25 @@ import ImageItem from './ImageItem';
 const ImageCarousel = ({ listImage, handleImage }) => {
   const settings = {
     arrows: true,
-    slidesToShow: 2,
+    infinite: true,
+    autoplay: true,
+    slidesToShow: listImage.length >= 4 ? 4 : 3,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
   };
 
   return (
     <section className="slider__container">
       <Slider {...settings}>
-        {listImage.map((src, index) => (
-          <ImageItem src={src} key={index} handleImage={handleImage} />
+        {listImage.map(({ imgItem }, index) => (
+          <ImageItem src={imgItem} key={index} handleImage={handleImage} />
         ))}
       </Slider>
     </section>
