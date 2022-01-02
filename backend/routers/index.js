@@ -7,12 +7,13 @@ const bill = require('./bill');
 const cart = require('./cart');
 const product_male = require('./product_male');
 const router = express.Router();
-
+const flashSale = require('./flashSale');
 router.use('/auth', auth);
 router.use('/user', user);
 router.use('/product_female', product_female);
 router.use('/bill', bill);
 router.use('/product_male', product_male);
+router.use('/flashSale', flashSale);
 router.use('/cart', cart);
 
 module.exports = router;

@@ -17,7 +17,6 @@ import Layout from './components/layout';
 import Cart from './page/Cart';
 import CheckoutPage from './page/CheckoutPage';
 import ProductProvider from './context/ProductProvider';
-
 // import { Navigate } from "react-router";
 export default function App() {
   const [authUser, setAuthUser] = useState(null);

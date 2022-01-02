@@ -19,7 +19,6 @@ const CartItem = ({
     removeOneFromItem,
     changeQuantityItem,
   } = useContext(CartCtx);
-
   const handleInputQuantity = e => {
     if (parseFloat(e.target.value) >= 0 && parseFloat(e.target.value) % 1 === 0)
       setNewQuantity(parseFloat(e.target.value));
