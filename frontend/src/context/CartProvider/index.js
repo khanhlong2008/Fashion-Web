@@ -2,7 +2,7 @@ import React, { useContext, useReducer } from 'react';
 import CartCtx from './CartCtx';
 import cartReducer from './cartReducer';
 import axiosInstance from '../../Util';
-import AuthContext from '../auth';
+import AuthCtx from '../AuthProvider/AuthCtx';
 
 const initialState = {
   changed: false,
@@ -26,7 +26,7 @@ const initialState = {
 
 const CartProvider = props => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthCtx);
 
   const getCart = async () => {
     try {
@@ -71,17 +71,17 @@ const CartProvider = props => {
     });
   };
 
-  const removeItemFromCart = id => {
+  const removeItemFromCart = item => {
     dispatch({
       type: 'REMOVE_ITEM',
-      payload: id,
+      payload: item,
     });
   };
 
-  const removeOneFromItem = id => {
+  const removeOneFromItem = item => {
     dispatch({
       type: 'REMOVE_ONE',
-      payload: id,
+      payload: item,
     });
   };
 
@@ -90,6 +90,15 @@ const CartProvider = props => {
       type: 'CHANGE_QUANTITY',
       payload: item,
     });
+  };
+
+  const handleBlockAddToCart = () => {
+    dispatch({
+      type: 'SEND_MESSAGE',
+      payload: 'Please login to add product to cart',
+    });
+
+    setTimeout(() => dispatch({ type: 'CLEAR_MESSAGE' }), 2000);
   };
 
   return (
@@ -104,6 +113,7 @@ const CartProvider = props => {
         changeQuantityItem,
         getCart,
         sendCartData,
+        handleBlockAddToCart,
       }}
     >
       {props.children}

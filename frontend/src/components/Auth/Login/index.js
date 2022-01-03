@@ -1,40 +1,33 @@
-import { useState, useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Card from "../UI/Card";
-import InputGroup from "../UI/InputGroup";
-import http, { addJwt } from "../../../Util";
-import AuthContext from "../../../context/auth.js";
-import "./Login.css";
+import { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Card from '../UI/Card';
+import InputGroup from '../UI/InputGroup';
+import './Login.css';
+import AuthCtx from '../../../context/AuthProvider/AuthCtx';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-     const [password, setPassword] = useState("");
-    const authCtx = useContext(AuthContext)
-    const onLoginSubmit = async (evt) => {
-        evt.preventDefault();
-        try {
-            const response = await http.post('/auth/signin',
-                {
-                    email: email,
-                    password: password,
-                })
-            // console.log(response)
-            authCtx.setUser(response.data.user)
-            // console.log(response.data.user)
-            localStorage.setItem("token", response.data.token)
-            addJwt(response.data.token)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, isAuthenticated } = useContext(AuthCtx);
+  const navigate = useNavigate();
 
-        } catch (err) {
-            alert(err.message);
-        }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
     }
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
 
-    if (authCtx.user) {
-      return <Navigate to="/home" replace={true} />
+  const onLoginSubmit = async evt => {
+    evt.preventDefault();
+    if (email === '' || password === '') {
+      console.log('Please enter all fields', 'danger');
+    } else {
+      login({ email, password });
     }
+  };
 
-
+  if (isAuthenticated) return <></>;
 
   return (
     <div className="login-screen">
@@ -45,7 +38,7 @@ const Login = () => {
             label="Email"
             value={email}
             htmlType="text"
-            onChange={(evt) => {
+            onChange={evt => {
               setEmail(evt.target.value);
             }}
           />
@@ -53,7 +46,7 @@ const Login = () => {
             label="Password"
             value={password}
             htmlType="password"
-            onChange={(evt) => {
+            onChange={evt => {
               setPassword(evt.target.value);
             }}
           />
@@ -70,6 +63,5 @@ const Login = () => {
       </Card>
     </div>
   );
-
-}
+};
 export default Login;

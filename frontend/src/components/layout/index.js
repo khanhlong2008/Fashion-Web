@@ -3,13 +3,14 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import BackToTopBtn from './BackToTopBtn';
 import CartCtx from '../../context/CartProvider/CartCtx';
-import AuthContext from '../../context/auth';
+import AuthCtx from '../../context/AuthProvider/AuthCtx';
 
 const Layout = props => {
   const { getCart, items, sendCartData, changed } = useContext(CartCtx);
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, checking, loadUser } = useContext(AuthCtx);
   useEffect(() => {
     if (isAuthenticated) getCart();
+
     // eslint-disable-next-line
   }, [isAuthenticated]);
 
@@ -20,14 +21,27 @@ const Layout = props => {
     // eslint-disable-next-line
   }, [items, changed]);
 
-  return (
-    <>
-      <Navbar />
-      {props.children}
-      <BackToTopBtn />
-      <Footer />
-    </>
-  );
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
+
+  if (!checking) {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        {' '}
+        Checking signed-in user status...
+      </div>
+    );
+  } else
+    return (
+      <>
+        <Navbar />
+        {props.children}
+        <BackToTopBtn />
+        <Footer />
+      </>
+    );
 };
 
 export default Layout;

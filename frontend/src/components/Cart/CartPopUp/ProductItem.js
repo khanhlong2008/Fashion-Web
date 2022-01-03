@@ -6,7 +6,7 @@ const ProductItem = ({ front, price, title, quantity, id, size, color }) => {
 
   const handleRemove = e => {
     e.stopPropagation();
-    removeItemFromCart(id);
+    removeItemFromCart({ id, size, color });
   };
 
   return (

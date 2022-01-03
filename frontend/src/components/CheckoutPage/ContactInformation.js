@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import InputGroup from './InputGroup';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../context/auth';
+import AuthCtx from '../../context/AuthProvider/AuthCtx';
 
 const ContactInfofmation = () => {
   const navigate = useNavigate();
@@ -10,9 +10,7 @@ const ContactInfofmation = () => {
   const [address, setAddress] = useState('');
   const [apartment, setApartment] = useState('');
   const [city, setCity] = useState('');
-  const {
-    user: { firstname, lastname, email },
-  } = useContext(AuthContext);
+  const { user } = useContext(AuthCtx);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -30,7 +28,7 @@ const ContactInfofmation = () => {
           />
         </div>
         <p>
-          {firstname + lastname} ({email})
+          {user.firstname + user.lastname} ({user.email})
         </p>
       </div>
       <div className="shipping-address">

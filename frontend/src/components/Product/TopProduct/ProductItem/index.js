@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import AuthCtx from '../../../../context/AuthProvider/AuthCtx';
 import CartCtx from '../../../../context/CartProvider/CartCtx';
 
 const ProductItem = ({
@@ -13,20 +14,26 @@ const ProductItem = ({
   quantity: stock,
 }) => {
   const link = `/products/${id}`;
-  const { addItemToCart, handleShowModal } = useContext(CartCtx);
+  const { addItemToCart, handleShowModal, handleBlockAddToCart } =
+    useContext(CartCtx);
   const stars = [];
+  const { isAuthenticated } = useContext(AuthCtx);
 
   const handleAddItem = () => {
-    addItemToCart({
-      id,
-      title,
-      price,
-      front: imgList[0].imgItem,
-      quantity: 1,
-      color: selectColor,
-      size: selectSize,
-      stock,
-    });
+    if (isAuthenticated) {
+      addItemToCart({
+        id,
+        title,
+        price,
+        front: imgList[0].imgItem,
+        quantity: 1,
+        color: selectColor,
+        size: selectSize,
+        stock,
+      });
+    } else {
+      handleBlockAddToCart();
+    }
   };
 
   let selectSize;
@@ -49,8 +56,8 @@ const ProductItem = ({
 
   for (let i = 1; i <= 5; i++) {
     if (i <= star) {
-      stars.push(<i className="bi bi-star-fill yellow"></i>);
-    } else stars.push(<i className="bi bi-star-fill"></i>);
+      stars.push(<i key={`star-${i}`} className="bi bi-star-fill yellow"></i>);
+    } else stars.push(<i key={`star-${i}`} className="bi bi-star-fill"></i>);
   }
   return (
     <div className="product-item__card">
@@ -93,11 +100,12 @@ const ProductItem = ({
         <div className="icon__container">
           <i className="bi bi-heart"></i>
         </div>
-        {isSoldout && (
-          <div className="icon__container" onClick={handleAddItem}>
-            <i className="bi bi-cart3"></i>
-          </div>
-        )}
+        <div
+          className={`icon__container ${isSoldout ? 'none-add' : ''}`}
+          onClick={handleAddItem}
+        >
+          <i className="bi bi-cart3"></i>
+        </div>
       </div>
     </div>
   );

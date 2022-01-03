@@ -11,10 +11,13 @@ const cartReducer = (state, action) => {
       };
     case 'ADD_ITEM':
       const newItem = action.payload;
-      const existingItem = state.items.findIndex(
-        item => item.id === newItem.id
+      const existingItem = state.items.find(
+        item =>
+          item.id === newItem.id &&
+          item.size === newItem.size &&
+          item.color === newItem.color
       );
-      if (existingItem === -1) {
+      if (!existingItem) {
         return {
           ...state,
           changed: true,
@@ -43,7 +46,7 @@ const cartReducer = (state, action) => {
           totalPrice: state.totalPrice + newItem.price,
           message: `PRODUCT ADDED TO CART`,
           items: state.items.map(item => {
-            if (item.id === newItem.id) {
+            if (item === existingItem) {
               return {
                 ...item,
                 quantity: item.quantity + newItem.quantity,
@@ -57,26 +60,37 @@ const cartReducer = (state, action) => {
       }
 
     case 'REMOVE_ITEM':
-      const id = action.payload;
-      const item = state.items.find(item => item.id === id);
+      const removedItem = action.payload;
+      const _removedItem = state.items.find(
+        item =>
+          item.id === removedItem.id &&
+          item.size === removedItem.size &&
+          item.color === removedItem.color
+      );
+
       return {
         ...state,
         changed: true,
-        items: state.items.filter(item => item.id !== id),
+        items: state.items.filter(item => item !== _removedItem),
         totalQuantity: state.totalQuantity - 1,
-        totalPrice: state.totalPrice - item.totalPrice,
+        totalPrice: state.totalPrice - _removedItem.totalPrice,
       };
 
     case 'CHANGE_QUANTITY':
       const changedItem = action.payload;
-      const selectItem = state.items.find(item => item.id === changedItem.id);
+      const selectItem = state.items.find(
+        item =>
+          item.id === changedItem.id &&
+          item.size === changedItem.size &&
+          item.color === changedItem.color
+      );
       return {
         ...state,
         changed: true,
         totalPrice:
           state.totalPrice - selectItem.totalPrice + changedItem.totalPrice,
         items: state.items.map(item => {
-          if (item.id === changedItem.id) {
+          if (item === selectItem) {
             return {
               ...item,
               quantity: changedItem.quantity,
@@ -88,32 +102,38 @@ const cartReducer = (state, action) => {
         }),
       };
     case 'REMOVE_ONE':
-      const itemDelete = state.items.find(item => item.id === action.payload);
-      if (itemDelete.quantity > 1) {
+      const removeOne = action.payload;
+      const removeItem = state.items.find(
+        item =>
+          item.id === removeOne.id &&
+          item.size === removeOne.size &&
+          item.color === removeOne.color
+      );
+      if (removeItem.quantity > 1) {
         return {
           ...state,
           changed: true,
           items: [
             ...state.items.map(item =>
-              item.id === action.payload
+              item === removeItem
                 ? {
                     ...item,
                     quantity: item.quantity - 1,
-                    totalPrice: item.totalPrice - item.price,
+                    totalPrice: item.totalPrice - removeItem.price,
                   }
                 : item
             ),
           ],
           totalQuantity: state.totalQuantity,
-          totalPrice: state.totalPrice - itemDelete.price,
+          totalPrice: state.totalPrice - removeItem.price,
         };
       } else {
         return {
           ...state,
           changed: true,
-          items: state.items.filter(item => item.id !== id),
+          items: state.items.filter(item => item === removeItem),
           totalQuantity: state.totalQuantity - 1,
-          totalPrice: state.totalPrice - itemDelete.totalPrice,
+          totalPrice: state.totalPrice - removeItem.totalPrice,
         };
       }
     case 'CLEAR_MESSAGE':
@@ -131,6 +151,11 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         showModal: false,
+      };
+    case 'SEND_MESSAGE':
+      return {
+        ...state,
+        message: action.payload,
       };
     default:
       return state;

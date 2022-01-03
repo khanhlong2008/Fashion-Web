@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import AuthCtx from '../../../../context/AuthProvider/AuthCtx';
 import CartCtx from '../../../../context/CartProvider/CartCtx';
 
 import ImageCarousel from './ImageCarousel';
@@ -9,7 +10,9 @@ const ProductModal = () => {
     handleCloseModal,
     addItemToCart,
     modal: { id, title, imgList, price, star, size, color, stock },
+    handleBlockAddToCart,
   } = useContext(CartCtx);
+  const { isAuthenticated } = useContext(AuthCtx);
   const [showCollapse, setShowCollapse] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [imgSrc, setImgSrc] = useState('');
@@ -47,6 +50,10 @@ const ProductModal = () => {
   };
 
   const addToCart = () => {
+    if (!isAuthenticated) {
+      handleBlockAddToCart();
+      return;
+    }
     if (quantity === '' || quantity < 1) return;
     addItemToCart({
       id,
@@ -127,8 +134,8 @@ const ProductModal = () => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= star) {
-      stars.push(<i className="bi bi-star-fill yellow"></i>);
-    } else stars.push(<i className="bi bi-star-fill"></i>);
+      stars.push(<i key={`star-${i}`} className="bi bi-star-fill yellow"></i>);
+    } else stars.push(<i key={`star-${i}`} className="bi bi-star-fill"></i>);
   }
 
   return (

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import CartCtx from '../../../../context/CartProvider/CartCtx';
 import { useNavigate } from 'react-router-dom';
+import AuthCtx from '../../../../context/AuthProvider/AuthCtx';
 
 const ProductRight = ({
   _id: id,
@@ -16,11 +17,12 @@ const ProductRight = ({
   quantity: stock,
 }) => {
   const [quantity, setQuantity] = useState(1);
-  const { addItemToCart } = useContext(CartCtx);
+  const { addItemToCart, handleBlockAddToCart } = useContext(CartCtx);
   const navigate = useNavigate();
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [isSoldout, setSoldout] = useState(false);
+  const { isAuthenticated } = useContext(AuthCtx);
 
   const handleChangeSize = e => {
     setSelectedSize(e.target.value);
@@ -96,6 +98,10 @@ const ProductRight = ({
   };
 
   const handleBuyProduct = () => {
+    if (!isAuthenticated) {
+      handleBlockAddToCart();
+      return;
+    }
     if (quantity === '' || quantity < 1) return;
 
     addItemToCart({
@@ -118,6 +124,10 @@ const ProductRight = ({
   };
 
   const addToCart = () => {
+    if (!isAuthenticated) {
+      handleBlockAddToCart();
+      return;
+    }
     if (quantity === '' || quantity < 1) return;
 
     addItemToCart({

@@ -54,7 +54,7 @@ const CartItem = ({
       });
     } else {
       setNewQuantity(state => +state - 1);
-      removeOneFromItem(id);
+      removeOneFromItem({ id, size, color });
     }
   };
 
@@ -98,7 +98,7 @@ const CartItem = ({
       </div>
       <i
         className="bi bi-trash"
-        onClick={removeItemFromCart.bind(null, id)}
+        onClick={() => removeItemFromCart({ id, size, color })}
       ></i>
     </div>
   );

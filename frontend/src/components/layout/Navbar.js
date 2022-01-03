@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import AuthCtx from '../../context/AuthProvider/AuthCtx';
 import CartCtx from '../../context/CartProvider/CartCtx';
-import AuthContext from '../../context/auth';
 import CartPopUp from '../Cart/CartPopUp';
 
 const Navbar = () => {
@@ -9,7 +9,7 @@ const Navbar = () => {
   const [onSearch, setOnSearch] = useState(false);
   const [onShowCart, setShowCart] = useState(false);
   const { totalQuantity } = useContext(CartCtx);
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthCtx);
 
   useEffect(() => {
     document.querySelector('body').addEventListener('click', e => {
@@ -91,7 +91,7 @@ const Navbar = () => {
               ) : (
                 <>
                   <li>
-                    <NavLink to="/">Login</NavLink>
+                    <NavLink to="/login">Login</NavLink>
                   </li>
                   <li>
                     <NavLink to="/register">Register</NavLink>
@@ -119,11 +119,13 @@ const Navbar = () => {
             />
             <i className="bi bi-search"></i>
           </div>
+          {user && (
+            <div className="cart-icon">
+              <i className="bi bi-cart2" onClick={handleShowCart}></i>
+              <p className="total-quantity">{totalQuantity}</p>
+            </div>
+          )}
 
-          <div className="cart-icon">
-            <i className="bi bi-cart2" onClick={handleShowCart}></i>
-            <p className="total-quantity">{totalQuantity}</p>
-          </div>
           <CartPopUp show={onShowCart} />
           <i className="bi bi-person" style={{ marginLeft: 15 }}></i>
           {user ? (
