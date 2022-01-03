@@ -5,7 +5,7 @@
 /**
  * Set up a decent box model on the root element
  */
- html {
+html {
     box-sizing: border-box;
 }
 
@@ -40,4 +40,34 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+.container {
+    // >1920px
+    padding: 0 400px;
+    max-width: 100%;
+    width: 100%;
+
+    // 1441-1920px
+    @include custom-media(desktop-larger) {
+        padding: 0 160px;
+    }
+
+    // 1281-1440px
+    @include custom-media(desktop-large) {
+        padding: 0 128px;
+    }
+
+    // 1025-1280px
+    @include custom-media(desktop) {
+        padding: 0 64px;
+    }
+
+    @include custom-media(tablet-large) {
+        padding: 0 40px;
+    }
+
+    @include custom-media(mobile) {
+        padding: 0 24px;
+    }
 }

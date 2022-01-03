@@ -4,15 +4,22 @@ import Footer from './Footer';
 import BackToTopBtn from './BackToTopBtn';
 import CartCtx from '../../context/CartProvider/CartCtx';
 import AuthCtx from '../../context/AuthProvider/AuthCtx';
+import ProductCtx from '../../context/ProductProvider/ProductCtx';
 
 const Layout = props => {
   const { getCart, items, sendCartData, changed } = useContext(CartCtx);
   const { isAuthenticated, checking, loadUser } = useContext(AuthCtx);
+  const { getProducts } = useContext(ProductCtx);
   useEffect(() => {
     if (isAuthenticated) getCart();
 
     // eslint-disable-next-line
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    getProducts();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (changed) {

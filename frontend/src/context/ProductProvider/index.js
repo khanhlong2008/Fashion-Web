@@ -1,32 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useReducer } from 'react';
 import ProductCtx from './ProductCtx';
+import axiosIntance from '../../Util';
+import ProductReducer from './ProductReducer';
+
+const initialState = {
+  menList: [],
+  womenList: [],
+  products: [],
+  filterList: null,
+};
 
 const ProductProvider = props => {
-  const [menList, setMenList] = useState([]);
-  const [womenList, setWomenList] = useState([]);
-  const products = womenList.concat(menList);
+  const [state, dispatch] = useReducer(ProductReducer, initialState);
 
-  useEffect(() => {
-    let isMounted = true;
+  const getProducts = async () => {
+    try {
+      const menRes = await axiosIntance.get('/product_male');
+      const womenRes = await axiosIntance.get('/product_female');
 
-    fetch('http://localhost:5000/fashionapp/product_male')
-      .then(reponse => reponse.json())
-      .then(data => {
-        if (isMounted) setMenList(data.product);
+      dispatch({
+        type: 'GET_PRODUCT',
+        payload: { men: menRes.data.product, women: womenRes.data.product },
       });
-    fetch('http://localhost:5000/fashionapp/product_female')
-      .then(reponse => reponse.json())
-      .then(data => {
-        if (isMounted) setWomenList(data.product);
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <ProductCtx.Provider value={{ menList, womenList, products }}>
+    <ProductCtx.Provider
+      value={{
+        ...state,
+        getProducts,
+      }}
+    >
       {props.children}
     </ProductCtx.Provider>
   );
