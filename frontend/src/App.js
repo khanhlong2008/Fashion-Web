@@ -6,6 +6,7 @@ import Account from './components/Auth/Create/Account';
 import Login from './components/Auth/Login';
 import Forgot from './components/Auth/Forgot';
 import CartProvider from './context/CartProvider';
+import InfoProvider from './context/InfoProvider';
 // import Logout from "./components/Auth/Logout";
 import ProductList from './components/Product/MainProduct';
 import Home from './page/Home';
@@ -21,31 +22,32 @@ export default function App() {
     <AuthProvider>
       <ProductProvider>
         <CartProvider>
-          <Layout>
-            <Routes>
-              {/* {
+          <InfoProvider>
+            <Layout>
+              <Routes>
+                {/* {
                 authUser ? (
                   <> */}
-              <Route path="/" element={<Home />}></Route>
-              <Route path="/forgot" element={<Forgot />}></Route>
-              <Route path="/register" element={<Account />}></Route>
-              <Route path="/login" element={<Login />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/blog/fashion" element={<Blog />} />
-              <Route path="/blog/fashion/:id" element={<FashionDetail />} />
-              <Route path="/collection/:param" element={<ProductList />} />
-              <Route path="/products/:id" element={<ProductDetail />} />
-              <Route path="/checkouts/:id:type" element={<CheckoutPage />} />
-              <Route path="/cart" element={<Cart />} />
-              {/* </>
+                <Route path="/" element={<Home />}></Route>
+                <Route path="/forgot" element={<Forgot />}></Route>
+                <Route path="/register" element={<Account />}></Route>
+                <Route path="/login" element={<Login />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/blog/fashion" element={<Blog />} />
+                <Route path="/blog/fashion/:id" element={<FashionDetail />} />
+                <Route path="/collection/:param" element={<ProductList />} />
+                <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/checkouts/:id" element={<CheckoutPage />} />
+                <Route path="/cart" element={<Cart />} />
+                {/* </>
                 ) : (
                   <> */}
 
-              {/* </>
+                {/* </>
                 )
               } */}
 
-              {/* <Route
+                {/* <Route
           path="/logout"
           render={() => {
             return localStorage.getItem('accessToken') ? (
@@ -56,8 +58,9 @@ export default function App() {
           }}
 
               ></Route> */}
-            </Routes>
-          </Layout>
+              </Routes>
+            </Layout>
+          </InfoProvider>
         </CartProvider>
       </ProductProvider>
     </AuthProvider>

@@ -1,20 +1,49 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import InputGroup from './InputGroup';
 import { useNavigate } from 'react-router-dom';
 import AuthCtx from '../../context/AuthProvider/AuthCtx';
+import InfoCtx from '../../context/InfoProvider/InfoCtx';
+import { useReducer } from 'react';
+
+const inputReducer = (state, action) => {
+  if (action.type === 'REPLACE_FORM') {
+    return {
+      ...state,
+      ...action.payload,
+    };
+  }
+  return {
+    ...state,
+    [action.name]: action.value,
+  };
+};
+
+const initialState = {
+  firstName: '',
+  lastName: '',
+  apartment: '',
+  address: '',
+  city: '',
+};
 
 const ContactInfofmation = () => {
   const navigate = useNavigate();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [address, setAddress] = useState('');
-  const [apartment, setApartment] = useState('');
-  const [city, setCity] = useState('');
+  const [form, dispatch] = useReducer(inputReducer, initialState);
   const { user } = useContext(AuthCtx);
+  const { info, replaceInfo } = useContext(InfoCtx);
+
+  const setForm = e => {
+    dispatch({ name: e.target.id, value: e.target.value });
+  };
+
+  useEffect(() => {
+    dispatch({ type: 'REPLACE_FORM', payload: info });
+  }, [info]);
 
   const handleSubmit = e => {
     e.preventDefault();
-    navigate('/checkouts/id?step=shipping_method');
+    replaceInfo(form);
+    navigate(`/checkouts/${user._id}?step=shipping_method`);
   };
 
   return (
@@ -28,7 +57,7 @@ const ContactInfofmation = () => {
           />
         </div>
         <p>
-          {user.firstname + user.lastname} ({user.email})
+          {user.firstname + ' ' + user.lastname} ({user.email})
         </p>
       </div>
       <div className="shipping-address">
@@ -36,35 +65,39 @@ const ContactInfofmation = () => {
         <form onSubmit={handleSubmit}>
           <div className="fullname">
             <InputGroup
-              value={firstName}
+              value={form.firstName}
               id="firstName"
               label="First name (optional)"
-              onChange={e => setFirstName(e.target.value)}
+              onChange={setForm}
             />
             <InputGroup
-              value={lastName}
+              value={form.lastName}
               id="lastName"
               label="Last name"
-              onChange={e => setLastName(e.target.value)}
+              onChange={setForm}
+              required
             />
           </div>
           <InputGroup
-            value={address}
+            value={form.address}
             id="address"
             label="Address"
-            onChange={e => setAddress(e.target.value)}
+            onChange={setForm}
+            required
           />
           <InputGroup
-            value={apartment}
+            value={form.apartment}
             id="apartment"
             label="Apartment"
-            onChange={e => setApartment(e.target.value)}
+            onChange={setForm}
+            required
           />
           <InputGroup
-            value={city}
+            value={form.city}
             id="city"
             label="City"
-            onChange={e => setCity(e.target.value)}
+            onChange={setForm}
+            required
           />
           <div className="btn-container">
             <button className="btn btn-primary" type="submit">

@@ -8,6 +8,8 @@ const Filter = ({
   handleCheck,
   handleInputPrice,
   handleClear,
+  showFilter,
+  toggleFilter,
 }) => {
   const { param } = useParams();
   const { menList, womenList } = useContext(ProductCtx);
@@ -90,72 +92,96 @@ const Filter = ({
   }
 
   return (
-    <div className="filter__container">
-      <p className="title">Filter by</p>
-      <button className="btn btn-primary" onClick={handleClear}>
-        CLEAR ALL
-      </button>
-      <div className="avalability">
-        <p>Availability</p>
-        <div className="checkbox-group">
-          <input
-            type="checkbox"
-            id="1"
-            value="1"
-            name="availability"
-            checked={selectOption.availability.includes('1')}
-            onChange={handleCheckForm}
-          />
-          <label htmlFor="1">In stock ({inStock})</label>
-        </div>
-        <div className="checkbox-group">
-          <input
-            type="checkbox"
-            id="0"
-            value="0"
-            name="availability"
-            checked={selectOption.availability.includes('0')}
-            onChange={handleCheckForm}
-          />
-          <label htmlFor="0">Out of stock ({outOfStock})</label>
-        </div>
-      </div>
-      <div className="price">
-        <p className="mb-0">Price</p>
-        <div>
-          <div>
-            <span className="me-1">$</span>
-            <InputGroup
-              label="From"
-              value={gte}
-              name="priceGte"
-              onChange={e => setGte(e.target.value)}
-              type="number"
-              onBlur={handlePriceForm}
+    <div>
+      <div className={`filter__container ${showFilter ? 'show' : ''}`}>
+        <p className="title">Filter by</p>
+        <button
+          className="btn btn-primary d-none d-lg-block"
+          onClick={handleClear}
+        >
+          CLEAR ALL
+        </button>
+        <div className="avalability">
+          <p>Availability</p>
+          <div className="checkbox-group">
+            <input
+              type="checkbox"
+              id="1"
+              value="1"
+              name="availability"
+              checked={selectOption.availability.includes('1')}
+              onChange={handleCheckForm}
             />
+            <label htmlFor="1">In stock ({inStock})</label>
           </div>
+          <div className="checkbox-group">
+            <input
+              type="checkbox"
+              id="0"
+              value="0"
+              name="availability"
+              checked={selectOption.availability.includes('0')}
+              onChange={handleCheckForm}
+            />
+            <label htmlFor="0">Out of stock ({outOfStock})</label>
+          </div>
+        </div>
+        <div className="price">
+          <p className="mb-0">Price</p>
+          <div>
+            <div>
+              <span className="me-1">$</span>
+              <InputGroup
+                label="From"
+                value={gte}
+                name="priceGte"
+                onChange={e => setGte(e.target.value)}
+                type="number"
+                onBlur={handlePriceForm}
+              />
+            </div>
 
-          <div>
-            <span className="me-1">$</span>
-            <InputGroup
-              label="To"
-              type="number"
-              name="priceLte"
-              value={lte}
-              onChange={e => setLte(e.target.value)}
-              onBlur={handlePriceForm}
-            />
+            <div>
+              <span className="me-1">$</span>
+              <InputGroup
+                label="To"
+                type="number"
+                name="priceLte"
+                value={lte}
+                onChange={e => setLte(e.target.value)}
+                onBlur={handlePriceForm}
+              />
+            </div>
           </div>
         </div>
+        <div className="color-container">
+          <p>Color</p>
+          <div className="color-options">{colorSelector}</div>
+        </div>
+        <div className="size-container">
+          <p>Size</p>
+          <div className="size-options">{sizeSelector}</div>
+        </div>
+        <div className="btn-container">
+          <button
+            className="btn btn-primary d-block d-lg-none"
+            onClick={() => {
+              handleClear();
+              toggleFilter();
+            }}
+          >
+            CLEAR ALL
+          </button>
+          <button
+            className="btn btn-primary d-block d-lg-none"
+            onClick={toggleFilter}
+          >
+            APPLY
+          </button>
+        </div>
       </div>
-      <div className="color-container">
-        <p>Color</p>
-        <div className="color-options">{colorSelector}</div>
-      </div>
-      <div className="size-container">
-        <p>Size</p>
-        <div className="size-options">{sizeSelector}</div>
-      </div>
+
+      <div className="backdrop" onClick={toggleFilter}></div>
     </div>
   );
 };

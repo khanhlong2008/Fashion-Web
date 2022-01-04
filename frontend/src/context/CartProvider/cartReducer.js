@@ -4,7 +4,7 @@ const cartReducer = (state, action) => {
       const cart = action.payload || [];
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         items: cart,
         totalPrice: cart.reduce((total, item) => total + item.totalPrice, 0),
         totalQuantity: cart.length,

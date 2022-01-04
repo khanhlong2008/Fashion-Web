@@ -3,13 +3,15 @@ import '@dotlottie/player-component';
 import { useNavigate } from 'react-router-dom';
 import CartCtx from '../../../context/CartProvider/CartCtx';
 import ProductItem from './ProductItem';
+import AuthCtx from '../../../context/AuthProvider/AuthCtx';
 
 const CartPopUp = ({ show }) => {
   const { items, totalPrice } = useContext(CartCtx);
+  const { user } = useContext(AuthCtx);
 
   const navigate = useNavigate();
   const handlePushCheckout = () => {
-    navigate('/checkouts/id?step=contact_information');
+    navigate(`/checkouts/${user._id}?step=contact_information`);
   };
   const handlePushCart = () => {
     navigate('/cart');
@@ -18,7 +20,7 @@ const CartPopUp = ({ show }) => {
     return (
       <div className={`dropdown-menu cart-wrapper ${show ? 'show' : ''}`}>
         <dotlottie-player
-          src="image/empty-basket.lottie"
+          src="../image/empty-basket.lottie"
           autoplay
           loop
           style={{ width: '100%', marginTop: '-40px' }}

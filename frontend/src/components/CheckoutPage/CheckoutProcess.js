@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthCtx from '../../context/AuthProvider/AuthCtx';
+import InfoCtx from '../../context/InfoProvider/InfoCtx';
 
-const CheckoutProcess = ({ status: { info, shipping, payment }, search }) => {
+const CheckoutProcess = ({ search }) => {
+  const { info } = useContext(InfoCtx);
+  const { user } = useContext(AuthCtx);
   return (
     <div className="checkout-process">
       <Link to="/cart">Cart</Link>
       <span>{' > '}</span>
       {search === 'contact_information' ? (
         <strong>Information</strong>
-      ) : info ? (
-        <Link to="/checkouts/id?step=contact_information">Infomation</Link>
+      ) : info.lastName ? (
+        <Link to={`/checkouts/${user._id}?step=contact_information`}>
+          Infomation
+        </Link>
       ) : (
         <span>Information</span>
       )}
@@ -17,22 +23,11 @@ const CheckoutProcess = ({ status: { info, shipping, payment }, search }) => {
       <span>{' > '}</span>
       {search === 'shipping_method' ? (
         <strong>Shipping</strong>
-      ) : shipping ? (
-        <Link to="/checkouts/id?step=shipping_method">Infomation</Link>
+      ) : info.lastName ? (
+        <Link to={`/checkouts/${user._id}?step=shipping_method`}>Shipping</Link>
       ) : (
         <span>Shipping</span>
       )}
-
-      {/* <span>{' > '}</span>
-      {search === 'payment_method' ? (
-        <strong>Payment</strong>
-      ) : payment ? (
-        <a href="/checkouts/61cc662277177893679d56d5?step=payment_method">
-          Infomation
-        </a>
-      ) : (
-        <span>Payment</span>
-      )} */}
     </div>
   );
 };

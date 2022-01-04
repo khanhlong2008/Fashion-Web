@@ -80,6 +80,11 @@ export default function ProductLists() {
   const [selectOption, dispatch] = useReducer(selectReducer, filterMode);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+
+  const toggleFilter = () => {
+    setShowFilter(state => !state);
+  };
 
   useEffect(() => {
     dispatch({ type: 'REPLACE', payload: filterMode });
@@ -121,14 +126,14 @@ export default function ProductLists() {
         if (selectOption[key].length === 0) continue;
         if (selectOption[key].length === 1)
           products = products.filter(
-            product => product.price > selectOption[key][0]
+            product => product.price >= selectOption[key][0]
           );
       }
       if (key === 'priceLte') {
         if (selectOption[key].length === 0) continue;
         if (selectOption[key].length === 1 && +selectOption[key] > 0)
           products = products.filter(
-            product => product.price < selectOption[key][0]
+            product => product.price <= selectOption[key][0]
           );
       }
 
@@ -232,8 +237,15 @@ export default function ProductLists() {
         handleCheck={handleCheck}
         handleInputPrice={handleInputPrice}
         handleClear={handleClear}
+        showFilter={showFilter}
+        toggleFilter={toggleFilter}
       />
       <div>
+        <div className="d-flex d-lg-none justify-content-end mb-3">
+          <button className="btn btn-primary filter-btn" onClick={toggleFilter}>
+            Filter Products
+          </button>
+        </div>
         <CustomSelect
           handleSortBy={handleSortBy}
           style={selectOption.sort_by[0]}

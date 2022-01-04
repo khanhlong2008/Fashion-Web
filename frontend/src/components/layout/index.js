@@ -6,14 +6,19 @@ import CartCtx from '../../context/CartProvider/CartCtx';
 import AuthCtx from '../../context/AuthProvider/AuthCtx';
 import ProductCtx from '../../context/ProductProvider/ProductCtx';
 import Notification from '../Home/Notification';
+import InfoCtx from '../../context/InfoProvider/InfoCtx';
 
 const Layout = props => {
   const { getCart, items, sendCartData, changed, message } =
     useContext(CartCtx);
+  const { getInfo, sendInfo, changed: infoChanged, info } = useContext(InfoCtx);
   const { isAuthenticated, checking, loadUser } = useContext(AuthCtx);
   const { getProducts } = useContext(ProductCtx);
   useEffect(() => {
-    if (isAuthenticated) getCart();
+    if (isAuthenticated) {
+      getCart();
+      getInfo();
+    }
 
     // eslint-disable-next-line
   }, [isAuthenticated]);
@@ -29,6 +34,20 @@ const Layout = props => {
     }
     // eslint-disable-next-line
   }, [items, changed]);
+
+  useEffect(() => {
+    if (changed) {
+      sendCartData(items);
+    }
+    // eslint-disable-next-line
+  }, [items, changed]);
+
+  useEffect(() => {
+    if (infoChanged) {
+      sendInfo(info);
+    }
+    // eslint-disable-next-line
+  }, [info, infoChanged]);
 
   useEffect(() => {
     loadUser();

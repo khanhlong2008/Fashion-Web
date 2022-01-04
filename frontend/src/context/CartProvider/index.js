@@ -21,7 +21,7 @@ const initialState = {
     size: {},
     stock: 0,
   },
-  isLoading: true,
+  isLoading: false,
 };
 
 const CartProvider = props => {

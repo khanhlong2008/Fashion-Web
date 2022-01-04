@@ -1,27 +1,42 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import AuthCtx from '../../context/AuthProvider/AuthCtx';
+import InfoCtx from '../../context/InfoProvider/InfoCtx';
 
 const Shipping = () => {
   const navigate = useNavigate();
+  const { info, isLoading } = useContext(InfoCtx);
+  const { user } = useContext(AuthCtx);
+
+  if (!info.lastName && isLoading) {
+    return <Navigate to={`/checkouts/${user._id}?step=contact_information`} />;
+  }
+
   return (
     <div className="shipping__container">
       <div className="info__container">
         <div className="info-detail">
           <p>Contact</p>
-          <p>minhnguyet@gmail.com</p>
+          <p>{user.email}</p>
           <p
             className="text-primary"
-            onClick={() => navigate('/checkouts/id?step=contact_information')}
+            onClick={() =>
+              navigate(`/checkouts/${user._id}?step=contact_information`)
+            }
           >
             Change
           </p>
         </div>
         <div className="info-detail">
           <p>Ship to</p>
-          <p>Hiep Binh, Ho Chi Minh city</p>
+          <p>
+            {info.address}, {info.apartment}, {info.city}
+          </p>
           <p
             className="text-primary"
-            onClick={() => navigate('/checkouts/id?step=contact_information')}
+            onClick={() =>
+              navigate(`/checkouts/${user._id}?step=contact_information`)
+            }
           >
             Change
           </p>
@@ -42,7 +57,9 @@ const Shipping = () => {
         </button>
         <button
           className="btn btn-light"
-          onClick={() => navigate('/checkouts/id?step=contact_information')}
+          onClick={() =>
+            navigate(`/checkouts/${user._id}?step=contact_information`)
+          }
         >
           Return to information
         </button>
