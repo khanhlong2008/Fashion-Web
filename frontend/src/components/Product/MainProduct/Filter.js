@@ -1,11 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCtx from '../../../context/ProductProvider/ProductCtx';
 import InputGroup from '../../CheckoutPage/InputGroup';
 
-const Filter = ({ selectOption }) => {
+const Filter = ({
+  selectOption,
+  handleCheck,
+  handleInputPrice,
+  handleClear,
+}) => {
   const { param } = useParams();
   const { menList, womenList } = useContext(ProductCtx);
+  const [gte, setGte] = useState(selectOption.priceGte);
+  const [lte, setLte] = useState(selectOption.priceLte);
+
+  const handleCheckForm = e => {
+    const element = e.target;
+    handleCheck(
+      element.checked ? 'CHECK' : 'UN_CHECK',
+      element.name,
+      element.value
+    );
+  };
+
+  const handlePriceForm = e => {
+    const element = e.target;
+    handleInputPrice(element.name, element.value);
+  };
+
   const list = param === 'men' ? menList : womenList;
   const inStock = list.reduce(
     (total, item) => (item.quantity > 0 ? total + 1 : total),
@@ -30,14 +52,15 @@ const Filter = ({ selectOption }) => {
   const sizeSelector = [];
 
   for (let c of colors) {
-    console.log(c);
     colorSelector.push(
       <>
         <input
           type="checkbox"
           name="color"
           id={`color-${c}`}
-          value={`color-${c}`}
+          value={c}
+          checked={selectOption.color.includes(c)}
+          onChange={handleCheckForm}
         />
         <label
           for={`color-${c}`}
@@ -51,7 +74,14 @@ const Filter = ({ selectOption }) => {
   for (let s in sizes) {
     sizeSelector.push(
       <div>
-        <input type="checkbox" id={`size-${s}`} value={`size-${s}`} />
+        <input
+          type="checkbox"
+          id={`size-${s}`}
+          value={s}
+          name="size"
+          checked={selectOption.size.includes(s)}
+          onChange={handleCheckForm}
+        />
         <label htmlFor={`size-${s}`}>
           {s.toUpperCase()} ({sizes[s]})
         </label>
@@ -62,15 +92,31 @@ const Filter = ({ selectOption }) => {
   return (
     <div className="filter__container">
       <p className="title">Filter by</p>
-      <button className="btn btn-primary">CLEAR ALL</button>
+      <button className="btn btn-primary" onClick={handleClear}>
+        CLEAR ALL
+      </button>
       <div className="avalability">
         <p>Availability</p>
         <div className="checkbox-group">
-          <input type="checkbox" id="1" checked />
+          <input
+            type="checkbox"
+            id="1"
+            value="1"
+            name="availability"
+            checked={selectOption.availability.includes('1')}
+            onChange={handleCheckForm}
+          />
           <label htmlFor="1">In stock ({inStock})</label>
         </div>
         <div className="checkbox-group">
-          <input type="checkbox" id="0" />
+          <input
+            type="checkbox"
+            id="0"
+            value="0"
+            name="availability"
+            checked={selectOption.availability.includes('0')}
+            onChange={handleCheckForm}
+          />
           <label htmlFor="0">Out of stock ({outOfStock})</label>
         </div>
       </div>
@@ -81,15 +127,24 @@ const Filter = ({ selectOption }) => {
             <span className="me-1">$</span>
             <InputGroup
               label="From"
-              value=""
-              onChange={() => {}}
+              value={gte}
+              name="priceGte"
+              onChange={e => setGte(e.target.value)}
               type="number"
+              onBlur={handlePriceForm}
             />
           </div>
 
           <div>
             <span className="me-1">$</span>
-            <InputGroup label="To" value="" onChange={() => {}} type="number" />
+            <InputGroup
+              label="To"
+              type="number"
+              name="priceLte"
+              value={lte}
+              onChange={e => setLte(e.target.value)}
+              onBlur={handlePriceForm}
+            />
           </div>
         </div>
       </div>

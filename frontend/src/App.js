@@ -7,7 +7,7 @@ import Login from './components/Auth/Login';
 import Forgot from './components/Auth/Forgot';
 import CartProvider from './context/CartProvider';
 // import Logout from "./components/Auth/Logout";
-import ProductList from './components/Product/MainProduct/ProductLists/ProductLists';
+import ProductList from './components/Product/MainProduct';
 import Home from './page/Home';
 import ProductDetail from './page/ProductDetail';
 import Layout from './components/layout';
