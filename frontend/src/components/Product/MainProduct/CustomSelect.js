@@ -109,7 +109,7 @@ then close all select boxes: */
 
   return (
     <div className="custom-selector">
-      <div class="custom-select">
+      <div className="custom-select">
         <select name="sort_by" className="form-select">
           <option>Choose your favorite style</option>
           <option value="az">Alphabetically, A-Z</option>

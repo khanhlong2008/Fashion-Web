@@ -7,7 +7,6 @@ const initialState = {
   menList: [],
   womenList: [],
   products: [],
-  filterList: null,
 };
 
 const ProductProvider = props => {

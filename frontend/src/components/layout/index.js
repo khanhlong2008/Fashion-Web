@@ -5,9 +5,11 @@ import BackToTopBtn from './BackToTopBtn';
 import CartCtx from '../../context/CartProvider/CartCtx';
 import AuthCtx from '../../context/AuthProvider/AuthCtx';
 import ProductCtx from '../../context/ProductProvider/ProductCtx';
+import Notification from '../Home/Notification';
 
 const Layout = props => {
-  const { getCart, items, sendCartData, changed } = useContext(CartCtx);
+  const { getCart, items, sendCartData, changed, message } =
+    useContext(CartCtx);
   const { isAuthenticated, checking, loadUser } = useContext(AuthCtx);
   const { getProducts } = useContext(ProductCtx);
   useEffect(() => {
@@ -45,6 +47,7 @@ const Layout = props => {
       <>
         <Navbar />
         {props.children}
+        {message && <Notification />}
         <BackToTopBtn />
         <Footer />
       </>

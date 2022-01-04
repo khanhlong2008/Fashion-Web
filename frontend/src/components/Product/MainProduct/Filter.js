@@ -63,7 +63,7 @@ const Filter = ({
           onChange={handleCheckForm}
         />
         <label
-          for={`color-${c}`}
+          htmlFor={`color-${c}`}
           className="square color"
           style={{ backgroundColor: c }}
         ></label>

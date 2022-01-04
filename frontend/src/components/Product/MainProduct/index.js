@@ -5,6 +5,7 @@ import ProductModal from '../ProductDetail/ProductModal';
 import ProductList from '../TopProduct/ProductList';
 import CustomSelect from './CustomSelect';
 import Filter from './Filter';
+import PageController from './PageController';
 
 const selectReducer = (state, action) => {
   switch (action.type) {
@@ -31,6 +32,11 @@ const selectReducer = (state, action) => {
         ...state,
         sort_by: [action.payload],
       };
+    case 'CHANGE_PAGE':
+      return {
+        ...state,
+        page: [action.payload],
+      };
     case 'CLEAR':
       return {
         availability: [],
@@ -39,6 +45,11 @@ const selectReducer = (state, action) => {
         color: [],
         size: [],
         sort_by: [],
+        page: [],
+      };
+    case 'REPLACE':
+      return {
+        ...action.payload,
       };
     default:
       return state;
@@ -56,6 +67,7 @@ export default function ProductLists() {
     color: [],
     size: [],
     sort_by: '',
+    page: [],
   };
 
   for (let key in filterMode) {
@@ -64,13 +76,36 @@ export default function ProductLists() {
     else filterMode[key] = [];
   }
   const { menList, womenList } = useContext(ProductCtx);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({ list: [], pages: 0 });
   const [selectOption, dispatch] = useReducer(selectReducer, filterMode);
-  const pages = Math.ceil(products.length / 8);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch({ type: 'REPLACE', payload: filterMode });
+    //eslint-disable-next-line
+  }, [location.search]);
+
+  useEffect(() => {
+    let link = '';
+
+    for (let type in selectOption) {
+      for (let option of selectOption[type]) {
+        if (option) {
+          if (link === '') link += `?${type}=${option}`;
+          else link += `&${type}=${option}`;
+        }
+      }
+    }
+    navigate(`${location.pathname}${link}`);
+    window.scrollTo(0, 0);
+    // eslint-disable-next-line
+  }, [selectOption]);
 
   useEffect(() => {
     let products = param === 'men' ? menList : womenList;
+    let totalProduct = 0;
+
     for (let key in selectOption) {
       if (key === 'availability') {
         if (selectOption[key].length === 2 || selectOption[key].length === 0)
@@ -128,22 +163,41 @@ export default function ProductLists() {
       if (key === 'sort_by') {
         if (selectOption[key].length === 0) continue;
         if (selectOption[key][0] === 'az')
-          products = products.sort((a, b) => a.title.localeCompare(b.title));
+          products = [...products].sort((a, b) =>
+            a.title.localeCompare(b.title)
+          );
         if (selectOption[key][0] === 'za')
-          products = products.sort((a, b) => b.title.localeCompare(a.title));
+          products = [...products].sort((a, b) =>
+            b.title.localeCompare(a.title)
+          );
         if (selectOption[key][0] === 'lowtohigh')
-          products = products.sort((a, b) => a.price - b.price);
+          products = [...products].sort((a, b) => a.price - b.price);
         if (selectOption[key][0] === 'hightolow')
-          products = products.sort((a, b) => b.price - a.price);
+          products = [...products].sort((a, b) => b.price - a.price);
         if (selectOption[key][0] === 'oldtonew')
-          products = products.sort((a, b) => a.date - b.date);
+          products = [...products].sort((a, b) => a.date - b.date);
         if (selectOption[key][0] === 'oldtonew')
-          products = products.sort((a, b) => b.date - a.date);
+          products = [...products].sort((a, b) => b.date - a.date);
+      }
+
+      if (key === 'page') {
+        totalProduct = products.length;
+        if (selectOption[key].length === 0 || selectOption[key][0] === 1) {
+          if (products.length >= 8) products = products.slice(0, 8);
+        } else {
+          if (Math.ceil(products.length / 8) < selectOption[key][0]) {
+            products = [];
+          } else {
+            products = products.slice(
+              (selectOption[key][0] - 1) * 8,
+              selectOption[key][0] * 8
+            );
+          }
+        }
       }
     }
-
-    setProducts(products);
-
+    setProducts({ list: products, pages: Math.ceil(totalProduct / 8) });
+    if (menList.length > 0) setLoading(false);
     // eslint-disable-next-line
   }, [menList, womenList, param, selectOption]);
 
@@ -163,24 +217,13 @@ export default function ProductLists() {
     dispatch({ type: 'CLEAR' });
   };
 
+  const handleChangePage = page => {
+    dispatch({ type: 'CHANGE_PAGE', payload: page });
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    let link = '';
-
-    for (let type in selectOption) {
-      for (let option of selectOption[type]) {
-        if (option) {
-          if (link === '') link += `?${type}=${option}`;
-          else link += `&${type}=${option}`;
-        }
-      }
-    }
-    navigate(`${location.pathname}${link}`);
-    // eslint-disable-next-line
-  }, [selectOption]);
 
   return (
     <div className="container product-list">
@@ -195,9 +238,19 @@ export default function ProductLists() {
           handleSortBy={handleSortBy}
           style={selectOption.sort_by[0]}
         />
-        <ProductList list={products} />
+        {products.list.length === 0 && !loading ? (
+          <p className="no-product">No products found</p>
+        ) : (
+          <ProductList list={products.list} />
+        )}
+        {products.pages > 1 ? (
+          <PageController
+            page={products.pages}
+            onShow={selectOption.page[0]}
+            handleChangePage={handleChangePage}
+          />
+        ) : null}
       </div>
-
       <ProductModal />
     </div>
   );

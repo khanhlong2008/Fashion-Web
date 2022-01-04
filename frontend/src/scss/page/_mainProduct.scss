@@ -275,3 +275,35 @@
         }
     }
 }
+
+.no-product {
+    margin-top: 32px;
+    padding: 8px;
+    text-align: center;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.page-controller {
+    float: right;
+    margin-top: 24px;
+
+    .btn {
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        padding: 6px 12px;
+        margin: 0 4px;
+
+        &.active {
+            background-color: $primary;
+            color: white;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        cursor: pointer;
+    }
+}

@@ -1,6 +1,6 @@
-import { Row, Col } from "react-bootstrap";
+import { Row, Col } from 'react-bootstrap';
 
-const AboutInfo = (props) => {
+const AboutInfo = props => {
   return (
     <Row className={props.className}>
       <Col xs={6} className="col-mobile">
@@ -38,7 +38,7 @@ const AboutInfo = (props) => {
                 </ul>
               </div>
               <div className="information-container-btn">
-                <button class="btn-css" type="submit">
+                <button className="btn-css" type="submit">
                   Contact Us
                 </button>
               </div>

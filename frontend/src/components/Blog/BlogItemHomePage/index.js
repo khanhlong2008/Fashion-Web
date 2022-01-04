@@ -1,7 +1,7 @@
 import React from 'react';
 
 const BlogItem = ({ title, cover, date, comments, text }) => {
-  const link = `/blogs/fashion/${title.toLowerCase().split(' ').join('-')}`;
+  const link = `/blog/fashion/${title.toLowerCase().split(' ').join('-')}`;
   return (
     <div className="blog-item__container mx-3">
       <div className="blog-item__cover">

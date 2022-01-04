@@ -159,7 +159,7 @@ const ProductRight = ({
       <p>Product Type : fashion</p>
       <div className="right-chart">
         <span>
-          <i class="bi bi-heart-fill" style={{ color: 'gray' }}></i>
+          <i className="bi bi-heart-fill" style={{ color: 'gray' }}></i>
         </span>
         <span className="ms-2">
           <p>Add To Wishlist</p>

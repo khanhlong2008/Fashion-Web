@@ -1,77 +1,68 @@
-import BlogItem from './BlogItem/BlogItem';
+import BlogItem from './BlogItemHomePage';
 import './Blog.css';
+const blogList = [
+  {
+    id: 'b1',
+    title: 'Proin faucibus tristique',
+    cover: '../image/blog1.png',
+    date: '06 November',
+    comments: 0,
+    text: "Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!",
+  },
+  {
+    id: 'b2',
+    title: 'Viderer voluptatum te eum',
+    cover: '../image/blog2.png',
+    date: '06 November',
+    comments: 0,
+    text: "Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!",
+  },
+  {
+    id: 'b3',
+    title: 'Nec intellegat deseruisse',
+    cover: '../image/blog3.png',
+    date: '06 November',
+    comments: 0,
+    text: "Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!",
+  },
+  {
+    id: 'b4',
+    title: 'Upon of seasons earth',
+    cover: '../image/blog4.png',
+    date: '06 November',
+    comments: 0,
+    text: "Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!",
+  },
+  {
+    id: 'b5',
+    title: 'Lorem ipsum dolor sit amet',
+    cover: '../image/blog5.png',
+    date: '06 November',
+    comments: 0,
+    text: "Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!",
+  },
+  {
+    id: 'b6',
+    title: 'Scelerisque vestibulum urna',
+    cover: '../image/blog6.png',
+    date: '06 November',
+    comments: 0,
+    text: "Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!",
+  },
+];
 
 const Blog = () => {
-  const blogdata = [
-    {
-      id: 1,
-      title: 'Proin faucibus tristique',
-      image:
-        'https://cdn.shopify.com/s/files/1/0054/0567/1479/articles/1_720x.png?v=1604644403',
-      content:
-        'Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat ',
-      date: '06 Nov 2020',
-      themes: 'Ishi Theme',
-    },
-    {
-      id: 2,
-      title: 'Lorem ipsum dolor sit amet',
-      image:
-        'https://cdn.shopify.com/s/files/1/0054/0567/1479/articles/2_720x.png?v=1604644069',
-      content:
-        'Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat',
-      date: '06 Nov 2020',
-      themes: 'Ishi Theme',
-    },
-    {
-      id: 3,
-      title: 'Upon of seasons earth',
-      image:
-        'https://cdn.shopify.com/s/files/1/0054/0567/1479/articles/8_720x.png?v=1604644306',
-      content:
-        'Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat',
-      date: '06 Nov 2020',
-      themes: 'Ishi Theme',
-    },
-    {
-      id: 4,
-      title: 'Nec intellegat deseruisse',
-      image:
-        'https://cdn.shopify.com/s/files/1/0054/0567/1479/articles/3_720x.png?v=1604644355',
-      content:
-        'Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat',
-      date: '06 Nov 2020',
-      themes: 'Ishi Theme',
-    },
-    {
-      id: 5,
-      title: 'Viderer voluptatum te eum',
-      image:
-        'https://cdn.shopify.com/s/files/1/0054/0567/1479/articles/6_720x.png?v=1604644252',
-      content:
-        'Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat',
-      date: '06 Nov 2020',
-      themes: 'Ishi Theme',
-    },
-    {
-      id: 6,
-      title: 'Scelerisque vestibulum urna',
-      image:
-        'https://cdn.shopify.com/s/files/1/0054/0567/1479/articles/5_720x.png?v=1604644015',
-      content:
-        'Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat',
-      date: '06 Nov 2020',
-      themes: 'Ishi Theme',
-    },
-  ];
-
   return (
     <div className="container">
       <div className="container-blog">
         <div>
           <h2 className="container-blog-title">Fashion</h2>
         </div>
-        <BlogItem blogdata={blogdata} />
+        <section className="blog__wrapper blog__wrapper-2 py-5">
+          {blogList.map(blog => (
+            <BlogItem key={blog.id} {...blog} />
+          ))}
+        </section>
         <div className="page-container">
           <div className="pape">
             <div className="pape-rol pape-rol__color">1</div>
