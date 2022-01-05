@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListCart from '../components/Cart/ListCart';
+import LoadingSpinner from '../components/layout/LoadingSpiner';
 import CartCtx from '../context/CartProvider/CartCtx';
 
 const Cart = () => {
-  const { items } = useContext(CartCtx);
+  const { items, isLoading } = useContext(CartCtx);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,9 +16,9 @@ const Cart = () => {
   return (
     <section className="container d-block shopping-cart__container">
       <h1 className="text-center">Your Shopping Cart</h1>
-      {items.length > 0 ? (
-        <ListCart />
-      ) : (
+      {isLoading && <LoadingSpinner />}
+      {items.length > 0 && <ListCart />}
+      {!isLoading && items.length === 0 && (
         <div className="empty-cart">
           <p>Your cart is currently empty</p>
           <button className="btn btn-primary" onClick={() => navigate('/')}>

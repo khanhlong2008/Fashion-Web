@@ -21,7 +21,7 @@ const initialState = {
     size: {},
     stock: 0,
   },
-  isLoading: false,
+  isLoading: true,
 };
 
 const CartProvider = props => {
@@ -33,7 +33,7 @@ const CartProvider = props => {
       const res = await axiosInstance.get(`/cart/${user._id}`);
       dispatch({ type: 'GET_CART', payload: res.data.cart });
     } catch (error) {
-      console.log('error');
+      dispatch({ type: 'ERROR' });
     }
   };
 

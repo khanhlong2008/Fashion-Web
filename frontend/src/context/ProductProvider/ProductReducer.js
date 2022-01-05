@@ -7,7 +7,16 @@ const ProductReducer = (state, action) => {
         ...state,
         menList,
         womenList,
+        loaded: true,
         products: [...menList, ...womenList],
+      };
+    case 'ERROR':
+      return {
+        ...state,
+        menList: [],
+        womenList: [],
+        loaded: true,
+        products: [],
       };
 
     default:

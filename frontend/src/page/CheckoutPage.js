@@ -26,7 +26,7 @@ const CheckoutPage = () => {
     document.body.click();
   }, []);
 
-  return items.length === 0 && isLoading ? (
+  return items.length === 0 && !isLoading ? (
     <Navigate to="/cart" />
   ) : (
     <section className="checkout-wrapper container d-block">

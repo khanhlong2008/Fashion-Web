@@ -7,6 +7,7 @@ const initialState = {
   menList: [],
   womenList: [],
   products: [],
+  loaded: false,
 };
 
 const ProductProvider = props => {
@@ -22,7 +23,9 @@ const ProductProvider = props => {
         payload: { men: menRes.data.product, women: womenRes.data.product },
       });
     } catch (err) {
-      console.log(err);
+      dispatch({
+        type: 'ERROR',
+      });
     }
   };
 

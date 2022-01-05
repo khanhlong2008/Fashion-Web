@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import AuthCtx from '../../context/AuthProvider/AuthCtx';
 import CartCtx from '../../context/CartProvider/CartCtx';
 import CartPopUp from '../Cart/CartPopUp';
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [onShowCart, setShowCart] = useState(false);
   const { totalQuantity } = useContext(CartCtx);
   const { user } = useContext(AuthCtx);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.querySelector('body').addEventListener('click', e => {
@@ -36,6 +37,11 @@ const Navbar = () => {
 
   const activeHandler = () => {
     setActiveMenu(state => !state);
+  };
+
+  const offMenuMobile = link => {
+    setActiveMenu(false);
+    navigate(link);
   };
 
   const handleSearchBar = e => {
@@ -72,28 +78,28 @@ const Navbar = () => {
             <ul>
               {user ? (
                 <>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/collection/men')}>
                     <NavLink to="/collection/men">Men</NavLink>
                   </li>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/collection/women')}>
                     <NavLink to="/collection/women">Women</NavLink>
                   </li>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/blog/fashion')}>
                     <NavLink to="/blog/fashion">Blogs</NavLink>
                   </li>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/about-us')}>
                     <NavLink to="/about-us">About us</NavLink>
                   </li>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/pages/contact')}>
                     <NavLink to="/pages/contact">Contact</NavLink>
                   </li>
                 </>
               ) : (
                 <>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/login')}>
                     <NavLink to="/login">Login</NavLink>
                   </li>
-                  <li>
+                  <li onClick={offMenuMobile.bind(null, '/register')}>
                     <NavLink to="/register">Register</NavLink>
                   </li>
                 </>

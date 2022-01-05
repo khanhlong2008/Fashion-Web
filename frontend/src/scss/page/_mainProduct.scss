@@ -180,7 +180,7 @@
             transition: .2s ease;
             cursor: pointer;
             padding: 0;
-            box-shadow: 5px 5px 5px #e0e0e0;
+            box-shadow: 5px 5px 5px #c5c5c5;
         }
 
         input[type="checkbox"] {
@@ -195,6 +195,7 @@
             box-shadow: 2px 2px 4px #e0e0e0;
             transform: scale(.95);
             border-color: #232323;
+            position: relative;
         }
     }
 

@@ -7,6 +7,7 @@ import AuthCtx from '../../context/AuthProvider/AuthCtx';
 import ProductCtx from '../../context/ProductProvider/ProductCtx';
 import Notification from '../Home/Notification';
 import InfoCtx from '../../context/InfoProvider/InfoCtx';
+import { useLocation } from 'react-router-dom';
 
 const Layout = props => {
   const { getCart, items, sendCartData, changed, message } =
@@ -14,6 +15,8 @@ const Layout = props => {
   const { getInfo, sendInfo, changed: infoChanged, info } = useContext(InfoCtx);
   const { isAuthenticated, checking, loadUser } = useContext(AuthCtx);
   const { getProducts } = useContext(ProductCtx);
+  const location = useLocation();
+
   useEffect(() => {
     if (isAuthenticated) {
       getCart();
@@ -53,6 +56,7 @@ const Layout = props => {
     loadUser();
     // eslint-disable-next-line
   }, []);
+  console.log(location.pathname);
 
   if (!checking) {
     return (
@@ -66,7 +70,7 @@ const Layout = props => {
       <>
         <Navbar />
         {props.children}
-        {message && <Notification />}
+        {message && location.pathname !== '/cart' && <Notification />}
         <BackToTopBtn />
         <Footer />
       </>

@@ -28,10 +28,12 @@ const CartItem = ({
 
   const changeQuantity = e => {
     const quantityInput = +e.target.value;
-    if (quantityInput > 0)
+    if (quantityInput > 0 && quantityInput <= stock)
       changeQuantityItem({
         quantity: quantityInput,
         id,
+        size,
+        color,
         totalPrice: price * quantityInput,
       });
     if (quantityInput === 0 || isNaN(quantityInput)) setNewQuantity(quantity);

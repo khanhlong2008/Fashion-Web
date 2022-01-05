@@ -1,6 +1,7 @@
 import { useContext, useEffect, useReducer, useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import ProductCtx from '../../../context/ProductProvider/ProductCtx';
+import LoadingSpinner from '../../layout/LoadingSpiner';
 import ProductModal from '../ProductDetail/ProductModal';
 import ProductList from '../TopProduct/ProductList';
 import CustomSelect from './CustomSelect';
@@ -75,154 +76,167 @@ export default function ProductLists() {
     if (searchState.length > 0) filterMode[key] = searchState;
     else filterMode[key] = [];
   }
-  const { menList, womenList } = useContext(ProductCtx);
+  const { menList, womenList, loaded } = useContext(ProductCtx);
   const [products, setProducts] = useState({ list: [], pages: 0 });
   const [selectOption, dispatch] = useReducer(selectReducer, filterMode);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const toggleFilter = () => {
     setShowFilter(state => !state);
   };
 
   useEffect(() => {
-    dispatch({ type: 'REPLACE', payload: filterMode });
+    if (filterMode !== selectOption) {
+      dispatch({ type: 'REPLACE', payload: filterMode });
+    }
     //eslint-disable-next-line
   }, [location.search]);
 
   useEffect(() => {
-    let link = '';
+    if (filterMode !== selectOption) {
+      let link = '';
 
-    for (let type in selectOption) {
-      for (let option of selectOption[type]) {
-        if (option) {
-          if (link === '') link += `?${type}=${option}`;
-          else link += `&${type}=${option}`;
+      for (let type in selectOption) {
+        for (let option of selectOption[type]) {
+          if (option) {
+            if (link === '') link += `?${type}=${option}`;
+            else link += `&${type}=${option}`;
+          }
         }
       }
+      navigate(`${location.pathname}${link}`);
+      window.scrollTo(0, 0);
     }
-    navigate(`${location.pathname}${link}`);
-    window.scrollTo(0, 0);
+
     // eslint-disable-next-line
   }, [selectOption]);
 
   useEffect(() => {
-    let products = param === 'men' ? menList : womenList;
-    let totalProduct = 0;
+    if (loaded) {
+      let products = param === 'men' ? menList : womenList;
+      let totalProduct = 0;
 
-    for (let key in selectOption) {
-      if (key === 'availability') {
-        if (selectOption[key].length === 2 || selectOption[key].length === 0)
-          continue;
-        else
-          products = products.filter(product =>
-            selectOption[key][0] === '1'
-              ? product.quantity > 0
-              : product.quantity === 0
-          );
-      }
-      if (key === 'priceGte') {
-        if (selectOption[key].length === 0) continue;
-        if (selectOption[key].length === 1)
-          products = products.filter(
-            product => product.price >= selectOption[key][0]
-          );
-      }
-      if (key === 'priceLte') {
-        if (selectOption[key].length === 0) continue;
-        if (selectOption[key].length === 1 && +selectOption[key] > 0)
-          products = products.filter(
-            product => product.price <= selectOption[key][0]
-          );
-      }
-
-      if (key === 'color') {
-        if (selectOption[key].length === 0) continue;
-        else {
-          products = products.filter(product => {
-            for (let col in product.color) {
-              if (product.color[col]) {
-                if (selectOption[key].includes(col)) return true;
-              }
-            }
-            return false;
-          });
-        }
-      }
-
-      if (key === 'size') {
-        if (selectOption[key].length === 0) continue;
-        else {
-          products = products.filter(product => {
-            for (let siz in product.size) {
-              if (product.size[siz]) {
-                if (selectOption[key].includes(siz)) return true;
-              }
-            }
-            return false;
-          });
-        }
-      }
-
-      if (key === 'sort_by') {
-        if (selectOption[key].length === 0) continue;
-        if (selectOption[key][0] === 'az')
-          products = [...products].sort((a, b) =>
-            a.title.localeCompare(b.title)
-          );
-        if (selectOption[key][0] === 'za')
-          products = [...products].sort((a, b) =>
-            b.title.localeCompare(a.title)
-          );
-        if (selectOption[key][0] === 'lowtohigh')
-          products = [...products].sort((a, b) => a.price - b.price);
-        if (selectOption[key][0] === 'hightolow')
-          products = [...products].sort((a, b) => b.price - a.price);
-        if (selectOption[key][0] === 'oldtonew')
-          products = [...products].sort((a, b) => a.date - b.date);
-        if (selectOption[key][0] === 'oldtonew')
-          products = [...products].sort((a, b) => b.date - a.date);
-      }
-
-      if (key === 'page') {
-        totalProduct = products.length;
-        if (selectOption[key].length === 0 || selectOption[key][0] === 1) {
-          if (products.length >= 8) products = products.slice(0, 8);
-        } else {
-          if (Math.ceil(products.length / 8) < selectOption[key][0]) {
-            products = [];
-          } else {
-            products = products.slice(
-              (selectOption[key][0] - 1) * 8,
-              selectOption[key][0] * 8
+      for (let key in selectOption) {
+        if (key === 'availability') {
+          if (selectOption[key].length === 2 || selectOption[key].length === 0)
+            continue;
+          else
+            products = products.filter(product =>
+              selectOption[key][0] === '1'
+                ? product.quantity > 0
+                : product.quantity === 0
             );
+        }
+        if (key === 'priceGte') {
+          if (selectOption[key].length === 0) continue;
+          if (selectOption[key].length === 1)
+            products = products.filter(
+              product => product.price >= selectOption[key][0]
+            );
+        }
+        if (key === 'priceLte') {
+          if (selectOption[key].length === 0) continue;
+          if (selectOption[key].length === 1 && +selectOption[key] > 0)
+            products = products.filter(
+              product => product.price <= selectOption[key][0]
+            );
+        }
+
+        if (key === 'color') {
+          if (selectOption[key].length === 0) continue;
+          else {
+            products = products.filter(product => {
+              for (let col in product.color) {
+                if (product.color[col]) {
+                  if (selectOption[key].includes(col)) return true;
+                }
+              }
+              return false;
+            });
+          }
+        }
+
+        if (key === 'size') {
+          if (selectOption[key].length === 0) continue;
+          else {
+            products = products.filter(product => {
+              for (let siz in product.size) {
+                if (product.size[siz]) {
+                  if (selectOption[key].includes(siz)) return true;
+                }
+              }
+              return false;
+            });
+          }
+        }
+
+        if (key === 'sort_by') {
+          if (selectOption[key].length === 0) continue;
+          if (selectOption[key][0] === 'az')
+            products = [...products].sort((a, b) =>
+              a.title.localeCompare(b.title)
+            );
+          if (selectOption[key][0] === 'za')
+            products = [...products].sort((a, b) =>
+              b.title.localeCompare(a.title)
+            );
+          if (selectOption[key][0] === 'lowtohigh')
+            products = [...products].sort((a, b) => a.price - b.price);
+          if (selectOption[key][0] === 'hightolow')
+            products = [...products].sort((a, b) => b.price - a.price);
+          if (selectOption[key][0] === 'oldtonew')
+            products = [...products].sort((a, b) => a.date - b.date);
+          if (selectOption[key][0] === 'oldtonew')
+            products = [...products].sort((a, b) => b.date - a.date);
+        }
+
+        if (key === 'page') {
+          totalProduct = products.length;
+          if (selectOption[key].length === 0 || selectOption[key][0] === 1) {
+            if (products.length >= 8) products = products.slice(0, 8);
+          } else {
+            if (Math.ceil(products.length / 8) < selectOption[key][0]) {
+              products = [];
+            } else {
+              products = products.slice(
+                (selectOption[key][0] - 1) * 8,
+                selectOption[key][0] * 8
+              );
+            }
           }
         }
       }
+      setProducts({ list: products, pages: Math.ceil(totalProduct / 8) });
+      setTimeout(() => setLoading(false), 1000);
     }
-    setProducts({ list: products, pages: Math.ceil(totalProduct / 8) });
-    if (menList.length > 0) setLoading(false);
+
     // eslint-disable-next-line
-  }, [menList, womenList, param, selectOption]);
+  }, [menList, womenList, param, selectOption, loaded]);
 
   const handleCheck = (type, version, option) => {
+    setLoading(true);
     dispatch({ type, version, option });
   };
 
   const handleSortBy = style => {
+    setLoading(true);
     dispatch({ type: 'SORT_BY', payload: style });
   };
 
   const handleInputPrice = (version, option) => {
+    setLoading(true);
     dispatch({ type: 'PRICE', version, option });
   };
 
   const handleClear = () => {
+    setLoading(true);
     dispatch({ type: 'CLEAR' });
   };
 
   const handleChangePage = page => {
+    setLoading(true);
     dispatch({ type: 'CHANGE_PAGE', payload: page });
   };
 
@@ -250,12 +264,14 @@ export default function ProductLists() {
           handleSortBy={handleSortBy}
           style={selectOption.sort_by[0]}
         />
-        {products.list.length === 0 && !loading ? (
+        {loading && <LoadingSpinner />}
+        {products.list.length === 0 && !loading && (
           <p className="no-product">No products found</p>
-        ) : (
+        )}
+        {products.list.length > 0 && !loading && (
           <ProductList list={products.list} />
         )}
-        {products.pages > 1 ? (
+        {products.pages > 1 && !loading ? (
           <PageController
             page={products.pages}
             onShow={selectOption.page[0]}
