@@ -337,25 +337,30 @@
     border-color: #ebccd1;
 }
 
-.page-controller {
-    float: right;
-    margin-top: 24px;
+.page-controller__wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 
-    .btn {
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        padding: 6px 12px;
-        margin: 0 4px;
+    .page-controller {
+        margin-top: 24px;
 
-        &.active {
-            background-color: $primary;
-            color: white;
+        .btn {
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            padding: 6px 12px;
+            margin: 0 4px;
+
+            &.active {
+                background-color: $primary;
+                color: white;
+            }
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            cursor: pointer;
         }
-
-        &:focus {
-            box-shadow: none;
-        }
-
-        cursor: pointer;
     }
 }

@@ -302,28 +302,34 @@ header {
       }
 
       .search-container {
-        display: flex !important;
-        justify-content: space-between;
+        display: grid !important;
+        grid-template-columns: 1fr auto;
         align-items: center;
         background-color: #fff;
         border: 1px solid lightgray;
-        padding: 4px 8px;
+        padding: 0 8px;
         position: absolute;
-        left: -200px;
-        top: calc(100%);
+        left: -300px;
+        top: calc(100% + 8px);
         width: auto;
         flex-wrap: nowrap;
         transform: scale(0);
         transition: transform 0.3s;
+        width: 350px;
 
         &.input-group {
           flex-direction: row;
         }
 
+        i {
+          padding-left: 8px;
+          grid-area: unset;
+          cursor: pointer;
+        }
+
         &.show {
           transform: scale(1);
-          display: flex !important;
-
+          display: grid !important;
         }
 
         @include custom-media(tablet-large) {
@@ -333,7 +339,7 @@ header {
 
         .form-control {
           border: none;
-          width: 200px;
+          width: 100%;
 
           &:focus {
             border: none;
@@ -348,7 +354,7 @@ header {
         padding: 10px;
         border: 1px solid lightgray;
         position: absolute;
-        right: 0;
+        right: 40px;
         top: calc(100% + 8px);
         width: 340px;
         background-color: #fff;

@@ -76,6 +76,7 @@ export default function ProductLists() {
     if (searchState.length > 0) filterMode[key] = searchState;
     else filterMode[key] = [];
   }
+
   const { menList, womenList, loaded } = useContext(ProductCtx);
   const [products, setProducts] = useState({ list: [], pages: 0 });
   const [selectOption, dispatch] = useReducer(selectReducer, filterMode);
