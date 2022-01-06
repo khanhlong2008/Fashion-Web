@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCtx from '../../../context/ProductProvider/ProductCtx';
 import InputGroup from '../../CheckoutPage/InputGroup';
@@ -10,11 +10,16 @@ const Filter = ({
   handleClear,
   showFilter,
   toggleFilter,
+  filterMode,
 }) => {
   const { param } = useParams();
   const { menList, womenList } = useContext(ProductCtx);
-  const [gte, setGte] = useState(selectOption.priceGte);
-  const [lte, setLte] = useState(selectOption.priceLte);
+  const [gte, setGte] = useState(
+    filterMode.priceGte[0] ? filterMode.priceGte[0] : ''
+  );
+  const [lte, setLte] = useState(
+    filterMode.priceLte[0] ? filterMode.priceLte[0] : ''
+  );
 
   const handleCheckForm = e => {
     const element = e.target;
@@ -25,9 +30,30 @@ const Filter = ({
     );
   };
 
-  const handlePriceForm = e => {
+  const handlePriceForm = (e, type) => {
     const element = e.target;
+
+    if (type === 'gte') setGte(element.value);
+    if (type === 'lte') setLte(element.value);
+
     handleInputPrice(element.name, element.value);
+  };
+
+  const checkForm = e => {
+    if (
+      isNaN(+e.target.value) ||
+      +e.target.value < 0 ||
+      e.target.value === ''
+    ) {
+      if (e.target.name === 'priceGte') {
+        setGte('');
+        handleInputPrice(e.target.name, '');
+      }
+      if (e.target.name === 'priceLte') {
+        setLte('');
+        handleInputPrice(e.target.name, '');
+      }
+    }
   };
 
   const list = param === 'men' ? menList : womenList;
@@ -135,9 +161,9 @@ const Filter = ({
                 label="From"
                 value={gte}
                 name="priceGte"
-                onChange={e => setGte(e.target.value)}
+                onChange={e => handlePriceForm(e, 'gte')}
                 type="number"
-                onBlur={handlePriceForm}
+                onBlur={checkForm}
               />
             </div>
 
@@ -148,8 +174,8 @@ const Filter = ({
                 type="number"
                 name="priceLte"
                 value={lte}
-                onChange={e => setLte(e.target.value)}
-                onBlur={handlePriceForm}
+                onChange={e => handlePriceForm(e, 'lte')}
+                onBlur={checkForm}
               />
             </div>
           </div>

@@ -88,6 +88,11 @@ const Navbar = () => {
     setAuthMenu(false);
   };
 
+  const handleLogout = e => {
+    e.stopPropagation();
+    logout();
+  };
+
   return (
     <header>
       <nav className="container navbar my-0">
@@ -161,7 +166,7 @@ const Navbar = () => {
               <ul className={`profile-menu ${onAuthMenu ? 'show' : ''}`}>
                 <li>My account</li>
                 <li>My purchase</li>
-                <li onClick={logout}>Logout</li>
+                <li onClick={handleLogout}>Logout</li>
               </ul>
             </div>
           )}

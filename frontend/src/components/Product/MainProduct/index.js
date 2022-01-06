@@ -132,14 +132,14 @@ export default function ProductLists() {
         }
         if (key === 'priceGte') {
           if (selectOption[key].length === 0) continue;
-          if (selectOption[key].length === 1)
+          if (selectOption[key].length === 1 && !isNaN(+selectOption[key][0]))
             products = products.filter(
               product => product.price >= selectOption[key][0]
             );
         }
         if (key === 'priceLte') {
           if (selectOption[key].length === 0) continue;
-          if (selectOption[key].length === 1 && +selectOption[key] > 0)
+          if (selectOption[key].length === 1 && !isNaN(+selectOption[key][0]))
             products = products.filter(
               product => product.price <= selectOption[key][0]
             );
@@ -254,6 +254,7 @@ export default function ProductLists() {
         handleClear={handleClear}
         showFilter={showFilter}
         toggleFilter={toggleFilter}
+        filterMode={filterMode}
       />
       <div>
         <div className="d-flex d-lg-none justify-content-end mb-3">
