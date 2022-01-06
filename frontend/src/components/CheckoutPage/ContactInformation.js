@@ -100,7 +100,7 @@ const ContactInfofmation = () => {
             required
           />
           <div className="btn-container">
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary me-2" type="submit">
               Continue to shipping
             </button>
             <button className="btn btn-light" onClick={() => navigate('/cart')}>

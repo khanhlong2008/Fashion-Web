@@ -25,10 +25,6 @@ const Form = mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: String,
-    default: Date.now,
-  },
 });
 
 module.exports = mongoose.model('form', Form);

@@ -9,6 +9,7 @@ const product_male = require('./product_male');
 const router = express.Router();
 const flashSale = require('./flashSale');
 const shippinginfo = require('./shippinginfo');
+const order = require('./order');
 
 router.use('/auth', auth);
 router.use('/user', user);
@@ -18,5 +19,6 @@ router.use('/product_male', product_male);
 router.use('/flashSale', flashSale);
 router.use('/cart', cart);
 router.use('/shippinginfo', shippinginfo);
+router.use('/order', order);
 
 module.exports = router;

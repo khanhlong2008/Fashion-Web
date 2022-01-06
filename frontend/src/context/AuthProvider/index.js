@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import AuthCtx from './AuthCtx';
 import AuthReducer from './AuthReducer';
-import axiosInstance, { addJwt } from '../../Util';
+import axiosInstance from '../../Util';
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
@@ -21,9 +21,7 @@ const AuthProvider = props => {
           },
         });
         dispatch({ type: 'USER_LOADED', payload: res.data.user });
-        addJwt(localStorage.token);
       } catch (err) {
-        console.log(err);
         dispatch({ type: 'NOT_LOGIN_YET' });
       }
     } else dispatch({ type: 'NOT_LOGIN_YET' });
@@ -38,9 +36,18 @@ const AuthProvider = props => {
     };
 
     try {
-      await axiosInstance.post('/auth/signup', formData, config);
+      const response = await axiosInstance.post(
+        '/auth/signup',
+        formData,
+        config
+      );
 
-      login({ email: formData.email, password: formData.password });
+      dispatch({
+        type: 'REGISTER_SUCCESS',
+        payload: response.data.token,
+      });
+
+      loadUser();
     } catch (err) {
       console.log(err);
     }
@@ -70,8 +77,12 @@ const AuthProvider = props => {
     }
   };
   // Logout
-  const logout = () => dispatch({ type: 'LOGOUT' });
-
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' });
+    setTimeout(() => {
+      dispatch({ type: 'NOT_LOGIN_YET' });
+    }, 1000);
+  };
   return (
     <AuthCtx.Provider
       value={{

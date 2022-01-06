@@ -12,7 +12,7 @@ import ProductModal from '../components/Product/ProductDetail/ProductModal';
 import CartCtx from '../context/CartProvider/CartCtx';
 
 const Home = () => {
-  const { message, showModal } = useContext(CartCtx);
+  const { showModal } = useContext(CartCtx);
 
   useEffect(() => {
     if (showModal === true)

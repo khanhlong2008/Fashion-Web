@@ -3,6 +3,7 @@ import CartCtx from './CartCtx';
 import cartReducer from './cartReducer';
 import axiosInstance from '../../Util';
 import AuthCtx from '../AuthProvider/AuthCtx';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   changed: false,
@@ -22,11 +23,14 @@ const initialState = {
     stock: 0,
   },
   isLoading: true,
+  orders: [],
+  isOrdered: false,
 };
 
 const CartProvider = props => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const { user } = useContext(AuthCtx);
+  const navigate = useNavigate();
 
   const getCart = async () => {
     try {
@@ -34,6 +38,30 @@ const CartProvider = props => {
       dispatch({ type: 'GET_CART', payload: res.data.cart });
     } catch (error) {
       dispatch({ type: 'ERROR' });
+    }
+  };
+
+  const getOrders = async () => {
+    try {
+      const res = await axiosInstance.get(`/order/${user._id}`);
+      dispatch({ type: 'GET_ORDER', payload: res.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const postOrder = async order => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      await axiosInstance.post(`/order/${user._id}`, order, config);
+      await dispatch({ type: 'ORDER_SUCCESS' });
+      navigate('/ordersuccess');
+    } catch (error) {
+      console.log('error');
     }
   };
 
@@ -101,6 +129,10 @@ const CartProvider = props => {
     setTimeout(() => dispatch({ type: 'CLEAR_MESSAGE' }), 2000);
   };
 
+  const returnToHome = () => {
+    dispatch({ type: 'RETURN' });
+  };
+
   return (
     <CartCtx.Provider
       value={{
@@ -114,6 +146,9 @@ const CartProvider = props => {
         getCart,
         sendCartData,
         handleBlockAddToCart,
+        getOrders,
+        postOrder,
+        returnToHome,
       }}
     >
       {props.children}

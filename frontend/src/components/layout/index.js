@@ -8,35 +8,34 @@ import ProductCtx from '../../context/ProductProvider/ProductCtx';
 import Notification from '../Home/Notification';
 import InfoCtx from '../../context/InfoProvider/InfoCtx';
 import { useLocation } from 'react-router-dom';
+import LoadingSpiner from './LoadingSpiner';
 
 const Layout = props => {
   const { getCart, items, sendCartData, changed, message } =
     useContext(CartCtx);
   const { getInfo, sendInfo, changed: infoChanged, info } = useContext(InfoCtx);
-  const { isAuthenticated, checking, loadUser } = useContext(AuthCtx);
+  const { isAuthenticated, checking, loadUser, user } = useContext(AuthCtx);
   const { getProducts } = useContext(ProductCtx);
   const location = useLocation();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (user && isAuthenticated) {
       getCart();
       getInfo();
     }
 
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user]);
 
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    if (changed) {
-      sendCartData(items);
-    }
-    // eslint-disable-next-line
-  }, [items, changed]);
 
   useEffect(() => {
     if (changed) {
@@ -52,19 +51,8 @@ const Layout = props => {
     // eslint-disable-next-line
   }, [info, infoChanged]);
 
-  useEffect(() => {
-    loadUser();
-    // eslint-disable-next-line
-  }, []);
-  console.log(location.pathname);
-
   if (!checking) {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        {' '}
-        Checking signed-in user status...
-      </div>
-    );
+    return <LoadingSpiner />;
   } else
     return (
       <>

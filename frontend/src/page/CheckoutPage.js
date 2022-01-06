@@ -13,7 +13,7 @@ import Shipping from '../components/CheckoutPage/Shipping';
 import AuthCtx from '../context/AuthProvider/AuthCtx';
 
 const CheckoutPage = () => {
-  const { items, isLoading } = useContext(CartCtx);
+  const { items, isLoading, isOrder } = useContext(CartCtx);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get('step');
@@ -26,7 +26,7 @@ const CheckoutPage = () => {
     document.body.click();
   }, []);
 
-  return items.length === 0 && !isLoading ? (
+  return items.length === 0 && !isLoading && !isOrder ? (
     <Navigate to="/cart" />
   ) : (
     <section className="checkout-wrapper container d-block">
@@ -34,7 +34,21 @@ const CheckoutPage = () => {
         <div className="left-container">
           <h1>Aveda Sectioned Shopify Theme</h1>
           <div className="checkout-info">
-            {id !== user._id ? (
+            {!user ? (
+              <div className="mt-5">
+                <p>
+                  The checkout page you’re looking for does not exist The URL
+                  you entered may be deleted or not available.
+                  <br /> Return to the home page to continue shopping.
+                </p>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate('/')}
+                >
+                  Return to home
+                </button>
+              </div>
+            ) : user && id !== user._id ? (
               <div className="mt-5">
                 <p>
                   The checkout page you’re looking for does not exist The URL
@@ -59,7 +73,7 @@ const CheckoutPage = () => {
             )}
           </div>
         </div>
-        {id === user._id ? <CartContainer /> : null}
+        {user && id === user._id ? <CartContainer /> : null}
       </div>
     </section>
   );

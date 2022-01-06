@@ -1,17 +1,23 @@
 import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import ListCart from '../components/Cart/ListCart';
 import LoadingSpinner from '../components/layout/LoadingSpiner';
+import AuthCtx from '../context/AuthProvider/AuthCtx';
 import CartCtx from '../context/CartProvider/CartCtx';
 
 const Cart = () => {
   const { items, isLoading } = useContext(CartCtx);
+  const { isAuthenticated } = useContext(AuthCtx);
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     document.body.click();
   }, []);
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <section className="container d-block shopping-cart__container">

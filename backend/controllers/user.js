@@ -68,7 +68,7 @@ const signUp = async (req, res, next) => {
       .json({ error: { message: 'email is alrady is use' } });
   const user = await authcontroller.signUpAuth(email, password);
 
-  const newUser = new User({
+  const newUser = await new User({
     email,
     salt: user.salt,
     hashed: user.hashed,
@@ -76,10 +76,9 @@ const signUp = async (req, res, next) => {
     lastname,
   });
   newUser.save();
-
   const token = encodetoken(newUser._id);
   res.setHeader('Authorization', token);
-  return res.status(201).json({ success: true, user: newUser.lastname });
+  return res.status(201).json({ success: true, token, user: newUser.lastname });
 };
 
 const signIn = async (req, res, next) => {
@@ -97,6 +96,7 @@ const signIn = async (req, res, next) => {
 const secret = async (req, res, next) => {
   // console.log(req.user)
   const { _id, email, firstname, lastname } = req.user;
+
   // console.log("call to secret fn")
   return res.status(200).json({ user: { _id, email, firstname, lastname } });
 };

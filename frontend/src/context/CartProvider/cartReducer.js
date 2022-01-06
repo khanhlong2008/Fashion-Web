@@ -165,6 +165,26 @@ const cartReducer = (state, action) => {
         ...state,
         message: action.payload,
       };
+    case 'GET_ORDER':
+      return {
+        ...state,
+        orders: action.payload,
+      };
+    case 'ORDER_SUCCESS':
+      return {
+        ...state,
+        changed: true,
+        items: [],
+        totalQuantity: 0,
+        totalPrice: 0,
+        isOrder: true,
+      };
+    case 'RETURN':
+      return {
+        ...state,
+        isOrder: false,
+      };
+
     default:
       return state;
   }

@@ -16,6 +16,7 @@ import Cart from './page/Cart';
 import CheckoutPage from './page/CheckoutPage';
 import ProductProvider from './context/ProductProvider';
 import AuthProvider from './context/AuthProvider';
+import OrderSuccess from './components/CheckoutPage/OrderSuccess';
 // import { Navigate } from "react-router";
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
                 <Route path="/products/:id" element={<ProductDetail />} />
                 <Route path="/checkouts/:id" element={<CheckoutPage />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/ordersuccess" element={<OrderSuccess />} />
                 {/* </>
                 ) : (
                   <> */}

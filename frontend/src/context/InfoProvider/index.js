@@ -19,7 +19,7 @@ const CartProvider = props => {
       const res = await axiosInstance.get(`/shippinginfo/${user._id}`);
       dispatch({ type: 'GET_INFO', payload: res.data });
     } catch (error) {
-      console.log('error');
+      console.log('error get info');
     }
   };
 
