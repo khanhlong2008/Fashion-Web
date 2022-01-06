@@ -10,8 +10,8 @@ const CartContainer = () => {
   return (
     <div className="cart__container">
       <div className="list-product">
-        {items.map(item => (
-          <CartItem {...item} key="item.id" />
+        {items.map((item, index) => (
+          <CartItem {...item} key={item.id + index} />
         ))}
       </div>
       <div className="discount-code">

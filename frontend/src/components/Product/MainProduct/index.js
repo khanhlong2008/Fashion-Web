@@ -209,7 +209,7 @@ export default function ProductLists() {
         }
       }
       setProducts({ list: products, pages: Math.ceil(totalProduct / 8) });
-      setTimeout(() => setLoading(false), 1000);
+      setTimeout(() => setLoading(false), 500);
     }
 
     // eslint-disable-next-line

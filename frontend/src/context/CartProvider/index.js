@@ -60,6 +60,7 @@ const CartProvider = props => {
       await axiosInstance.post(`/order/${user._id}`, order, config);
       await dispatch({ type: 'ORDER_SUCCESS' });
       navigate('/ordersuccess');
+      document.body.addEventListener('click', returnToHome, { once: true });
     } catch (error) {
       console.log('error');
     }
@@ -130,6 +131,7 @@ const CartProvider = props => {
   };
 
   const returnToHome = () => {
+    console.log('clcik');
     dispatch({ type: 'RETURN' });
   };
 

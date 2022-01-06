@@ -1,27 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import '@dotlottie/player-component';
-import CartCtx from '../../context/CartProvider/CartCtx';
 import { useNavigate } from 'react-router-dom';
 
-const OrderSuccess = () => {
-  const { isOrdered, returnToHome } = useContext(CartCtx);
+const NotFound = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isOrdered) {
-      navigate('/');
-    }
-  }, [isOrdered, navigate]);
-
   const handleReturn = () => {
-    returnToHome();
     navigate('/');
   };
-
   return (
-    <div className="order-success__container container d-block">
+    <div className="notfound__container container d-block">
       <dotlottie-player
-        src="../image/ordersuccess.lottie"
+        src="../image/404notfound.lottie"
         autoplay
         loop
         style={{ height: '60vh', margin: '0 auto' }}
@@ -35,4 +25,4 @@ const OrderSuccess = () => {
   );
 };
 
-export default OrderSuccess;
+export default NotFound;

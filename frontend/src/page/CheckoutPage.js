@@ -37,8 +37,6 @@ const CheckoutPage = () => {
     return <LoadingSpinner />;
   }
 
-  console.log(items, isLoading, isOrdered, user);
-
   return items.length === 0 && !isLoading && !isOrdered ? (
     <Navigate to="/cart" />
   ) : (

@@ -17,6 +17,7 @@ import CheckoutPage from './page/CheckoutPage';
 import ProductProvider from './context/ProductProvider';
 import AuthProvider from './context/AuthProvider';
 import OrderSuccess from './components/CheckoutPage/OrderSuccess';
+import NotFound from './page/404NotFound';
 // import { Navigate } from "react-router";
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="/checkouts/:id" element={<CheckoutPage />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/ordersuccess" element={<OrderSuccess />} />
+                <Route path="/*" element={<NotFound />} />
                 {/* </>
                 ) : (
                   <> */}
