@@ -1,18 +1,14 @@
 import React, { useContext } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthCtx from '../../context/AuthProvider/AuthCtx';
 import InfoCtx from '../../context/InfoProvider/InfoCtx';
 import CartCtx from '../../context/CartProvider/CartCtx';
 
 const Shipping = () => {
   const navigate = useNavigate();
-  const { info, isLoading } = useContext(InfoCtx);
+  const { info } = useContext(InfoCtx);
   const { user } = useContext(AuthCtx);
   const { postOrder, items, totalPrice } = useContext(CartCtx);
-
-  if (!info.lastName && !isLoading) {
-    return <Navigate to={`/checkouts/${user._id}?step=contact_information`} />;
-  }
 
   const handleOrder = () => {
     const { firstName, lastName, address, apartment, city } = info;

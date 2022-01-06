@@ -7,7 +7,7 @@ import CartCtx from '../context/CartProvider/CartCtx';
 
 const Cart = () => {
   const { items, isLoading } = useContext(CartCtx);
-  const { isAuthenticated } = useContext(AuthCtx);
+  const { isAuthenticated, loading } = useContext(AuthCtx);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Cart = () => {
     document.body.click();
   }, []);
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && !loading) {
     return <Navigate to="/" />;
   }
 

@@ -6,13 +6,14 @@ import InfoCtx from '../../context/InfoProvider/InfoCtx';
 const CheckoutProcess = ({ search }) => {
   const { info } = useContext(InfoCtx);
   const { user } = useContext(AuthCtx);
+
   return (
     <div className="checkout-process">
       <Link to="/cart">Cart</Link>
       <span>{' > '}</span>
       {search === 'contact_information' ? (
         <strong>Information</strong>
-      ) : info.lastName ? (
+      ) : info ? (
         <Link to={`/checkouts/${user._id}?step=contact_information`}>
           Infomation
         </Link>
@@ -23,7 +24,7 @@ const CheckoutProcess = ({ search }) => {
       <span>{' > '}</span>
       {search === 'shipping_method' ? (
         <strong>Shipping</strong>
-      ) : info.lastName ? (
+      ) : info ? (
         <Link to={`/checkouts/${user._id}?step=shipping_method`}>Shipping</Link>
       ) : (
         <span>Shipping</span>

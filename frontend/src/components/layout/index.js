@@ -34,6 +34,7 @@ const Layout = props => {
 
   useEffect(() => {
     getProducts();
+    getInfo();
     // eslint-disable-next-line
   }, []);
 

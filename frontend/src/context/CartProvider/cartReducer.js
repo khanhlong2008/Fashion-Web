@@ -177,12 +177,12 @@ const cartReducer = (state, action) => {
         items: [],
         totalQuantity: 0,
         totalPrice: 0,
-        isOrder: true,
+        isOrdered: true,
       };
     case 'RETURN':
       return {
         ...state,
-        isOrder: false,
+        isOrdered: false,
       };
 
     default:

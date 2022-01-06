@@ -81,7 +81,7 @@ const AuthProvider = props => {
     dispatch({ type: 'LOGOUT' });
     setTimeout(() => {
       dispatch({ type: 'NOT_LOGIN_YET' });
-    }, 1000);
+    }, 500);
   };
   return (
     <AuthCtx.Provider

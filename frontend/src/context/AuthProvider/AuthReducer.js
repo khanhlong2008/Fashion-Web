@@ -16,7 +16,7 @@ const AuthReducer = (state, action) => {
       return {
         token: null,
         isAuthenticated: null,
-        loading: false,
+        loading: true,
         user: null,
         checking: false,
       };

@@ -5,7 +5,7 @@ import axiosInstance from '../../Util';
 import AuthCtx from '../AuthProvider/AuthCtx';
 
 const initialState = {
-  info: {},
+  info: null,
   isLoading: true,
   changed: false,
 };
@@ -19,7 +19,7 @@ const CartProvider = props => {
       const res = await axiosInstance.get(`/shippinginfo/${user._id}`);
       dispatch({ type: 'GET_INFO', payload: res.data });
     } catch (error) {
-      console.log('error get info');
+      dispatch({ type: 'GET_INFO_FAIL' });
     }
   };
 

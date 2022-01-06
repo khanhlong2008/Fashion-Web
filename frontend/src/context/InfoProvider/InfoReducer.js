@@ -4,10 +4,16 @@ const InfoReducer = (state, action) => {
       return {
         ...state,
         changed: false,
-        isLoading: true,
+        isLoading: false,
         info: action.payload,
       };
-
+    case 'GET_INFO_FAIL':
+      return {
+        ...state,
+        changed: false,
+        isLoading: false,
+        info: null,
+      };
     case 'NEW_INFO':
       return {
         ...state,

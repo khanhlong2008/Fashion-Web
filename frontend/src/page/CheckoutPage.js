@@ -11,14 +11,17 @@ import CartContainer from '../components/CheckoutPage/CartContainer';
 import CartCtx from '../context/CartProvider/CartCtx';
 import Shipping from '../components/CheckoutPage/Shipping';
 import AuthCtx from '../context/AuthProvider/AuthCtx';
+import InfoCtx from '../context/InfoProvider/InfoCtx';
+import LoadingSpinner from '../components/layout/LoadingSpiner';
 
 const CheckoutPage = () => {
-  const { items, isLoading, isOrder } = useContext(CartCtx);
+  const { items, isLoading, isOrdered } = useContext(CartCtx);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get('step');
   const { id } = useParams();
   const { user } = useContext(AuthCtx);
+  const { info, isLoading: isLoadingInfo } = useContext(InfoCtx);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +29,17 @@ const CheckoutPage = () => {
     document.body.click();
   }, []);
 
-  return items.length === 0 && !isLoading && !isOrder ? (
+  if (search === 'shipping_method' && !info && !isLoadingInfo && user) {
+    navigate(`/checkouts/${user._id}?step=contact_information`);
+  }
+
+  if (search === 'shipping_method' && isLoadingInfo) {
+    return <LoadingSpinner />;
+  }
+
+  console.log(items, isLoading, isOrdered, user);
+
+  return items.length === 0 && !isLoading && !isOrdered ? (
     <Navigate to="/cart" />
   ) : (
     <section className="checkout-wrapper container d-block">
@@ -68,7 +81,7 @@ const CheckoutPage = () => {
                 {search === 'contact_information' || !search ? (
                   <ContactInformation />
                 ) : null}
-                {search === 'shipping_method' && <Shipping />}
+                {search === 'shipping_method' && info && <Shipping />}
               </>
             )}
           </div>
