@@ -15,28 +15,30 @@ const Layout = props => {
     useContext(CartCtx);
   const { getInfo, sendInfo, changed: infoChanged, info } = useContext(InfoCtx);
   const { isAuthenticated, checking, loadUser, user } = useContext(AuthCtx);
-  const { getProducts } = useContext(ProductCtx);
+  const {
+    getProducts,
+    getWishList,
+    sendWishList,
+    wishList,
+    changed: wishlistChanged,
+  } = useContext(ProductCtx);
   const location = useLocation();
 
   useEffect(() => {
     loadUser();
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (user && isAuthenticated) {
-      getCart();
-      getInfo();
-    }
-
-    // eslint-disable-next-line
-  }, [isAuthenticated, user]);
-
-  useEffect(() => {
     getProducts();
     getInfo();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getCart();
+      getInfo();
+      getWishList();
+    }
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (changed) {
@@ -44,6 +46,13 @@ const Layout = props => {
     }
     // eslint-disable-next-line
   }, [items, changed]);
+
+  useEffect(() => {
+    if (wishlistChanged) {
+      sendWishList(wishList);
+    }
+    // eslint-disable-next-line
+  }, [wishList, wishlistChanged]);
 
   useEffect(() => {
     if (infoChanged) {

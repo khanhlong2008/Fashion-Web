@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import ProductCtx from '../context/ProductProvider/ProductCtx';
 import ImageCarousel from '../components/Product/ProductDetail/ProductModal/ImageCarousel';
@@ -6,14 +6,20 @@ import ProductRight from '../components/Product/ProductDetail/ProductRight';
 
 const Details = () => {
   const { id } = useParams();
-  const { products } = useContext(ProductCtx);
+  const { products, loaded } = useContext(ProductCtx);
   const [product, setProduct] = useState(undefined);
   const [imgSrc, setImgSrc] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const selectProduct = products.find(item => item._id === id);
-    setProduct(selectProduct);
-  }, [products, id]);
+    if (loaded) {
+      const selectProduct = products.find(item => item._id === id);
+      if (selectProduct) {
+        setProduct(selectProduct);
+      } else navigate('/404notfound');
+    }
+  }, [products, id, loaded, navigate]);
+
   const handleImage = src => {
     setImgSrc(src);
   };

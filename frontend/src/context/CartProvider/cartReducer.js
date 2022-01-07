@@ -1,7 +1,7 @@
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'GET_CART':
-      const cart = action.payload || [];
+      const cart = action.payload;
       return {
         ...state,
         isLoading: false,
@@ -16,6 +16,7 @@ const cartReducer = (state, action) => {
         items: [],
         totalPrice: 0,
         totalQuantity: 0,
+        isOrdered: false,
       };
     case 'ADD_ITEM':
       const newItem = action.payload;

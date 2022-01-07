@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useContext, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import CartCtx from '../../../../context/CartProvider/CartCtx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import AuthCtx from '../../../../context/AuthProvider/AuthCtx';
 
 const ProductRight = ({
@@ -157,14 +157,6 @@ const ProductRight = ({
       </div>
       <p>Vendor : Aveda</p>
       <p>Product Type : fashion</p>
-      <div className="right-chart">
-        <span>
-          <i className="bi bi-heart-fill" style={{ color: 'gray' }}></i>
-        </span>
-        <span className="ms-2">
-          <p>Add To Wishlist</p>
-        </span>
-      </div>
       <div className="body-one">
         <p className="option-label">Size</p>
         <div>{sizesSelector}</div>
@@ -207,7 +199,7 @@ const ProductRight = ({
           </button>
         )}
       </div>
-      <div className="main-reassurance mt-3">
+      <div className="main-reassurance mt-4">
         <Row className="row">
           <Col className="reassurance">
             <div className="reassurance-img">

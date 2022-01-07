@@ -46,7 +46,7 @@ const CartProvider = props => {
       const res = await axiosInstance.get(`/order/${user._id}`);
       dispatch({ type: 'GET_ORDER', payload: res.data });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'ERROR' });
     }
   };
 
@@ -124,7 +124,7 @@ const CartProvider = props => {
   const handleBlockAddToCart = () => {
     dispatch({
       type: 'SEND_MESSAGE',
-      payload: 'Please login to add product to cart',
+      payload: 'Please login first',
     });
 
     setTimeout(() => dispatch({ type: 'CLEAR_MESSAGE' }), 2000);

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCtx from '../../../context/ProductProvider/ProductCtx';
 import InputGroup from '../../CheckoutPage/InputGroup';

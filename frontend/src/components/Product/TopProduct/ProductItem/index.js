@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AuthCtx from '../../../../context/AuthProvider/AuthCtx';
 import CartCtx from '../../../../context/CartProvider/CartCtx';
+import ProductCtx from '../../../../context/ProductProvider/ProductCtx';
 
 const ProductItem = ({
   _id: id,
@@ -13,11 +14,29 @@ const ProductItem = ({
   color,
   quantity: stock,
 }) => {
+  const { idWishList, addItemToWishList, removeItemFromWishList } =
+    useContext(ProductCtx);
   const link = `/products/${id}`;
   const { addItemToCart, handleShowModal, handleBlockAddToCart } =
     useContext(CartCtx);
   const stars = [];
   const { isAuthenticated } = useContext(AuthCtx);
+  const [isLoved, setIsLoved] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setIsLoved(idWishList.includes(id));
+    } else setIsLoved(false);
+  }, [idWishList, id, isAuthenticated]);
+
+  const handleHeart = () => {
+    if (isAuthenticated) {
+      if (isLoved) removeItemFromWishList(id);
+      else addItemToWishList({ id, title, price, front: imgList[0].imgItem });
+    } else {
+      handleBlockAddToCart();
+    }
+  };
 
   const handleAddItem = () => {
     if (isAuthenticated) {
@@ -97,8 +116,8 @@ const ProductItem = ({
         >
           <i className="bi bi-eye-fill"></i>
         </div>
-        <div className="icon__container">
-          <i className="bi bi-heart"></i>
+        <div className="icon__container" onClick={handleHeart}>
+          <i className={`bi ${isLoved ? 'bi-heart-fill' : 'bi-heart'}`}></i>
         </div>
         <div
           className={`icon__container ${isSoldout ? 'none-add' : ''}`}

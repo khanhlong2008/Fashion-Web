@@ -20,7 +20,7 @@ const CheckoutPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const search = queryParams.get('step');
   const { id } = useParams();
-  const { user } = useContext(AuthCtx);
+  const { user, loading } = useContext(AuthCtx);
   const { info, isLoading: isLoadingInfo } = useContext(InfoCtx);
   const navigate = useNavigate();
 
@@ -34,6 +34,10 @@ const CheckoutPage = () => {
   }
 
   if (search === 'shipping_method' && isLoadingInfo) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user && !loading) {
     return <LoadingSpinner />;
   }
 

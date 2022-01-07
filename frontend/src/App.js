@@ -1,6 +1,6 @@
 import AboutUs from './components/About/aboutUs/AboutUs';
 import Blog from './components/Blog/Blog';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import FashionDetail from './components/Blog/fashion/FashionDetail';
 import Account from './components/Auth/Create/Account';
 import Login from './components/Auth/Login';
@@ -19,8 +19,16 @@ import AuthProvider from './context/AuthProvider';
 import OrderSuccess from './components/CheckoutPage/OrderSuccess';
 import NotFound from './page/404NotFound';
 import SearchPage from './page/SearchPage';
+import WishList from './page/WishList';
+import { useEffect } from 'react';
 // import { Navigate } from "react-router";
 export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <AuthProvider>
       <ProductProvider>
@@ -28,9 +36,6 @@ export default function App() {
           <InfoProvider>
             <Layout>
               <Routes>
-                {/* {
-                authUser ? (
-                  <> */}
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/forgot" element={<Forgot />}></Route>
                 <Route path="/register" element={<Account />}></Route>
@@ -44,26 +49,8 @@ export default function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/ordersuccess" element={<OrderSuccess />} />
                 <Route path="/search" element={<SearchPage />} />
+                <Route path="/wishlist" element={<WishList />} />
                 <Route path="*" element={<NotFound />} />
-                {/* </>
-                ) : (
-                  <> */}
-
-                {/* </>
-                )
-              } */}
-
-                {/* <Route
-          path="/logout"
-          render={() => {
-            return localStorage.getItem('accessToken') ? (
-              <Logout />
-            ) : (
-              <Navigate replace to="/" />
-            );
-          }}
-
-              ></Route> */}
               </Routes>
             </Layout>
           </InfoProvider>

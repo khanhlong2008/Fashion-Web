@@ -125,8 +125,8 @@ const Navbar = () => {
               <li onClick={offMenuMobile.bind(null, '/about-us')}>
                 <NavLink to="/about-us">About us</NavLink>
               </li>
-              <li onClick={offMenuMobile.bind(null, '/pages/contact')}>
-                <NavLink to="/pages/contact">Contact</NavLink>
+              <li onClick={offMenuMobile.bind(null, '/wishlist')}>
+                <NavLink to="/wishlist">Wishlist</NavLink>
               </li>
             </ul>
           </div>
