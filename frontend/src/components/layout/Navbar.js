@@ -58,6 +58,12 @@ const Navbar = () => {
     //eslint-disable-next-line
   }, []);
 
+  const handleNavigate = (e, link) => {
+    e.stopPropagation();
+    setAuthMenu(false);
+    navigate(link);
+  };
+
   const activeHandler = () => {
     setActiveMenu(state => !state);
   };
@@ -147,7 +153,7 @@ const Navbar = () => {
             </div>
           )}
 
-          <CartPopUp show={onShowCart} />
+          <CartPopUp show={onShowCart} setShowCart={setShowCart} />
           {!user && (
             <div className="auth-container">
               <NavLink to="/login">Login</NavLink>
@@ -164,8 +170,12 @@ const Navbar = () => {
                 />
               </div>
               <ul className={`profile-menu ${onAuthMenu ? 'show' : ''}`}>
-                <li>My account</li>
-                <li>My purchase</li>
+                <li onClick={e => handleNavigate(e, '/myaccount')}>
+                  My account
+                </li>
+                <li onClick={e => handleNavigate(e, '/mypurchase')}>
+                  My purchase
+                </li>
                 <li onClick={handleLogout}>Logout</li>
               </ul>
             </div>

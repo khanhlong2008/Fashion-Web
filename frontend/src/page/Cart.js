@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import ListCart from '../components/Cart/ListCart';
 import LoadingSpinner from '../components/layout/LoadingSpiner';
@@ -9,11 +9,6 @@ const Cart = () => {
   const { items, isLoading } = useContext(CartCtx);
   const { isAuthenticated, loading } = useContext(AuthCtx);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.body.click();
-  }, []);
 
   if (!isAuthenticated && !loading) {
     return <Navigate to="/" />;

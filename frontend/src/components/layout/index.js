@@ -13,11 +13,10 @@ import LoadingSpiner from './LoadingSpiner';
 const Layout = props => {
   const { getCart, items, sendCartData, changed, message } =
     useContext(CartCtx);
-  const { getInfo, sendInfo, changed: infoChanged, info } = useContext(InfoCtx);
+  const { sendInfo, changed: infoChanged, info } = useContext(InfoCtx);
   const { isAuthenticated, checking, loadUser, user } = useContext(AuthCtx);
   const {
     getProducts,
-    getWishList,
     sendWishList,
     wishList,
     changed: wishlistChanged,
@@ -27,18 +26,15 @@ const Layout = props => {
   useEffect(() => {
     loadUser();
     getProducts();
-    getInfo();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user) {
       getCart();
-      getInfo();
-      getWishList();
     }
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user]);
 
   useEffect(() => {
     if (changed) {

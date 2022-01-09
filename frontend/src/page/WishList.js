@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../components/layout/LoadingSpiner';
 import ProductCtx from '../context/ProductProvider/ProductCtx';
 
 const WishList = () => {
-  const { wishList, loading, removeItemFromWishList } = useContext(ProductCtx);
+  const { wishList, getWishList, loading, removeItemFromWishList } =
+    useContext(ProductCtx);
   const navigate = useNavigate();
+  const { isAuthenticated } = useContext(ProductCtx);
+  useEffect(() => {
+    getWishList();
+  }, [isAuthenticated, getWishList]);
+
   return (
     <section className="wishlist__wrapper container d-block">
       <h1 className="text-center">Wishlist</h1>

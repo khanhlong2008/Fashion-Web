@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FlashsaleSlider from '../Product/FlashSale/FlashsaleSlider';
 
 const DiscountSale = () => {
-  const countDownDate = new Date('2023, 1, 1 0:00:00').getTime();
+  const promote = [13, 15, 17, 19, 21, 23];
+  let today = new Date().toLocaleString().split(',')[0];
+  const timeNow = new Date().getHours();
+  const target = promote.find(h => timeNow >= h && timeNow < h + 2) + 2 || 1;
+  if (target === 1) {
+    const dateArr = today.split('/');
+    dateArr[1] = +dateArr[1] + 1;
+    today = dateArr.join('/');
+  }
+
+  const countDownDate = new Date(`${today} ${target}:00`).getTime();
   const now = new Date().getTime();
   const distance = countDownDate - now;
   const navigate = useNavigate();
   const [timer, setTime] = useState({
-    days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -39,21 +49,14 @@ const DiscountSale = () => {
     }
   }, [timeLeft]);
 
-  const { days, minutes, hours, seconds } = timer;
+  const { minutes, hours, seconds } = timer;
 
   return (
-    <section className="discount-sale__wrapper py-5">
-      <div className="container">
+    <section className="discount-sale__wrapper">
+      <div className="container d-block">
         <div className="discount-sale__container text-center">
-          <p className="h2 text-primary">For the best</p>
-          <p className="h1">Discount Sale</p>
-          <p>The Big Offer Day Extra 10% Off</p>
+          <p className="h1">Flash Sale</p>
           <div className="discount-timer">
-            <div>
-              <p>
-                {days} <span>Days</span>
-              </p>
-            </div>
             <div>
               <p>
                 {hours} <span>Hours</span>
@@ -70,13 +73,14 @@ const DiscountSale = () => {
               </p>
             </div>
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={() => navigate('/collection/fashion')}
-          >
-            View Collection
-          </button>
         </div>
+        <div
+          className="d-flex justify-content-end mt-3"
+          onClick={() => navigate('/flashsale')}
+        >
+          <button className="btn btn-primary">See all</button>
+        </div>
+        <FlashsaleSlider />
       </div>
     </section>
   );

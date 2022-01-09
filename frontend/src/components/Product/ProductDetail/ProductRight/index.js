@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useContext, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import CartCtx from '../../../../context/CartProvider/CartCtx';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthCtx from '../../../../context/AuthProvider/AuthCtx';
 
 const ProductRight = ({
@@ -22,7 +22,7 @@ const ProductRight = ({
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [isSoldout, setSoldout] = useState(false);
-  const { isAuthenticated } = useContext(AuthCtx);
+  const { isAuthenticated, user } = useContext(AuthCtx);
 
   const handleChangeSize = e => {
     setSelectedSize(e.target.value);
@@ -115,7 +115,7 @@ const ProductRight = ({
       color: selectedColor,
     });
 
-    navigate('/checkouts/id?step=contact_information');
+    navigate(`/checkouts/${user._id}?step=contact_information`);
   };
 
   const handleQuantity = type => {
@@ -200,7 +200,7 @@ const ProductRight = ({
         )}
       </div>
       <div className="main-reassurance mt-4">
-        <Row className="row">
+        <Row className="row pb-0">
           <Col className="reassurance">
             <div className="reassurance-img">
               <img
@@ -226,7 +226,7 @@ const ProductRight = ({
             </div>
           </Col>
         </Row>
-        <Row className="row">
+        <Row className="row pt-0">
           <Col className="reassurance">
             <div className="reassurance-img">
               <img
@@ -252,15 +252,6 @@ const ProductRight = ({
             </div>
           </Col>
         </Row>
-      </div>
-      <div
-        className="logo-img"
-        style={{ marginTop: '2rem', marginBottom: '2rem' }}
-      >
-        <img
-          src="https://cdn.shopify.com/s/files/1/0054/0567/1479/files/Trustedimage_73a6da00-06b0-497f-a8a5-b974089b9419.png?v=1632227833"
-          alt="/"
-        />
       </div>
       <div>
         <a href="/">

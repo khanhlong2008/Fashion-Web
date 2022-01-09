@@ -13,7 +13,7 @@ const Filter = ({
   filterMode,
 }) => {
   const { param } = useParams();
-  const { menList, womenList } = useContext(ProductCtx);
+  const { menList, womenList, products } = useContext(ProductCtx);
   const [gte, setGte] = useState(
     filterMode.priceGte[0] ? filterMode.priceGte[0] : ''
   );
@@ -56,7 +56,8 @@ const Filter = ({
     }
   };
 
-  const list = param === 'men' ? menList : womenList;
+  const list =
+    param === 'men' ? menList : param === 'women' ? womenList : products;
   const inStock = list.reduce(
     (total, item) => (item.quantity > 0 ? total + 1 : total),
     0

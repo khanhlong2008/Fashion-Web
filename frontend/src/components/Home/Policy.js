@@ -17,8 +17,8 @@ const Policy = () => {
           <img src="image/moneyback.png" alt="" />
         </div>
         <div>
-          <p>ORDER BEFORE 16:00</p>
-          <p>Next business day at home</p>
+          <p>MONEY BACK</p>
+          <p>14 days to change your mind</p>
         </div>
       </div>
       <div className="d-flex">
@@ -26,8 +26,8 @@ const Policy = () => {
           <img src="image/addproduct.png" alt="" />
         </div>
         <div>
-          <p>ORDER BEFORE 16:00</p>
-          <p>Next business day at home</p>
+          <p>1000 PRODUCT ADD</p>
+          <p>Products added every day</p>
         </div>
       </div>
     </section>

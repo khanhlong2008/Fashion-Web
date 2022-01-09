@@ -28,10 +28,6 @@ const Details = () => {
     if (product) setImgSrc(product.img.imgList[0].imgItem);
   }, [product]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const imgList = product ? product.img.imgList : [];
 
   return (

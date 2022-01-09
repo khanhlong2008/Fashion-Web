@@ -18,6 +18,7 @@ const PageController = ({ page, onShow = '1', handleChangePage }) => {
     for (let i = 1; i <= page; i++) {
       pages.push(
         <button
+          key={`button-${i}`}
           onClick={handleOnClickNav}
           className={`btn ${onShow === `${i}` ? 'active' : ''} ${
             i === 1 && !onShow ? 'active' : ''

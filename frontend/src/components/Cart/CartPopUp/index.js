@@ -5,15 +5,17 @@ import CartCtx from '../../../context/CartProvider/CartCtx';
 import ProductItem from './ProductItem';
 import AuthCtx from '../../../context/AuthProvider/AuthCtx';
 
-const CartPopUp = ({ show }) => {
+const CartPopUp = ({ show, setShowCart }) => {
   const { items, totalPrice } = useContext(CartCtx);
   const { user } = useContext(AuthCtx);
 
   const navigate = useNavigate();
   const handlePushCheckout = () => {
+    setShowCart(false);
     navigate(`/checkouts/${user._id}?step=contact_information`);
   };
   const handlePushCart = () => {
+    setShowCart(false);
     navigate('/cart');
   };
   if (items.length === 0) {

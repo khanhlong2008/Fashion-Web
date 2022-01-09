@@ -8,6 +8,7 @@
         grid-row-gap: 32px;
     }
 
+
     .product-image {
 
         div:first-child {
@@ -18,6 +19,10 @@
                 object-fit: cover;
                 object-position: center top;
                 height: 600px;
+
+                @include custom-media(tablet) {
+                    height: 350px;
+                }
             }
         }
 

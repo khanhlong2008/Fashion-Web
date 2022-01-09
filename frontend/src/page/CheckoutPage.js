@@ -21,13 +21,13 @@ const CheckoutPage = () => {
   const search = queryParams.get('step');
   const { id } = useParams();
   const { user, loading } = useContext(AuthCtx);
-  const { info, isLoading: isLoadingInfo } = useContext(InfoCtx);
+  const { info, isLoading: isLoadingInfo, getInfo } = useContext(InfoCtx);
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    document.body.click();
-  }, []);
+    getInfo();
+    // eslint-disable-next-line
+  }, [user]);
 
   if (search === 'shipping_method' && !info && !isLoadingInfo && user) {
     navigate(`/checkouts/${user._id}?step=contact_information`);
@@ -37,11 +37,14 @@ const CheckoutPage = () => {
     return <LoadingSpinner />;
   }
 
-  if (!user && !loading) {
+  if (!user && loading) {
     return <LoadingSpinner />;
   }
 
-  return items.length === 0 && !isLoading && !isOrdered ? (
+  return search === 'contact_information' &&
+    items.length === 0 &&
+    !isLoading &&
+    !isOrdered ? (
     <Navigate to="/cart" />
   ) : (
     <section className="checkout-wrapper container d-block">

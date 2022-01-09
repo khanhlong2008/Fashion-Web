@@ -77,7 +77,12 @@ export default function ProductLists() {
     else filterMode[key] = [];
   }
 
-  const { menList, womenList, loaded } = useContext(ProductCtx);
+  const {
+    menList,
+    womenList,
+    products: allProducts,
+    loaded,
+  } = useContext(ProductCtx);
   const [products, setProducts] = useState({ list: [], pages: 0 });
   const [selectOption, dispatch] = useReducer(selectReducer, filterMode);
   const navigate = useNavigate();
@@ -108,7 +113,6 @@ export default function ProductLists() {
         }
       }
       navigate(`${location.pathname}${link}`);
-      window.scrollTo(0, 0);
     }
 
     // eslint-disable-next-line
@@ -116,7 +120,8 @@ export default function ProductLists() {
 
   useEffect(() => {
     if (loaded) {
-      let products = param === 'men' ? menList : womenList;
+      let products =
+        param === 'men' ? menList : param === 'women' ? womenList : allProducts;
       let totalProduct = 0;
 
       for (let key in selectOption) {
@@ -240,10 +245,6 @@ export default function ProductLists() {
     setLoading(true);
     dispatch({ type: 'CHANGE_PAGE', payload: page });
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <div className="container product-list">

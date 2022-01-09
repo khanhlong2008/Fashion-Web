@@ -15,7 +15,7 @@ const AuthReducer = (state, action) => {
       localStorage.removeItem('token');
       return {
         token: null,
-        isAuthenticated: null,
+        isAuthenticated: false,
         loading: true,
         user: null,
         checking: false,
@@ -23,7 +23,7 @@ const AuthReducer = (state, action) => {
     case 'NOT_LOGIN_YET':
       return {
         token: null,
-        isAuthenticated: null,
+        isAuthenticated: false,
         loading: false,
         user: null,
         checking: true,

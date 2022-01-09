@@ -63,14 +63,12 @@ const SearchPage = () => {
 
   const handleChangePage = page => {
     navigate(`/search?q=${searchField}&page=${page}`);
-    window.scrollTo(0, 0);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     setLoading(true);
     navigate(`/search?q=${searchField}`);
-    window.scrollTo(0, 0);
   };
 
   return (
