@@ -27,6 +27,21 @@ const AuthProvider = props => {
     } else dispatch({ type: 'NOT_LOGIN_YET' });
   };
 
+  // Update User
+
+  const updateUser = async form => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      await axiosInstance.put(`/user/${state.user._id}`, form, config);
+    } catch (error) {
+      console.log('error');
+    }
+  };
+
   // Register User
   const register = async formData => {
     const config = {
@@ -91,6 +106,7 @@ const AuthProvider = props => {
         loadUser,
         login,
         logout,
+        updateUser,
       }}
     >
       {props.children}

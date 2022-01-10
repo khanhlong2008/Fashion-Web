@@ -194,7 +194,7 @@ export default function ProductLists() {
             products = [...products].sort((a, b) => b.price - a.price);
           if (selectOption[key][0] === 'oldtonew')
             products = [...products].sort((a, b) => a.date - b.date);
-          if (selectOption[key][0] === 'oldtonew')
+          if (selectOption[key][0] === 'newtoold')
             products = [...products].sort((a, b) => b.date - a.date);
         }
 

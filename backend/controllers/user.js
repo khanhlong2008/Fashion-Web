@@ -46,6 +46,7 @@ const updateUser = async (req, res, next) => {
       email,
       salt: user.salt,
       hashed: user.hashed,
+      password,
       firstname,
       lastname,
     };
@@ -74,6 +75,7 @@ const signUp = async (req, res, next) => {
     hashed: user.hashed,
     firstname,
     lastname,
+    password,
   });
   newUser.save();
   const token = encodetoken(newUser._id);
@@ -95,10 +97,11 @@ const signIn = async (req, res, next) => {
 };
 const secret = async (req, res, next) => {
   // console.log(req.user)
-  const { _id, email, firstname, lastname } = req.user;
-
+  const { _id, email, firstname, lastname, password } = req.user;
   // console.log("call to secret fn")
-  return res.status(200).json({ user: { _id, email, firstname, lastname } });
+  return res
+    .status(200)
+    .json({ user: { _id, email, firstname, lastname, password } });
 };
 const secretAdmin = async (req, res, next) => {
   // console.log(req.user)

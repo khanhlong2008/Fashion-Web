@@ -1,0 +1,96 @@
+.account__container {
+    form {
+        width: 100%;
+        padding: 32px 24px;
+        background-color: #fff;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        >div {
+            display: grid;
+            grid-template-columns: 100px 400px;
+            align-items: center;
+
+            @include custom-media(tablet) {
+                grid-template-columns: 1fr;
+                grid-row-gap: 8px;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 12px;
+            }
+
+            input {
+                width: 100%;
+                padding: 8px 16px;
+                border-radius: 10px;
+                border: 1px solid #dfdfdf
+            }
+        }
+
+        label {
+            margin-right: 16px;
+        }
+
+        .btn-container {
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-self: center;
+
+            button {
+                padding: 8px 32px;
+                border-radius: 500px;
+            }
+        }
+    }
+
+    .notification {
+        position: fixed;
+        inset: 0;
+        place-items: center;
+        z-index: 100000;
+        display: none;
+
+        &.show {
+            display: grid;
+        }
+
+        .notification-container {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            width: 400px;
+            border-radius: 4px;
+
+            @include custom-media(mobile) {
+                width: 100%;
+            }
+
+            i {
+                font-size: 40px;
+                color: $primary;
+            }
+
+            p {
+                margin: 16px 0 0;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+    }
+}

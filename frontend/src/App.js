@@ -21,7 +21,8 @@ import SearchPage from './page/SearchPage';
 import WishList from './page/WishList';
 import { useEffect } from 'react';
 import Purchase from './page/Purchase';
-import Account from './page/Account';
+import Account from './components/Auth/Create/Account';
+import Profile from './page/Account';
 import FlashsaleDetail from './components/Product/FlashSale/FlashsaleDetail';
 // import { Navigate } from "react-router";
 export default function App() {
@@ -52,7 +53,7 @@ export default function App() {
                 <Route path="/ordersuccess" element={<OrderSuccess />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/wishlist" element={<WishList />} />
-                <Route path="/myaccount" element={<Account />} />
+                <Route path="/myaccount" element={<Profile />} />
                 <Route path="/mypurchase" element={<Purchase />} />
                 <Route path="/flashsale" element={<FlashsaleDetail />} />
                 <Route path="*" element={<NotFound />} />

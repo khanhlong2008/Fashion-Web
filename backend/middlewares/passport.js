@@ -13,12 +13,12 @@ passport.use(
       secretOrKey: 'fashionapp',
     },
     async (payload, done) => {
-      // console.log(payload.sub)
+      // console.log(payload.sub);
       try {
         const user = await User.findById(payload.sub);
 
         if (!user) return done(null, false);
-
+        // console.log(user);
         done(null, user);
       } catch (error) {
         done(error, false);
