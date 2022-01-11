@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import AuthCtx from '../context/AuthProvider/AuthCtx';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 const Account = () => {
-  const { user, checking, updateUser } = useContext(AuthCtx);
-  const navigate = useNavigate();
+  const { user, loading, updateUser, clearMessage, msg } = useContext(AuthCtx);
   const [info, setInfo] = useState({
     firstname: '',
     lastname: '',
     email: '',
     password: '',
   });
-  const [showNoti, setShow] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -25,10 +23,6 @@ const Account = () => {
       });
     }
   }, [user]);
-
-  if (!user && checking) {
-    navigate('/404notfound');
-  }
 
   const handleInput = e => {
     setInfo(state => ({ ...state, [e.target.name]: e.target.value }));
@@ -55,10 +49,13 @@ const Account = () => {
     )
       alert('Please enter a valid email!');
     else {
-      setShow(true);
       updateUser(info);
     }
   };
+
+  if (!user && !loading) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <section className="account__container container d-block">
@@ -106,12 +103,16 @@ const Account = () => {
           </button>
         </div>
       </form>
-      <div className={`notification ${showNoti ? 'show' : ''}`}>
+      <div className={`notification ${msg ? 'show' : ''}`}>
         <div className="notification-container">
-          <i className="bi bi-check-circle"></i>
-          <p>Profile Updated!!</p>
+          {msg === 'This email is already registered' ? (
+            <i class="bi bi-x-circle"></i>
+          ) : (
+            <i className="bi bi-check-circle"></i>
+          )}
+          <p>{msg}!!</p>
         </div>
-        <div className="backdrop" onClick={() => setShow(false)}></div>
+        <div className="backdrop" onClick={clearMessage}></div>
       </div>
     </section>
   );

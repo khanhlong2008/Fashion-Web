@@ -20,7 +20,6 @@ import NotFound from './page/404NotFound';
 import SearchPage from './page/SearchPage';
 import WishList from './page/WishList';
 import { useEffect } from 'react';
-import Purchase from './page/Purchase';
 import Account from './components/Auth/Create/Account';
 import Profile from './page/Account';
 import FlashsaleDetail from './components/Product/FlashSale/FlashsaleDetail';
@@ -54,7 +53,6 @@ export default function App() {
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/wishlist" element={<WishList />} />
                 <Route path="/myaccount" element={<Profile />} />
-                <Route path="/mypurchase" element={<Purchase />} />
                 <Route path="/flashsale" element={<FlashsaleDetail />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

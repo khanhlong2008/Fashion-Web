@@ -173,9 +173,6 @@ const Navbar = () => {
                 <li onClick={e => handleNavigate(e, '/myaccount')}>
                   My account
                 </li>
-                <li onClick={e => handleNavigate(e, '/mypurchase')}>
-                  My purchase
-                </li>
                 <li onClick={handleLogout}>Logout</li>
               </ul>
             </div>

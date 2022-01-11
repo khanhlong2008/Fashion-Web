@@ -273,20 +273,29 @@ const FlashsaleDetail = () => {
   const navigate = useNavigate();
   const timeNow = new Date().getHours();
   const [onGoing, setOnGoing] = useState(false);
-  let today = new Date().toLocaleString().split(',')[0];
-  let target = 0;
-  if (timeNow >= promotionId && timeNow < +promotionId + 2) {
-    target = +promotionId + 2;
-  } else {
-    target = +promotionId;
-  }
-  if (target > 24) target = 1;
+  const [today, setToday] = useState(new Date().toLocaleString().split(',')[0]);
+  const [target, setTarget] = useState(0);
 
-  if (target === 1 || target < timeNow) {
-    const dateArr = today.split('/');
-    dateArr[1] = +dateArr[1] + 1;
-    today = dateArr.join('/');
-  }
+  useEffect(() => {
+    let newTarget;
+    if (timeNow >= promotionId && timeNow < +promotionId + 2) {
+      newTarget = +promotionId + 2;
+    } else {
+      newTarget = +promotionId;
+    }
+    if (newTarget > 24) newTarget = 1;
+    setTarget(newTarget);
+  }, [timeNow, promotionId]);
+
+  useEffect(() => {
+    if (target === 1 || target < timeNow) {
+      const dateArr = today.split('/');
+      dateArr[1] = +dateArr[1] + 1;
+      setToday(dateArr.join('/'));
+    }
+
+    // eslint-disable-next-line
+  }, [target, timeNow]);
 
   useEffect(() => {
     if (timeNow >= promotionId && timeNow < +promotionId + 2) {
@@ -306,7 +315,7 @@ const FlashsaleDetail = () => {
         </div>
       </div>
       <div className="time-list__wrapper container">
-        {[15, 17, 19, 21, 23].map((time, index) => (
+        {[9, 12, 15, 18, 21].map((time, index) => (
           <div
             className={`time-section ${
               promotionId === time.toString()

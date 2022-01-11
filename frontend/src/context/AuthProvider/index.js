@@ -8,6 +8,7 @@ const initialState = {
   loading: true,
   user: null,
   checking: false,
+  msg: null,
 };
 const AuthProvider = props => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -37,9 +38,15 @@ const AuthProvider = props => {
     };
     try {
       await axiosInstance.put(`/user/${state.user._id}`, form, config);
+      dispatch({ type: 'UPDATE_SUCCESS' });
+      loadUser();
     } catch (error) {
-      console.log('error');
+      dispatch({ type: 'UPDATE_ERROR', msg: error.response.data.msg });
     }
+  };
+
+  const clearMessage = () => {
+    dispatch({ type: 'CLEAR_MESSAGE' });
   };
 
   // Register User
@@ -107,6 +114,7 @@ const AuthProvider = props => {
         login,
         logout,
         updateUser,
+        clearMessage,
       }}
     >
       {props.children}

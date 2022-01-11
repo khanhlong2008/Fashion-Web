@@ -41,6 +41,15 @@ const updateUser = async (req, res, next) => {
     const { userID } = req.params;
     // console.log(userID)
     const { email, password, firstname, lastname } = req.body;
+    const beforeInfo = await User.findById(userID);
+    if (email !== beforeInfo.email) {
+      const userEmail = await User.findOne({ email });
+      if (userEmail) {
+        return res
+          .status(404)
+          .json({ msg: 'This email is already registered' });
+      }
+    }
     const user = await authcontroller.updatePassword(email, password);
     const newUser = {
       email,

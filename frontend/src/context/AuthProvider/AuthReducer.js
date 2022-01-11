@@ -16,7 +16,7 @@ const AuthReducer = (state, action) => {
       return {
         token: null,
         isAuthenticated: false,
-        loading: true,
+        loading: false,
         user: null,
         checking: false,
       };
@@ -35,6 +35,21 @@ const AuthReducer = (state, action) => {
         loading: false,
         user: action.payload,
         checking: true,
+      };
+    case 'UPDATE_ERROR':
+      return {
+        ...state,
+        msg: action.msg,
+      };
+    case 'UPDATE_SUCCESS':
+      return {
+        ...state,
+        msg: 'PROFILE UPDATED',
+      };
+    case 'CLEAR_MESSAGE':
+      return {
+        ...state,
+        msg: null,
       };
     default:
       return state;

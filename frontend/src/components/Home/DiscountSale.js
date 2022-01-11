@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import FlashsaleSlider from '../Product/FlashSale/FlashsaleSlider';
 
 const DiscountSale = () => {
-  const promote = [13, 15, 17, 19, 21, 23];
+  const promote = [9, 12, 15, 18, 21];
   let today = new Date().toLocaleString().split(',')[0];
   const timeNow = new Date().getHours();
   const target = promote.find(h => timeNow >= h && timeNow < h + 2) + 2 || 1;
