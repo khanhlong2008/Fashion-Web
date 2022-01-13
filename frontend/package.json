@@ -17,6 +17,8 @@
     "react-router-dom": "^6.1.1",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
+    "sass": "^1.46.0",
+    "sass-loader": "^12.4.0",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.0.1"
   },
