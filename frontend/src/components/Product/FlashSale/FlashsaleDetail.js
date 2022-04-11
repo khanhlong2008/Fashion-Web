@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import PageController from '../MainProduct/PageController';
+// import PageController from '../MainProduct/PageController';
 import ComingSoonItem from './ComingSoonItem';
 import CountDown from './CountDown';
 import FSItemSlider from './FSItemSlider';
