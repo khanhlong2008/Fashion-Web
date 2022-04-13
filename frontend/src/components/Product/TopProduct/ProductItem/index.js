@@ -100,7 +100,9 @@ const ProductItem = ({
         {originPrice > 0 && <span>{`$${originPrice.toFixed(2)}`}</span>}
         {`$${price.toFixed(2)}`}
       </p>
-      <div className="icon__wrapper">
+
+
+      <div className="">
         <div
           className="icon__container"
           onClick={handleShowModal.bind(null, {
@@ -114,6 +116,7 @@ const ProductItem = ({
             stock,
           })}
         >
+
           <i className="bi bi-eye-fill"></i>
         </div>
         <div className="icon__container" onClick={handleHeart}>
